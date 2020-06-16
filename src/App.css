@@ -182,6 +182,10 @@ img {
   color: #fff;
 }
 
+.bg-semidark {
+  background-color: #0a0910dc;
+}
+
 .btn-danger,
 .bg-danger,
 .badge-danger,
@@ -310,7 +314,7 @@ button {
   z-index: 1;
   width: 100%;
   top: 0;
-  border-bottom: solid 1px var(--primary-color);
+  /* border-bottom: solid 1px var(--primary-color); */
   opacity: 0.9;
 }
 
@@ -576,4 +580,9 @@ button {
   .post button {
     padding: 0.3rem 0.4rem;
   }
+}
+
+
+nav .navbar .bg-dark {
+  background: rgba(0, 0, 0, 0) !important;
 }

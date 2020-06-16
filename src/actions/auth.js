@@ -1,4 +1,5 @@
 import api from '../utils/api';
+import setAuthToken from '../utils/setAuthToken';
 import { setAlert } from './alert';
 import {
   REGISTER_SUCCESS,
@@ -10,11 +11,13 @@ import {
   LOGOUT
 } from './types';
 
-// Load User
-export const loadUser = () => async dispatch => {
-  try {
-    const res = await api.get('/auth');
 
+// Load User
+export const loadUser = (id) => async dispatch => {
+  try {
+    const res = await api.get(`users/${id}`);
+    console.log(res);
+    
     dispatch({
       type: USER_LOADED,
       payload: res.data
@@ -32,7 +35,7 @@ export const register = ({email, password }) => async dispatch => {
 
   try {
     const res = await api.post('/users', body);
-    console.log(res.data);
+
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data
@@ -58,13 +61,18 @@ export const login = (email, password) => async dispatch => {
   try {
     const res = await api.post('/signin', body);
     console.log(res.data);
+    const token = res.data.token;
+    const id = res.data.userId;
+    localStorage.setItem('token', token);
+    localStorage.setItem('id', id);
+    setAuthToken(token);
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data
     });
 
-    dispatch(loadUser());
+    // dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -81,4 +89,5 @@ export const login = (email, password) => async dispatch => {
 // Logout / Clear Profile
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
+  localStorage.clear();
 };

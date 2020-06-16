@@ -10,10 +10,11 @@ import {
 } from './types';
 
 // Get current users profile
-export const getCurrentProfile = () => async dispatch => {
+export const getCurrentProfile = (id) => async dispatch => {
   try {
-    const res = await api.get('/profile/me');
-
+    const res = await api.get(`/users/${id}`);
+    console.log(res);
+    localStorage.setItem('email', res.data.email);
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -31,7 +32,7 @@ export const getProfiles = () => async dispatch => {
   dispatch({ type: CLEAR_PROFILE });
 
   try {
-    const res = await api.get('/profile');
+    const res = await api.get('/users');
 
     dispatch({
       type: GET_PROFILES,
@@ -48,7 +49,7 @@ export const getProfiles = () => async dispatch => {
 // Get profile by ID
 export const getProfileById = userId => async dispatch => {
   try {
-    const res = await api.get(`/profile/user/${userId}`);
+    const res = await api.get(`/users/${userId}`);
 
     dispatch({
       type: GET_PROFILE,
@@ -69,7 +70,7 @@ export const createProfile = (
   edit = false
 ) => async dispatch => {
   try {
-    const res = await api.post('/profile', formData);
+    const res = await api.post('/users', formData);
 
     dispatch({
       type: GET_PROFILE,
@@ -100,10 +101,10 @@ export const createProfile = (
 
 
 // Delete account & profile
-export const deleteAccount = () => async dispatch => {
+export const deleteAccount = (id) => async dispatch => {
   if (window.confirm('Are you sure? This can NOT be undone!')) {
     try {
-      await api.delete('/profile');
+      await api.delete(`/users/${id}`);
 
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });
