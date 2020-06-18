@@ -4,8 +4,9 @@ import { LOGOUT, CLEAR_PROFILE } from '../actions/types';
 
 const api = axios.create({
   baseURL: 'https://cors-anywhere.herokuapp.com/https://afternoon-falls-25894.herokuapp.com',
+  
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   }
 });
 /**

@@ -40,7 +40,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 
   return (
-    <nav className='navbar bg-dark'>
+    <nav className='navbar bg-semidark'>
       <h1>
         <Link to='/'>
           <i className='fas fa-globe' /> RS Lang
