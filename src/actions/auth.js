@@ -42,12 +42,10 @@ export const register = ({email, password }) => async dispatch => {
     });
     dispatch(loadUser());
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    console.log('Пароль не соответствует требованиям. Выберите другой пароль');
+    if (err) {
+      dispatch(setAlert('Пароль не соответствует требованиям. Выберите другой пароль', 'danger'));
     }
-
     dispatch({
       type: REGISTER_FAIL
     });
@@ -74,10 +72,10 @@ export const login = (email, password) => async dispatch => {
 
     // dispatch(loadUser());
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    console.log(err.message);
+    console.log('Электронный адрес или пароль введены неверно');
+    if (err) {
+     dispatch(setAlert('Электронный адрес или пароль введены неверно', 'danger'));
     }
 
     dispatch({
