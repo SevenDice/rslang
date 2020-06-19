@@ -35,15 +35,17 @@ export const register = ({email, password }) => async dispatch => {
 
   try {
     const res = await api.post('/users', body);
-
+    console.log(res);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data
     });
     dispatch(loadUser());
   } catch (err) {
-    console.log('Пароль не соответствует требованиям. Выберите другой пароль');
-    if (err) {
+    console.log(err.response.statusText, err.response.status);
+    if (err.response.status === 417) {
+      dispatch(setAlert('Пользователь с данным элекронным адресом уже зарегистрирован', 'danger'));
+    } else if (err.response.status === 422) {
       dispatch(setAlert('Пароль не соответствует требованиям. Выберите другой пароль', 'danger'));
     }
     dispatch({
@@ -72,10 +74,11 @@ export const login = (email, password) => async dispatch => {
 
     // dispatch(loadUser());
   } catch (err) {
-    console.log(err.message);
-    console.log('Электронный адрес или пароль введены неверно');
-    if (err) {
-     dispatch(setAlert('Электронный адрес или пароль введены неверно', 'danger'));
+    console.log(err.response.statusText, err.response.status);
+    if (err.response.status === 403) {
+     dispatch(setAlert('Неверный пароль', 'danger'));
+    } else if (err.response.status === 404) {
+      dispatch(setAlert('Пользователь с таким электронным адресом не зарегистрирован', 'danger'));
     }
 
     dispatch({
