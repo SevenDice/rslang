@@ -17,9 +17,9 @@ const Dashboard = ({
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Dashboard</h1>
+      <h1 className="large text-primary">Главная</h1>
       <p className="lead">
-        <i className="fas fa-user" /> Welcome {localStorage.getItem('email')}
+        <i className="fas fa-user" /> Добро пожаловать, {localStorage.getItem('email')}
       </p>
       {/* profile !== null ? */ (
         <Fragment>
@@ -27,7 +27,7 @@ const Dashboard = ({
 
           <div className="my-2">
             <button className="btn btn-danger" onClick={() => deleteAccount(localStorage.getItem('id'))}>
-              <i className="fas fa-user-minus" /> Delete My Account
+              <i className="fas fa-user-minus" /> Удалить мой аккаунт
             </button>
           </div>
         </Fragment>

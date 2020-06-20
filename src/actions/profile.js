@@ -102,14 +102,14 @@ export const createProfile = (
 
 // Delete account & profile
 export const deleteAccount = (id) => async dispatch => {
-  if (window.confirm('Are you sure? This can NOT be undone!')) {
+  if (window.confirm('Вы уверены? Данное действие НЕ может быть отменено')) {
     try {
       await api.delete(`/users/${id}`);
 
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });
 
-      dispatch(setAlert('Your account has been permanently deleted'));
+      dispatch(setAlert('Ваш аккаунт был удален навсегда'));
     } catch (err) {
       dispatch({
         type: PROFILE_ERROR,

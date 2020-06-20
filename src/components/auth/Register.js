@@ -20,7 +20,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert('Passwords do not match', 'danger');
+      setAlert('Пароли не совпадают', 'danger');
     } else {
       register({email, password });
     }
@@ -32,46 +32,47 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Sign Up</h1>
+      <h1 className="large text-primary">Регистрация</h1>
       <p className="lead">
-        <i className="fas fa-user" /> Create Your Account
+        <i className="fas fa-user" /> Создать аккаунт
       </p>
       <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
           <input
             type="email"
-            placeholder="Email Address"
+            placeholder="Электронный адрес"
             name="email"
             value={email}
             onChange={onChange}
           />
+        </div>
+        <div className="form-group">
+          <input
+            type="password"
+            placeholder="Пароль"
+            name="password"
+            value={password}
+            onChange={onChange}
+          />
           <small className="form-text">
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
+            Обратите внимание! <br />
+            Пароль должен содержать не менее 8 символов, как минимум одну прописную букву,
+            одну заглавную букву, одну цифру и один спецсимвол из <b>+-_@$!%*?&#.,;:[]{}</b>
           </small>
         </div>
         <div className="form-group">
           <input
             type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={onChange}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Confirm Password"
+            placeholder="Подтвердите пароль"
             name="password2"
             value={password2}
             onChange={onChange}
           />
         </div>
-        <input type="submit" className="btn btn-primary" value="Register" />
+        <input type="submit" className="btn btn-primary" value="Создать" />
       </form>
       <p className="my-1">
-        Already have an account? <Link to="/login">Sign In</Link>
+        Уже есть аккаунт? <Link to="/login">Войти</Link>
       </p>
     </Fragment>
   );

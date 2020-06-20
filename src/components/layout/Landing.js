@@ -12,16 +12,16 @@ const Landing = ({ isAuthenticated }) => {
     <section className='landing'>
       <div className='dark-overlay'>
         <div className='landing-inner'>
-          <h1 className='x-large'>RS Lang Application</h1>
+          <h1 className='x-large'>RS Lang</h1>
           <p className='lead'>
-            Improve your english skills
+            Улучши свой английский вместе с нами
           </p>
           <div className='buttons'>
             <Link to='/register' className='btn btn-primary'>
-              Sign Up
+              Регистрация
             </Link>
             <Link to='/login' className='btn btn-light'>
-              Login
+              Войти
             </Link>
           </div>
         </div>
