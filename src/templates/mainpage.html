@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Главная</title>
+    <link rel="stylesheet" href="../App.css" />
+    <link rel="stylesheet" href="mycss.css" />
+  </head>
+  <body>
+    <div class="burgermenue hidden" id="burgermenue">
+      <nav class="burgermenue__navigation">
+        <ul class="navigation__nav">
+          <!-- li.nav-item>a.nav-link -->
+          <li class="nav-item"><a href="#" class="nav-link"> <img src="../img/иконки/главная.png" alt="главная" class="nav-link-img">
+              Главная</a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><img src="../img/иконки/учить слова.png" alt="учить слова" class="nav-link-img">
+              Учим слова</a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><img src="../img/иконки/игра1.png" alt="учить слова" class="nav-link-img">
+              Игры</a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><img src="../img/иконки/словарь.png" alt="словарь" class="nav-link-img">
+              Словарь</a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><img src="../img/иконки/настройки.png" alt="настройки" class="nav-link-img">
+              Настройки</a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><img src="../img/иконки/статистика.png" alt="статистика" class="nav-link-img">
+              Статистика</a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><img src="../img/иконки/команда.png" alt="команда" class="nav-link-img">
+              О нас</a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><img src="../img/иконки/промо.png" alt="промо" class="nav-link-img">
+              Промо</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <nav class="navbar bg-semidark">
+      <h1>
+        <a href="/"><i class="fas fa-globe"></i> RS Lang</a>
+      </h1>
+      <button class="navbar__burgermenue" id="navbar__burgermenue"></button>
+    </nav>
+
+    <section class="landing">
+      <div class="dark-overlay">
+        <div class="landing-inner">
+          <h1 class="x-large">RS Lang Application</h1>
+          <p class="lead">Improve your english skills</p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="/register">Sign Up</a
+            ><a class="btn btn-light" href="/login">Login</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="myjs.js"></script>
+  </body>
+</html>

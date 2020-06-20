@@ -49,6 +49,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
       )}
+
+      <button className="navbar__burgermenue" id="navbar__burgermenue"></button>
+
     </nav>
   );
 };
