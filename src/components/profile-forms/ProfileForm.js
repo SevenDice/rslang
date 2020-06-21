@@ -2,16 +2,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createProfile, getCurrentProfile } from '../../actions/profile';
+import { createProfile, getCurrentProfile, deleteAccount } from '../../actions/profile';
 
 const initialState = {
-  company: '',
-  website: '',
-  location: '',
-  status: '',
-  skills: '',
-  githubusername: '',
-  bio: '',
+  level: '',
+  wordsperday: '',
+  newwords: '',
   twitter: '',
   facebook: '',
   linkedin: '',
@@ -23,7 +19,8 @@ const ProfileForm = ({
   profile: { profile, loading },
   createProfile,
   getCurrentProfile,
-  history
+  history,
+  deleteAccount
 }) => {
   const [formData, setFormData] = useState(initialState);
 
@@ -39,20 +36,13 @@ const ProfileForm = ({
       for (const key in profile.social) {
         if (key in profileData) profileData[key] = profile.social[key];
       }
-      if (Array.isArray(profileData.skills))
-        profileData.skills = profileData.skills.join(', ');
-      setFormData(profileData);
     }
   }, [loading, getCurrentProfile, profile]);
 
   const {
-    company,
-    website,
-    location,
-    status,
-    skills,
-    githubusername,
-    bio,
+    level,
+    wordsperday,
+    newwords,
     twitter,
     facebook,
     linkedin,
@@ -70,108 +60,54 @@ const ProfileForm = ({
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Edit Your Profile</h1>
+      <h1 className="large text-primary">Редактировать настройки</h1>
       <p className="lead">
-        <i className="fas fa-user" /> Add some changes to your profile
+        <i className="fas fa-user" /> Изменение настроек пользователя
       </p>
-      <small>* = required field</small>
+      <small>* = Обязательное поле</small>
       <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
-          <select name="status" value={status} onChange={onChange}>
-            <option>* Select Professional Status</option>
-            <option value="Developer">Developer</option>
-            <option value="Junior Developer">Junior Developer</option>
-            <option value="Senior Developer">Senior Developer</option>
-            <option value="Manager">Manager</option>
-            <option value="Student or Learning">Student or Learning</option>
-            <option value="Instructor">Instructor or Teacher</option>
-            <option value="Intern">Intern</option>
-            <option value="Other">Other</option>
+          <select name="level" value={level} onChange={onChange}>
+            <option>* Выберите уровень сложности изучения</option>
+            <option value="Beginner">Начальный</option>
+            <option value="Elementary">Элементарный</option>
+            <option value="Intermediate">Средний</option>
+            <option value="Upper Intermediate">Средне-продвинутый</option>
+            <option value="Advanced">Продвинутый</option>
+            <option value="Proficiency">В совершенстве</option>
           </select>
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            name="wordsperday"
+            value={wordsperday}
+            onChange={onChange}
+          />
           <small className="form-text">
-            Give us an idea of where you are at in your career
+            Укажите количество изучаемых слов в день
           </small>
         </div>
         <div className="form-group">
           <input
             type="text"
-            placeholder="Company"
-            name="company"
-            value={company}
+            name="newwords"
+            value={newwords}
             onChange={onChange}
           />
           <small className="form-text">
-            Could be your own company or one you work for
+            Укажите количество новых изучаемых слов в день
           </small>
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Website"
-            name="website"
-            value={website}
-            onChange={onChange}
-          />
-          <small className="form-text">
-            Could be your own or a company website
-          </small>
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Location"
-            name="location"
-            value={location}
-            onChange={onChange}
-          />
-          <small className="form-text">
-            City & state suggested (eg. Boston, MA)
-          </small>
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="* Skills"
-            name="skills"
-            value={skills}
-            onChange={onChange}
-          />
-          <small className="form-text">
-            Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
-          </small>
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Github Username"
-            name="githubusername"
-            value={githubusername}
-            onChange={onChange}
-          />
-          <small className="form-text">
-            If you want your latest repos and a Github link, include your
-            username
-          </small>
-        </div>
-        <div className="form-group">
-          <textarea
-            placeholder="A short bio of yourself"
-            name="bio"
-            value={bio}
-            onChange={onChange}
-          />
-          <small className="form-text">Tell us a little about yourself</small>
-        </div>
-
         <div className="my-2">
           <button
             onClick={() => toggleSocialInputs(!displaySocialInputs)}
             type="button"
             className="btn btn-light"
           >
-            Add Social Network Links
+            Добавить ссылки на страницы в социальных сетях
           </button>
-          <span>Optional</span>
+          <span>Необязательно</span>
         </div>
 
         {displaySocialInputs && (
@@ -233,18 +169,25 @@ const ProfileForm = ({
           </Fragment>
         )}
 
-        <input type="submit" className="btn btn-primary my-1" />
+        <input type="submit" className="btn btn-primary my-1" value="Сохранить"/>
         <Link className="btn btn-light my-1" to="/dashboard">
-          Go Back
+          Отмена
         </Link>
       </form>
-    </Fragment>
+
+      <div className="my-2">
+        <button className="btn btn-danger" onClick={() => deleteAccount(localStorage.getItem('id'))}>
+          <i className="fas fa-user-minus" /> Удалить мой аккаунт
+        </button>
+      </div>
+    </Fragment>  
   );
 };
 
 ProfileForm.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
@@ -252,6 +195,6 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
+export default connect(mapStateToProps, { createProfile, getCurrentProfile, deleteAccount })(
   ProfileForm
 );

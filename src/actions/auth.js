@@ -10,13 +10,16 @@ import {
   LOGIN_FAIL,
   LOGOUT
 } from './types';
+//import { Redirect } from 'react-router-dom';
 
 
 // Load User
 export const loadUser = (id) => async dispatch => {
   try {
     const res = await api.get(`users/${id}`);
-    console.log(res);
+    //const settings = await api.get(`users/${id}/settings`);
+    console.log(res.data);
+    //console.log(settings.data);
     
     dispatch({
       type: USER_LOADED,
@@ -91,4 +94,5 @@ export const login = (email, password) => async dispatch => {
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
   localStorage.clear();
+  
 };
