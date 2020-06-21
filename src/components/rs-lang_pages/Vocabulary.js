@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 
-const Learn = () => {
+const Vocabulary = () => {
   return (
     <Fragment>
-      <p>Learn page</p>
+      <p>Vocabulary page</p>
     </Fragment>
   );
 };
 
-export default Learn;
+export default Vocabulary;

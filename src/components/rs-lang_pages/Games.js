@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 
-const Learn = () => {
+const Games = () => {
   return (
     <Fragment>
-      <p>Learn page</p>
+      <p>Games page</p>
     </Fragment>
   );
 };
 
-export default Learn;
+export default Games;

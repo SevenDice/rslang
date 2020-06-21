@@ -28,7 +28,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-          <Burgermenue />
+          {/* <Burgermenue /> */}
           <Navbar />
           <Switch>
             <Route exact path="/" component={Landing} />

@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 
-const Learn = () => {
+const Promopage = () => {
   return (
     <Fragment>
-      <p>Learn page</p>
+      <p>Promo page</p>
     </Fragment>
   );
 };
 
-export default Learn;
+export default Promopage;
