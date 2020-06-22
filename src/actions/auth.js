@@ -17,9 +17,7 @@ import {
 export const loadUser = (id) => async dispatch => {
   try {
     const res = await api.get(`users/${id}`);
-    //const settings = await api.get(`users/${id}/settings`);
     console.log(res.data);
-    //console.log(settings.data);
     
     dispatch({
       type: USER_LOADED,
@@ -31,6 +29,7 @@ export const loadUser = (id) => async dispatch => {
     });
   }
 };
+
 
 // Register User
 export const register = ({email, password }) => async dispatch => {

@@ -8,6 +8,40 @@ import {
   ACCOUNT_DELETED
 } from './types';
 
+// // User Settings
+// export const loadSettings = (id) => async dispatch => {
+//   try {
+//     const res = await api.get(`users/${id}/settings`);
+//     console.log(res.data);
+    
+//     dispatch({
+//       type: USER_LOADED, //Сделать редьюсеры
+//       payload: res.data
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: AUTH_ERROR
+//     });
+//   }
+// };
+
+// // Set user settings
+// export const setUserSettings = (id) => async dispatch => {
+//   try {
+//     const res = await api.put(`users/${id}`);
+//     console.log(res.data);
+    
+//     dispatch({
+//       type: USER_LOADED, //Сделать редьюсеры
+//       payload: res.data
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: AUTH_ERROR
+//     });
+//   }
+// };
+
 // Get current users profile
 export const getCurrentProfile = (id) => async dispatch => {
   try {
