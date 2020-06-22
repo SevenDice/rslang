@@ -6,13 +6,21 @@ import { createProfile, getCurrentProfile, deleteAccount } from '../../actions/p
 
 const initialState = {
   level: '',
-  wordsperday: '',
-  newwords: '',
-  twitter: '',
-  facebook: '',
-  linkedin: '',
-  youtube: '',
-  instagram: ''
+  wordsPerDay: '',
+  newWords: '',
+  wordTranslate: '',
+  sentenceWithMeaning: '',
+  sentenceWithCurrentWord: '',
+  wordTranscription: '',
+  wordPicture: '',
+  wordAutoPlay: '',
+  currentWordTranslate: '',
+  translateSentenceWithWord: '',
+  skipToNextCard: '',
+  deleteFromTrainList: '',
+  moveToHardWordsGroup: '',
+  getCustomWordsForTrain: '',
+  moveToGroups: ''
 };
 
 const ProfileForm = ({
@@ -24,7 +32,6 @@ const ProfileForm = ({
 }) => {
   const [formData, setFormData] = useState(initialState);
 
-  const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   useEffect(() => {
     if (!profile) getCurrentProfile();
@@ -41,13 +48,22 @@ const ProfileForm = ({
 
   const {
     level,
-    wordsperday,
-    newwords,
-    twitter,
-    facebook,
-    linkedin,
-    youtube,
-    instagram
+    wordsPerDay,
+    newWords,
+    wordTranslate,
+    sentenceWithMeaning,
+    sentenceWithCurrentWord,
+    wordTranscription,
+    wordPicture,
+    wordAutoPlay,
+    currentWordTranslate,
+    translateSentenceWithWord,
+    skipToNextCard,
+    deleteFromTrainList,
+    moveToHardWordsGroup,
+    getCustomWordsForTrain,
+    moveToGroups
+
   } = formData;
 
   const onChange = e =>
@@ -80,8 +96,8 @@ const ProfileForm = ({
         <div className="form-group">
           <input
             type="text"
-            name="wordsperday"
-            value={wordsperday}
+            name="wordsPerDay"
+            value={wordsPerDay}
             onChange={onChange}
           />
           <small className="form-text">
@@ -91,85 +107,168 @@ const ProfileForm = ({
         <div className="form-group">
           <input
             type="text"
-            name="newwords"
-            value={newwords}
+            name="newWords"
+            value={newWords}
             onChange={onChange}
           />
           <small className="form-text">
             Укажите количество новых изучаемых слов в день
           </small>
         </div>
-        <div className="my-2">
-          <button
-            onClick={() => toggleSocialInputs(!displaySocialInputs)}
-            type="button"
-            className="btn btn-light"
-          >
-            Добавить ссылки на страницы в социальных сетях
-          </button>
-          <span>Необязательно</span>
+        <div className='form-group'>
+          <p>Настройка информации, отображаемой на карточках со словами</p>
+          <p>На карточках будет отображаться:</p>
+          <p>
+            <input
+              type='checkbox'
+              name='wordTranslate'
+              checked={wordTranslate}
+              value={wordTranslate}
+              onChange={onChange}
+            />{' '}
+            Перевод слова
+          </p>
+          <p>
+            <input
+              type='checkbox'
+              name='sentenceWithMeaning'
+              checked={sentenceWithMeaning}
+              value={sentenceWithMeaning}
+              onChange={onChange}
+            />{' '}
+            Предложение с объяснением значения слова
+          </p>
+          <p>
+            <input
+              type='checkbox'
+              name='sentenceWithCurrentWord'
+              checked={sentenceWithCurrentWord}
+              value={sentenceWithCurrentWord}
+              onChange={onChange}
+            />{' '}
+            Предложение с примером использования изучаемого слова
+          </p>
+          <p>
+            <input
+              type='checkbox'
+              name='wordTranscription'
+              checked={wordTranscription}
+              value={wordTranscription}
+              onChange={onChange}
+            />{' '}
+            Транскрипция слова
+          </p>
+          <p>
+            <input
+              type='checkbox'
+              name='wordPicture'
+              checked={wordPicture}
+              value={wordPicture}
+              onChange={onChange}
+            />{' '}
+            Картинка-ассоциация
+          </p>
         </div>
 
-        {displaySocialInputs && (
-          <Fragment>
-            <div className="form-group social-input">
-              <i className="fab fa-twitter fa-2x" />
-              <input
-                type="text"
-                placeholder="Twitter URL"
-                name="twitter"
-                value={twitter}
-                onChange={onChange}
-              />
-            </div>
+        <div className='form-group'>
+          <p>
+            <input
+              type='checkbox'
+              name='wordAutoPlay'
+              checked={wordAutoPlay}
+              value={wordAutoPlay}
+              onChange={onChange}
+            />{' '}
+            Автоматическое воспроизведение звука
+          </p>
+        </div>
 
-            <div className="form-group social-input">
-              <i className="fab fa-facebook fa-2x" />
-              <input
-                type="text"
-                placeholder="Facebook URL"
-                name="facebook"
-                value={facebook}
-                onChange={onChange}
-              />
-            </div>
+        <div className='form-group'>
+          <p>После правильного ввода слова будут показаны:</p>
+          <p>
+            <input
+              type='checkbox'
+              name='currentWordTranslate'
+              checked={currentWordTranslate}
+              value={currentWordTranslate}
+              onChange={onChange}
+            />{' '}
+            Перевод этого слова
+          </p>
+          <p>
+            <input
+              type='checkbox'
+              name='translateSentenceWithWord'
+              checked={translateSentenceWithWord}
+              value={translateSentenceWithWord}
+              onChange={onChange}
+            />{' '}
+            Перевод предложений с использованием этого слова
+          </p>
+        </div>
 
-            <div className="form-group social-input">
-              <i className="fab fa-youtube fa-2x" />
-              <input
-                type="text"
-                placeholder="YouTube URL"
-                name="youtube"
-                value={youtube}
-                onChange={onChange}
-              />
-            </div>
+        <div className='form-group'>
+          <p>
+            <input
+              type='checkbox'
+              name='skipToNextCard'
+              checked={skipToNextCard}
+              value={skipToNextCard}
+              onChange={onChange}
+            />{' '}
+            Можно перейти к другому вопросу, не ответив на предыдущий
+          </p>
+        </div>
 
-            <div className="form-group social-input">
-              <i className="fab fa-linkedin fa-2x" />
-              <input
-                type="text"
-                placeholder="Linkedin URL"
-                name="linkedin"
-                value={linkedin}
-                onChange={onChange}
-              />
-            </div>
+        <div className='form-group'>
+          <p>Настройка возможностей слов</p>
+          <p>
+            <input
+              type='checkbox'
+              name='deleteFromTrainList'
+              checked={deleteFromTrainList}
+              value={deleteFromTrainList}
+              onChange={onChange}
+            />{' '}
+            Возможность удалить слово из списка изучаемых
+          </p>
+          <p>
+            <input
+              type='checkbox'
+              name='moveToHardWordsGroup'
+              checked={moveToHardWordsGroup}
+              value={moveToHardWordsGroup}
+              onChange={onChange}
+            />{' '}
+            Возможность поместить слово в группу сложных 
+          </p>
+          <p>
+            <input
+              type='checkbox'
+              name='getCustomWordsForTrain'
+              checked={getCustomWordsForTrain}
+              value={getCustomWordsForTrain}
+              onChange={onChange}
+            />{' '}
+            Возможность выбирать слова к изучению
+          </p>
+        </div>
 
-            <div className="form-group social-input">
-              <i className="fab fa-instagram fa-2x" />
-              <input
-                type="text"
-                placeholder="Instagram URL"
-                name="instagram"
-                value={instagram}
-                onChange={onChange}
-              />
-            </div>
-          </Fragment>
-        )}
+        <div className='form-group'>
+          <p>Группировка слов</p>
+          <p>
+            <input
+              type='checkbox'
+              name='moveToGroups'
+              checked={moveToGroups}
+              value={moveToGroups}
+              onChange={onChange}
+            />{' '}
+            Возможность относить слова к категориям "Снова", "Трудно", "Хорошо", "Легко"
+          </p>
+        </div>
 
-        <input type="submit" className="btn btn-primary my-1" value="Сохранить"/>
+        <input type="submit" className="btn btn-primary my-1" value="Сохранить" />
         <Link className="btn btn-light my-1" to="/dashboard">
           Отмена
         </Link>
@@ -180,7 +279,7 @@ const ProfileForm = ({
           <i className="fas fa-user-minus" /> Удалить мой аккаунт
         </button>
       </div>
-    </Fragment>  
+    </Fragment>
   );
 };
 
