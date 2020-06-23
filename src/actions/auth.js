@@ -10,7 +10,6 @@ import {
   LOGIN_FAIL,
   LOGOUT
 } from './types';
-//import { Redirect } from 'react-router-dom';
 
 
 // Load User

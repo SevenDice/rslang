@@ -5,42 +5,84 @@ import {
   GET_PROFILE,
   PROFILE_ERROR,
   CLEAR_PROFILE,
-  ACCOUNT_DELETED
+  ACCOUNT_DELETED,
+  STATISTICS_LOADED,
+  STATISTICS_LOAD_ERROR,
+  STATISTICS_UPDATED,
+  STATISTICS_UPDATE_ERROR,
+  USER_SETTINGS_LOADED,
+  USER_SETTINGS_LOAD_ERROR,
+  USER_SETTINGS_UPDATED,
+  USER_SETTINGS_UPDATE_ERROR
 } from './types';
 
-// // User Settings
-// export const loadSettings = (id) => async dispatch => {
-//   try {
-//     const res = await api.get(`users/${id}/settings`);
-//     console.log(res.data);
+// Get user statistics
+export const getUserStats = userId => async dispatch => {
+  try {
+    const res = await api.get(`users/${userId}/statistics`);
+    console.log(res.data);
     
-//     dispatch({
-//       type: USER_LOADED, //Сделать редьюсеры
-//       payload: res.data
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: AUTH_ERROR
-//     });
-//   }
-// };
+    dispatch({
+      type: STATISTICS_LOADED,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: STATISTICS_LOAD_ERROR
+    });
+  }
+};
 
-// // Set user settings
-// export const setUserSettings = (id) => async dispatch => {
-//   try {
-//     const res = await api.put(`users/${id}`);
-//     console.log(res.data);
+// Upserts new user statistics
+export const updateUserStats = (userId, params) => async dispatch => {
+  try {
+    const res = await api.put(`users/${userId}/statistics`, params);
+    console.log(res.data);
     
-//     dispatch({
-//       type: USER_LOADED, //Сделать редьюсеры
-//       payload: res.data
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: AUTH_ERROR
-//     });
-//   }
-// };
+    dispatch({
+      type: STATISTICS_UPDATED,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: STATISTICS_UPDATE_ERROR
+    });
+  }
+};
+
+// Get user settings
+export const getUserSettings = userId => async dispatch => {
+  try {
+    const res = await api.get(`users/${userId}/settings`);
+    console.log(res.data);
+    
+    dispatch({
+      type: USER_SETTINGS_LOADED, //Сделать редьюсеры
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: USER_SETTINGS_LOAD_ERROR
+    });
+  }
+};
+
+// Set user settings
+export const updateUserSettings = (userId, params) => async dispatch => {
+  try {
+    const res = await api.put(`users/${userId}/settings`, params);
+    console.log(res.data);
+    
+    dispatch({
+      type: USER_SETTINGS_UPDATED,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: USER_SETTINGS_UPDATE_ERROR
+    });
+  }
+};
 
 // Get current users profile
 export const getCurrentProfile = (id) => async dispatch => {
