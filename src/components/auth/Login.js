@@ -24,7 +24,6 @@ const Login = ({ login, isAuthenticated }) => {
     return <Redirect to="/dashboard" />;
   }
 
-  
   return (
     <Fragment>
       <h1 className="large text-primary">Авторизация</h1>

@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import ProfileTop from './ProfileTop';
-import ProfileAbout from './ProfileAbout';
-import { getProfileById } from '../../actions/profile';
 
-const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
+import { getCurrentProfile } from '../../actions/profile';
+
+const Profile = ({ getCurrentProfile, profile: { profile }, auth, match }) => {
   useEffect(() => {
-    getProfileById(match.params.id);
-  }, [getProfileById, match.params.id]);
+    getCurrentProfile(localStorage.getItem('id'));
+  }, [getCurrentProfile]);
 
   return (
     <Fragment>
@@ -18,21 +17,25 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <Link to="/profiles" className="btn btn-light">
-            Back To Profiles
-          </Link>
-          {auth.isAuthenticated &&
-            auth.loading === false &&
-            auth.user._id === profile.user._id && (
-              <Link to="/edit-profile" className="btn btn-dark">
-                Edit Profile
-              </Link>
-            )}
-          <div className="profile-grid my-1">
-            <ProfileTop profile={profile} />
-            <ProfileAbout profile={profile} />
-
-          </div>
+          <h1 className="large text-primary">Профиль пользователя</h1>
+          {<div className='dash-buttons'>
+             <Link to="/edit-profile" className="btn btn-light">
+               Редактировать настройки
+             </Link>
+            </div> 
+          }
+          {<div className='dash-buttons'>
+             <Link to="/stats" className="btn btn-light">
+               Посмотреть статистику
+             </Link>
+           </div> 
+          }
+          {<div className='dash-buttons'>
+             <Link to="/dictionary" className="btn btn-light">
+               Словарь
+             </Link>
+           </div>  
+          }
         </Fragment>
       )}
     </Fragment>
@@ -40,7 +43,7 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
 };
 
 Profile.propTypes = {
-  getProfileById: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -50,4 +53,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getProfileById })(Profile);
+export default connect(mapStateToProps, { getCurrentProfile })(Profile);

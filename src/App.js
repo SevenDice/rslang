@@ -7,7 +7,7 @@ import Routes from './components/routing/Routes';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
-import { loadUser, login } from './actions/auth';
+import { loadUser} from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
 import './App.css';

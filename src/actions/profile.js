@@ -3,11 +3,86 @@ import { setAlert } from './alert';
 
 import {
   GET_PROFILE,
-  GET_PROFILES,
   PROFILE_ERROR,
   CLEAR_PROFILE,
-  ACCOUNT_DELETED
+  ACCOUNT_DELETED,
+  STATISTICS_LOADED,
+  STATISTICS_LOAD_ERROR,
+  STATISTICS_UPDATED,
+  STATISTICS_UPDATE_ERROR,
+  USER_SETTINGS_LOADED,
+  USER_SETTINGS_LOAD_ERROR,
+  USER_SETTINGS_UPDATED,
+  USER_SETTINGS_UPDATE_ERROR
 } from './types';
+
+// Get user statistics
+export const getUserStats = userId => async dispatch => {
+  try {
+    const res = await api.get(`users/${userId}/statistics`);
+    console.log(res.data);
+    
+    dispatch({
+      type: STATISTICS_LOADED,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: STATISTICS_LOAD_ERROR
+    });
+  }
+};
+
+// Upserts new user statistics
+export const updateUserStats = (userId, params) => async dispatch => {
+  try {
+    const res = await api.put(`users/${userId}/statistics`, params);
+    console.log(res.data);
+    
+    dispatch({
+      type: STATISTICS_UPDATED,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: STATISTICS_UPDATE_ERROR
+    });
+  }
+};
+
+// Get user settings
+export const getUserSettings = userId => async dispatch => {
+  try {
+    const res = await api.get(`users/${userId}/settings`);
+    console.log(res.data);
+    
+    dispatch({
+      type: USER_SETTINGS_LOADED, //Сделать редьюсеры
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: USER_SETTINGS_LOAD_ERROR
+    });
+  }
+};
+
+// Set user settings
+export const updateUserSettings = (userId, params) => async dispatch => {
+  try {
+    const res = await api.put(`users/${userId}/settings`, params);
+    console.log(res.data);
+    
+    dispatch({
+      type: USER_SETTINGS_UPDATED,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: USER_SETTINGS_UPDATE_ERROR
+    });
+  }
+};
 
 // Get current users profile
 export const getCurrentProfile = (id) => async dispatch => {
@@ -15,42 +90,6 @@ export const getCurrentProfile = (id) => async dispatch => {
     const res = await api.get(`/users/${id}`);
     console.log(res);
     localStorage.setItem('email', res.data.email);
-    dispatch({
-      type: GET_PROFILE,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
-
-// Get all profiles
-export const getProfiles = () => async dispatch => {
-  dispatch({ type: CLEAR_PROFILE });
-
-  try {
-    const res = await api.get('/users');
-
-    dispatch({
-      type: GET_PROFILES,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
-
-// Get profile by ID
-export const getProfileById = userId => async dispatch => {
-  try {
-    const res = await api.get(`/users/${userId}`);
-
     dispatch({
       type: GET_PROFILE,
       payload: res.data

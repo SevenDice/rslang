@@ -16,7 +16,7 @@ import {
 export const loadUser = (id) => async dispatch => {
   try {
     const res = await api.get(`users/${id}`);
-    console.log(res);
+    console.log(res.data);
     
     dispatch({
       type: USER_LOADED,
@@ -28,6 +28,7 @@ export const loadUser = (id) => async dispatch => {
     });
   }
 };
+
 
 // Register User
 export const register = ({email, password }) => async dispatch => {
@@ -91,4 +92,5 @@ export const login = (email, password) => async dispatch => {
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
   localStorage.clear();
+  
 };
