@@ -20,7 +20,7 @@ import {
 // Get word by id
 export const getWordById = (wordId) => async dispatch => {
   try {
-    const res = await api.get(`words/${wordId}`);
+    const res = await api.get(`/words/${wordId}`);
 
     dispatch({
       type: WORD_LOADED,
@@ -36,7 +36,7 @@ export const getWordById = (wordId) => async dispatch => {
 // Get a chunk of words
 export const getChunkOfWords = (group, page, wordsPerExampleSentenceLTE, wordsPerPage) => async dispatch => {
   try {
-    const res = await api.get(`words?page=${page}&group=${group}&wordsPerExampleSentenceLTE=${wordsPerExampleSentenceLTE}&wordsPerPage=${wordsPerPage}`);
+    const res = await api.get(`/words?page=${page}&group=${group}&wordsPerExampleSentenceLTE=${wordsPerExampleSentenceLTE}&wordsPerPage=${wordsPerPage}`);
 
     dispatch({
       type: CHUNK_WORDS_LOADED,
@@ -52,7 +52,7 @@ export const getChunkOfWords = (group, page, wordsPerExampleSentenceLTE, wordsPe
 // Get a total number of words. If wordsPerExampleSentenceLTE is specified then returns number of full pages.
 export const getNumberOfWords = (group, wordsPerExampleSentenceLTE, wordsPerPage) => async dispatch => {
   try {
-    const res = await api.get(`words/count?group=${group}&wordsPerExampleSentenceLTE=${wordsPerExampleSentenceLTE}&wordsPerPage=${wordsPerPage}`);
+    const res = await api.get(`/words/count?group=${group}&wordsPerExampleSentenceLTE=${wordsPerExampleSentenceLTE}&wordsPerPage=${wordsPerPage}`);
 
     dispatch({
       type: NUMBER_WORDS_LOADED,
