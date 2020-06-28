@@ -12,45 +12,54 @@ const Profile = ({ getCurrentProfile, profile: { profile }, auth, match }) => {
   }, [getCurrentProfile]);
 
   return (
-    <Fragment>
-      {profile === null ? (
-        <Spinner />
-      ) : (
-        <Fragment>
-          <h1 className="large text-primary">Профиль пользователя</h1>
-          {<div className='dash-buttons'>
-             <Link to="/edit-profile" className="btn btn-light">
-               Редактировать настройки
-             </Link>
-            </div> 
-          }
-          {<div className='dash-buttons'>
-             <Link to="/stats" className="btn btn-light">
-               Посмотреть статистику
-             </Link>
-           </div> 
-          }
-          {<div className='dash-buttons'>
-             <Link to="/dictionary" className="btn btn-light">
-               Словарь
-             </Link>
-           </div>  
-          }
-        </Fragment>
-      )}
-    </Fragment>
+    <section className='wrapper style5'>
+      <div className='inner'>
+        {
+          //здесь при перезагрузке некорректно работает
+          //данная проверка
+          profile === null ? (
+            <Spinner />
+          ) : (
+            <Fragment>
+              <h1 className='large text-primary'>Профиль пользователя</h1>
+              {
+                <div className='dash-buttons'>
+                  <Link to='/edit-profile' className='btn btn-light'>
+                    Редактировать настройки
+                  </Link>
+                </div>
+              }
+              {
+                <div className='dash-buttons'>
+                  <Link to='/stats' className='btn btn-light'>
+                    Посмотреть статистику
+                  </Link>
+                </div>
+              }
+              {
+                <div className='dash-buttons'>
+                  <Link to='/dictionary' className='btn btn-light'>
+                    Словарь
+                  </Link>
+                </div>
+              }
+            </Fragment>
+          )
+        }
+      </div>
+    </section>
   );
 };
 
 Profile.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { getCurrentProfile })(Profile);

@@ -7,40 +7,38 @@ import DashboardActions from './DashboardActions';
 import { getCurrentProfile } from '../../actions/profile';
 
 const Dashboard = ({
-  getCurrentProfile
-  //deleteAccount,
+  getCurrentProfile,
+  // deleteAccount,
   // auth: { user },
   // profile: { profile }
 }) => {
   useEffect(() => {
     getCurrentProfile(localStorage.getItem('id'));
   }, [getCurrentProfile]);
-    return (
-      <Fragment>
-        <h1 className="large text-primary">Главная</h1>
-        <p className="lead">
-          <i /> Добро пожаловать, {localStorage.getItem('email')}
+  return (
+    <section className='wrapper style5'>
+      <div className='inner'>
+        <h1 className='large text-primary'>Главная</h1>
+        <p className='lead'>
+          <i className='fas fa-user' /> Добро пожаловать, {localStorage.getItem('email')}
         </p>
-        {(
-          <Fragment>
-            <DashboardActions />
-          </Fragment>
-        ) }
-      </Fragment>
-    )
+        <Fragment>
+          <DashboardActions />
+        </Fragment>
+      </div>
+    </section>
+  );
 };
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile})(
-  Dashboard
-);
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);

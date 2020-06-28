@@ -8,53 +8,52 @@ const DashboardActions = () => {
         <div className='dash-buttons'>
           <Link to='/profile' className='btn btn-light'>
             <i className='fas fa-user-circle text-primary' /> Профиль пользователя
-        </Link>
+          </Link>
         </div>
       }
       {
         <div className='dash-buttons'>
           <Link to='/training' className='btn btn-light'>
             <i className='text-primary' /> Изучение новых слов
-        </Link>
+          </Link>
         </div>
       }
       {
         <div className='dash-buttons'>
           <Link to='/training-levels' className='btn btn-light'>
             <i className='text-primary' /> Уровни
-        </Link>
+          </Link>
         </div>
       }
       {
         <div className='dash-buttons'>
           <Link to='/EnglishPuzzle' className='btn btn-light'>
             <i className='text-primary' /> Английский в пазлах
-        </Link>
+          </Link>
         </div>
       }
       {
         <div className='dash-buttons'>
           <Link to='/Savanna' className='btn btn-light'>
             <i className='text-primary' /> Саванна
-        </Link>
+          </Link>
         </div>
       }
       {
         <div className='dash-buttons'>
           <Link to='/Speakit' className='btn btn-light'>
-            <i className='text-primary' /> Произошение слов
-        </Link>
+            <i className='text-primary' /> SpeakIt
+          </Link>
         </div>
       }
       {
         <div className='dash-buttons'>
           <Link to='/Sprint' className='btn btn-light'>
             <i className='text-primary' /> Спринт
-        </Link>
+          </Link>
         </div>
       }
     </div>
-
   );
 };
 
