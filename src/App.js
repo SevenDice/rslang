@@ -7,34 +7,41 @@ import Routes from './components/routing/Routes';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
-import { loadUser} from './actions/auth';
+import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
-import './App.css';
+import './assets/sass/main.scss';
+
+document.querySelector('body').className = 'landing is-preload';
+
+setTimeout(() => {
+  document.querySelector('body').className = 'landing';
+}, 500);
 
 const App = () => {
   useEffect(() => {
-    if (localStorage.getItem('token'))  {
+    if (localStorage.getItem('token')) {
       setAuthToken(localStorage.getItem('token'));
     }
     if (localStorage.getItem('id')) {
       store.dispatch(loadUser(localStorage.getItem('id')));
     }
-    
   }, []);
 
   return (
-    <Provider store={store}>
-      <Router>
-        <Fragment>
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route component={Routes} />
-          </Switch>
-        </Fragment>
-      </Router>
-    </Provider>
+    <div id='page-wrapper'>
+      <Provider store={store}>
+        <Router>
+          <Fragment>
+            <Navbar />
+            <Switch>
+              <Route exact path='/' component={Landing} />
+              <Route component={Routes} />
+            </Switch>
+          </Fragment>
+        </Router>
+      </Provider>
+    </div>
   );
 };
 

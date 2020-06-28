@@ -9,83 +9,82 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    password2: ''
+    password2: '',
   });
 
-  const {email, password, password2 } = formData;
+  const { email, password, password2 } = formData;
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
       setAlert('Пароли не совпадают', 'danger');
     } else {
-      register({email, password });
+      register({ email, password });
     }
   };
 
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to='/dashboard' />;
   }
 
   return (
-    <Fragment>
-      <h1 className="large text-primary">Регистрация</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Создать аккаунт
+    <section className='section-first'>
+      <h4 className='auth'>Регистрация</h4>
+      <p>
+        <i className='fas fa-user' /> Создать аккаунт
       </p>
-      <form className="form" onSubmit={onSubmit}>
-        <div className="form-group">
+      <form className='form' onSubmit={onSubmit}>
+        <div>
           <input
-            type="email"
-            placeholder="Электронный адрес"
-            name="email"
+            type='email'
+            placeholder='Электронный адрес'
+            name='email'
             value={email}
             onChange={onChange}
           />
         </div>
-        <div className="form-group">
+        <div className='form-group'>
           <input
-            type="password"
-            placeholder="Пароль"
-            name="password"
+            type='password'
+            placeholder='Пароль'
+            name='password'
             value={password}
             onChange={onChange}
           />
-          <small className="form-text">
-            Обратите внимание! <br />
-            Пароль должен содержать не менее 8 символов, как минимум одну прописную букву,
-            одну заглавную букву, одну цифру и один спецсимвол из <b>+-_@$!%*?&#.,;:[]{}</b>
-          </small>
+          <p className='password-info'>
+            Обратите внимание! Пароль должен содержать не менее 8 символов, как минимум одну
+            прописную букву, одну заглавную букву, одну цифру и один спецсимвол из{' '}
+            <b>+-_@$!%*?&#.,;:[]{}</b>
+          </p>
         </div>
-        <div className="form-group">
+        <div className='form-group'>
           <input
-            type="password"
-            placeholder="Подтвердите пароль"
-            name="password2"
+            type='password'
+            placeholder='Подтвердите пароль'
+            name='password2'
             value={password2}
             onChange={onChange}
           />
         </div>
-        <input type="submit" className="btn btn-primary" value="Создать" />
+        <input type='submit' className='button primary' value='Создать' />
       </form>
-      <p className="my-1">
-        Уже есть аккаунт? <Link to="/login">Войти</Link>
+      <p className='my-1'>
+        Уже есть аккаунт? <Link to='/login'>Войти</Link>
       </p>
-    </Fragment>
+    </section>
   );
 };
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { setAlert, register })(Register);
