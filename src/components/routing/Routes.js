@@ -10,6 +10,7 @@ import Profile from '../profile/Profile';
 import NotFound from '../layout/NotFound';
 import PrivateRoute from '../routing/PrivateRoute';
 import Savanna from '../savanna/Savanna';
+import Audiocall from '../audiocall/Audiocall';
 import EnglishPuzzle from '../englishpuzzle/EnglishPuzzle';
 import Sprint from '../sprint/Sprint';
 import Speakit from '../speakIt/Speakit';
@@ -32,6 +33,7 @@ const Routes = (props) => {
         <PrivateRoute exact path='/stats' component={Stats} />
         <PrivateRoute exact path='/dictionary' component={Dictionary} />
         <PrivateRoute exact path='/savanna' component={Savanna} />
+        <PrivateRoute exact path='/audiocall' component={Audiocall} />
         <PrivateRoute exact path='/englishpuzzle' component={EnglishPuzzle} />
         <PrivateRoute exact path='/sprint' component={Sprint} />
         <PrivateRoute exact path='/speakIt' component={Speakit} />

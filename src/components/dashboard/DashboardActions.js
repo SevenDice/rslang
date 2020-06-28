@@ -34,6 +34,13 @@ const DashboardActions = () => {
       }
       {
         <div className='dash-buttons'>
+          <Link to='/Audiocall' className='btn btn-light'>
+            <i className='text-primary' /> Аудиовызов
+          </Link>
+        </div>
+      }
+      {
+        <div className='dash-buttons'>
           <Link to='/Savanna' className='btn btn-light'>
             <i className='text-primary' /> Саванна
           </Link>
