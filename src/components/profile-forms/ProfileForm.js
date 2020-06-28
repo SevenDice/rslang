@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,19 +8,19 @@ const initialState = {
   level: '',
   wordsPerDay: '',
   newWords: '',
-  wordTranslate: '',
-  sentenceWithMeaning: '',
-  sentenceWithCurrentWord: '',
-  wordTranscription: '',
-  wordPicture: '',
-  wordAutoPlay: '',
-  currentWordTranslate: '',
-  translateSentenceWithWord: '',
-  skipToNextCard: '',
-  deleteFromTrainList: '',
-  moveToHardWordsGroup: '',
-  getCustomWordsForTrain: '',
-  moveToGroups: '',
+  wordTranslate: true,
+  sentenceWithMeaning: false,
+  sentenceWithCurrentWord: true,
+  wordTranscription: false,
+  wordPicture: true,
+  wordAutoPlay: false,
+  currentWordTranslate: true,
+  translateSentenceWithWord: false,
+  skipToNextCard: false,
+  deleteFromTrainList: true,
+  moveToHardWordsGroup: false,
+  getCustomWordsForTrain: true,
+  moveToGroups: true,
 };
 
 const ProfileForm = ({
@@ -33,6 +33,8 @@ const ProfileForm = ({
   const [formData, setFormData] = useState(initialState);
 
   useEffect(() => {
+    console.log('first mount');
+    console.log(formData);
     if (!profile) getCurrentProfile();
     if (!loading && profile) {
       const profileData = { ...initialState };
@@ -64,7 +66,11 @@ const ProfileForm = ({
     moveToGroups,
   } = formData;
 
-  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e) => {
+    console.log('change');
+    setFormData({ ...formData, [e.target.name]: e.target.checked });
+    console.log(formData);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -72,8 +78,8 @@ const ProfileForm = ({
   };
 
   return (
-    <section class='wrapper style5'>
-      <div class='inner'>
+    <section className='wrapper style5'>
+      <div className='inner'>
         <h1 className='large text-primary'>Редактировать настройки</h1>
         <p className='lead'>
           <i className='fas fa-user' /> Изменение настроек пользователя
@@ -102,171 +108,187 @@ const ProfileForm = ({
           <div className='form-group'>
             <p>Настройка информации, отображаемой на карточках со словами</p>
             <p>На карточках будет отображаться:</p>
-            <div class='col-6 col-12-small'>
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
                 id='wordTranslate'
                 name='wordTranslate'
+                checked={formData.wordTranslate}
                 value={wordTranslate}
                 onChange={onChange}
               />
-              <label for='wordTranslate'>Перевод слова</label>
+              <label htmlFor='wordTranslate'>Перевод слова</label>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <p>
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
-                name='wordTranslate'
-                checked={wordTranslate}
-                value={wordTranslate}
-                onChange={onChange}
-              />{' '}
-              Перевод слова
-            </p>
-            <p>
-              <input
-                type='checkbox'
+                id='sentenceWithMeaning'
                 name='sentenceWithMeaning'
-                checked={sentenceWithMeaning}
+                checked={formData.sentenceWithMeaning}
                 value={sentenceWithMeaning}
                 onChange={onChange}
-              />{' '}
-              Предложение с объяснением значения слова
-            </p>
-            <p>
+              />
+              <label htmlFor='sentenceWithMeaning'>Предложение с объяснением значения слова</label>
+            </div>
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
+                id='sentenceWithCurrentWord'
                 name='sentenceWithCurrentWord'
-                checked={sentenceWithCurrentWord}
+                checked={formData.sentenceWithCurrentWord}
                 value={sentenceWithCurrentWord}
                 onChange={onChange}
-              />{' '}
-              Предложение с примером использования изучаемого слова
-            </p>
-            <p>
+              />
+              <label htmlFor='sentenceWithCurrentWord'>
+                Предложение с примером использования изучаемого слова
+              </label>
+            </div>
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
+                id='wordTranscription'
                 name='wordTranscription'
-                checked={wordTranscription}
+                checked={formData.wordTranscription}
                 value={wordTranscription}
                 onChange={onChange}
-              />{' '}
-              Транскрипция слова
-            </p>
-            <p>
+              />
+              <label htmlFor='wordTranscription'>Транскрипция слова</label>
+            </div>
+
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
+                id='wordPicture'
                 name='wordPicture'
-                checked={wordPicture}
+                checked={formData.wordPicture}
                 value={wordPicture}
                 onChange={onChange}
-              />{' '}
-              Картинка-ассоциация
-            </p>
+              />
+              <label htmlFor='wordPicture'>Картинка-ассоциация</label>
+            </div>
+            <br />
           </div>
 
           <div className='form-group'>
-            <p>
+            <p>Настройки автовоспроизведения:</p>
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
+                id='wordAutoPlay'
                 name='wordAutoPlay'
-                checked={wordAutoPlay}
+                checked={formData.wordAutoPlay}
                 value={wordAutoPlay}
                 onChange={onChange}
-              />{' '}
-              Автоматическое воспроизведение звука
-            </p>
+              />
+              <label htmlFor='wordAutoPlay'>Автоматическое воспроизведение звука</label>
+            </div>
+            <br />
           </div>
 
           <div className='form-group'>
             <p>После правильного ввода слова будут показаны:</p>
-            <p>
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
+                id='currentWordTranslate'
                 name='currentWordTranslate'
-                checked={currentWordTranslate}
+                checked={formData.currentWordTranslate}
                 value={currentWordTranslate}
                 onChange={onChange}
-              />{' '}
-              Перевод этого слова
-            </p>
-            <p>
+              />
+              <label htmlFor='currentWordTranslate'>Перевод этого слова</label>
+            </div>
+
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
+                id='translateSentenceWithWord'
                 name='translateSentenceWithWord'
-                checked={translateSentenceWithWord}
+                checked={formData.translateSentenceWithWord}
                 value={translateSentenceWithWord}
                 onChange={onChange}
-              />{' '}
-              Перевод предложений с использованием этого слова
-            </p>
+              />
+              <label htmlFor='translateSentenceWithWord'>
+                Перевод предложений с использованием этого слова
+              </label>
+            </div>
+            <br />
           </div>
 
           <div className='form-group'>
-            <p>
-              <input
-                type='checkbox'
-                name='skipToNextCard'
-                checked={skipToNextCard}
-                value={skipToNextCard}
-                onChange={onChange}
-              />{' '}
-              Можно перейти к другому вопросу, не ответив на предыдущий
-            </p>
-          </div>
+            <p>Дополнительные настройки:</p>
 
-          <div className='form-group'>
-            <p>Настройка возможностей слов</p>
-            <p>
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
+                id='deleteFromTrainList'
                 name='deleteFromTrainList'
-                checked={deleteFromTrainList}
+                checked={formData.deleteFromTrainList}
                 value={deleteFromTrainList}
                 onChange={onChange}
-              />{' '}
-              Возможность удалить слово из списка изучаемых
-            </p>
-            <p>
+              />
+              <label htmlFor='deleteFromTrainList'>
+                Возможность удалить слово из списка изучаемых
+              </label>
+            </div>
+
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
+                id='moveToHardWordsGroup'
                 name='moveToHardWordsGroup'
-                checked={moveToHardWordsGroup}
+                checked={formData.moveToHardWordsGroup}
                 value={moveToHardWordsGroup}
                 onChange={onChange}
-              />{' '}
-              Возможность поместить слово в группу сложных
-            </p>
-            <p>
+              />
+              <label htmlFor='moveToHardWordsGroup'>
+                Возможность поместить слово в группу сложных
+              </label>
+            </div>
+
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
+                id='getCustomWordsForTrain'
                 name='getCustomWordsForTrain'
-                checked={getCustomWordsForTrain}
+                checked={formData.getCustomWordsForTrain}
                 value={getCustomWordsForTrain}
                 onChange={onChange}
-              />{' '}
-              Возможность выбирать слова к изучению
-            </p>
-          </div>
+              />
+              <label htmlFor='getCustomWordsForTrain'>Возможность выбирать слова к изучению</label>
+            </div>
 
-          <div className='form-group'>
-            <p>Группировка слов</p>
-            <p>
+            <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
+                id='skipToNextCard'
+                name='skipToNextCard'
+                checked={formData.skipToNextCard}
+                value={skipToNextCard}
+                onChange={onChange}
+              />
+              <label htmlFor='skipToNextCard'>
+                Можно перейти к другому вопросу, не ответив на предыдущий
+              </label>
+            </div>
+
+            <div className='col-6 col-12-small'>
+              <input
+                type='checkbox'
+                id='moveToGroups'
                 name='moveToGroups'
-                checked={moveToGroups}
+                checked={formData.moveToGroups}
                 value={moveToGroups}
                 onChange={onChange}
-              />{' '}
-              Возможность относить слова к категориям "Снова", "Трудно", "Хорошо", "Легко"
-            </p>
+              />
+              <label htmlFor='moveToGroups'>
+                Возможность относить слова к категориям "Снова", "Трудно", "Хорошо", "Легко"
+              </label>
+            </div>
+            <br />
           </div>
 
-          <input type='submit' className='btn btn-primary my-1' value='Сохранить' />
+          <input type='submit' className='button primary' value='Сохранить' />
           <Link className='btn btn-light my-1' to='/dashboard'>
             Отмена
           </Link>
