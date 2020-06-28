@@ -9,7 +9,6 @@ import {
 const initialState = {
   profile: null,
   profiles: [],
-  repos: [],
   loading: true,
   error: {}
 };
@@ -41,8 +40,7 @@ export default function (state = initialState, action) {
     case CLEAR_PROFILE:
       return {
         ...state,
-        profile: null,
-        repos: []
+        profile: null
       };
   
     default:

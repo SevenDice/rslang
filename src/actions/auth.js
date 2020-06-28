@@ -15,7 +15,7 @@ import {
 // Load User
 export const loadUser = (id) => async dispatch => {
   try {
-    const res = await api.get(`users/${id}`);
+    const res = await api.get(`/users/${id}`);
     console.log(res.data);
     
     dispatch({

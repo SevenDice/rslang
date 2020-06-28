@@ -19,7 +19,7 @@ import {
 // Get user statistics
 export const getUserStats = userId => async dispatch => {
   try {
-    const res = await api.get(`users/${userId}/statistics`);
+    const res = await api.get(`/users/${userId}/statistics`);
     console.log(res.data);
     
     dispatch({
@@ -36,7 +36,7 @@ export const getUserStats = userId => async dispatch => {
 // Upserts new user statistics
 export const updateUserStats = (userId, params) => async dispatch => {
   try {
-    const res = await api.put(`users/${userId}/statistics`, params);
+    const res = await api.put(`/users/${userId}/statistics`, params);
     console.log(res.data);
     
     dispatch({
@@ -53,7 +53,7 @@ export const updateUserStats = (userId, params) => async dispatch => {
 // Get user settings
 export const getUserSettings = userId => async dispatch => {
   try {
-    const res = await api.get(`users/${userId}/settings`);
+    const res = await api.get(`/users/${userId}/settings`);
     console.log(res.data);
     
     dispatch({
@@ -70,7 +70,7 @@ export const getUserSettings = userId => async dispatch => {
 // Set user settings
 export const updateUserSettings = (userId, params) => async dispatch => {
   try {
-    const res = await api.put(`users/${userId}/settings`, params);
+    const res = await api.put(`/users/${userId}/settings`, params);
     console.log(res.data);
     
     dispatch({
@@ -134,10 +134,6 @@ export const createProfile = (
     });
   }
 };
-
-
-
-
 
 // Delete account & profile
 export const deleteAccount = (id) => async dispatch => {
