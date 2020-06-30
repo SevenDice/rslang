@@ -1,0 +1,32 @@
+.savanna{
+    background: url('savanna_bcg.jpg') center center no-repeat;
+    background-attachment: fixed;
+
+
+    & p{
+        color: #ffffff;
+    }
+
+    & .wrapper{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    & .inner{
+        position: relative;
+        flex: 1 0 auto;
+        background: rgba($color: #000000, $alpha: .7);
+        padding: 20px 30px;
+        min-height: 75vh;
+    }
+    & .button-close{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: 30px;
+        top: 20px;
+        background-color: #ed4933;
+    }
+}
