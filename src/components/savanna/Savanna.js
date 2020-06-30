@@ -26,10 +26,13 @@ const Savanna = () => {
     toggleGamingMode();
     countDown()
     setTimeout(() => {
-      // setCountingDown({
-      //   isTimer: !countingDown.timer,
-      // })
-    }, 5000)
+      setCountingDown({
+        isTimer: false,
+      })
+      setTimer({
+        timer: 3,
+      });
+    }, 4000)
   }
 
   function countDown() {
@@ -40,10 +43,8 @@ const Savanna = () => {
     }, 1000);
     setTimeout(() => {
       clearInterval(clock);
-      setCountingDown({
-        isTimer: !countingDown.timer,
-      })
     }, 3000);
+
   }
 
   return (
@@ -71,7 +72,8 @@ const Savanna = () => {
           </div>
         ) : (
           <div className="inner">
-            <p className="counter">{countingDown.isTimer}</p>
+          <button className='button-close button primary' onClick={toggleGamingMode}>Сбросить игру</button>
+            <p className="counter">lolkek</p>
           </div>
         )
       ))
