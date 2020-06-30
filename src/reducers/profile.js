@@ -3,14 +3,17 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   UPDATE_PROFILE,
-  GET_PROFILES
+  GET_PROFILES,
+  USER_SETTINGS_LOADED,
+  USER_SETTINGS_LOAD_ERROR,
 } from '../actions/types';
 
 const initialState = {
   profile: null,
   profiles: [],
   loading: true,
-  error: {}
+  settings: null,
+  error: {},
 };
 
 export default function (state = initialState, action) {
@@ -22,27 +25,56 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profile: payload,
-        loading: false
+        loading: false,
       };
     case GET_PROFILES:
       return {
         ...state,
         profiles: payload,
-        loading: false
+        loading: false,
       };
     case PROFILE_ERROR:
       return {
         ...state,
         error: payload,
         loading: false,
-        profile: null
+        profile: null,
       };
     case CLEAR_PROFILE:
       return {
         ...state,
-        profile: null
+        profile: null,
       };
-  
+    case USER_SETTINGS_LOADED:
+      return {
+        ...state,
+        settings: payload,
+      };
+    case USER_SETTINGS_LOAD_ERROR:
+      return {
+        ...state,
+        settings: {
+          wordsPerDay: 10,
+          optional: {
+            level: 1,
+            newWords: 5,
+            wordTranslate: true,
+            sentenceWithMeaning: false,
+            sentenceWithCurrentWord: true,
+            wordTranscription: false,
+            wordPicture: true,
+            wordAutoPlay: false,
+            currentWordTranslate: true,
+            translateSentenceWithWord: false,
+            skipToNextCard: false,
+            deleteFromTrainList: true,
+            moveToHardWordsGroup: false,
+            getCustomWordsForTrain: true,
+            moveToGroups: true,
+          },
+        },
+      };
+
     default:
       return state;
   }

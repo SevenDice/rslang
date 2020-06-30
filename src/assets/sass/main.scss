@@ -1577,14 +1577,13 @@ button,
     background-image: url('images/close.svg');
     background-position: 4.85em 1em;
     background-repeat: no-repeat;
-    border: 0;
+    border: 0 !important;
     cursor: pointer;
     display: block;
     height: 3em;
     position: absolute;
     right: 0;
     top: 0;
-    vertical-align: middle;
     width: 7em;
   }
 
@@ -1919,7 +1918,10 @@ body.is-preload {
     @include padding(12em, 0);
     @include vendor(
       'background-image',
-      ('linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5))', 'url("../../../img/showcase.jpg")')
+      (
+        'linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5))',
+        'url("../../../img/showcase.jpg")'
+      )
     );
     background-attachment: fixed;
     background-position: center center;
@@ -2048,7 +2050,7 @@ body.landing {
     @include vendor(
       'background-image',
       (
-        '-webkit-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6))',
+        'linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.6))',
         'url("../images/showcase.jpg")'
       )
     );
@@ -2075,7 +2077,7 @@ body.is-mobile {
       @include vendor(
         'background-image',
         (
-          'linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5))',
+          'linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5))',
           'url("../../../img/showcase.jpg")'
         )
       );
@@ -2113,12 +2115,13 @@ body {
 
 .alert {
   position: absolute;
-  background-color: #d37057;
-  top: 15%;
+  background-color: #505393;
+  top: 74px;
   width: 300px;
-  left: 40%;
+  right: 20px;
   border-radius: 5px;
   padding: 20px;
+  text-align: center;
   z-index: 100000000;
 }
 
@@ -2142,4 +2145,34 @@ ul li {
 .landing-logo,
 .auth {
   color: _palette(fg-bold) !important;
+}
+
+.p600 {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.cancel {
+  margin-left: 30px;
+}
+
+.delete {
+  background-color: #ed4933 !important;
+}
+
+.primary.delete:hover {
+  background-color: #f17161 !important;
+}
+
+.level-select {
+  max-width: 600px;
+}
+
+.number-input {
+  border: 3px solid #4e4852;
+  border-radius: 5px;
+  font-weight: 500;
+  color: #4e4852;
+  padding-left: 5px;
+  margin-left: 10px;
 }
