@@ -19,8 +19,6 @@ const ProfileForm = ({
   deleteAccount,
 }) => {
   const settings = useSelector((state) => state.profile.settings);
-  const id = useSelector((state) => state.auth.user.id);
-  console.log(id);
   const [formData, setFormData] = useState(settings);
 
   // Зачем это?
@@ -76,7 +74,7 @@ const ProfileForm = ({
     e.preventDefault();
     const newSettings = { ...formData };
     delete newSettings.id;
-    store.dispatch(updateUserSettings(id, newSettings));
+    store.dispatch(updateUserSettings(localStorage.getItem('id'), newSettings));
     store.dispatch(setAlert('Настройки сохранены'));
     userHistory.go(-2);
   };
