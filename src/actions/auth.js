@@ -8,38 +8,38 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
 } from './types';
-
+import store from '../store';
+import { getUserSettings } from '../actions/profile';
 
 // Load User
-export const loadUser = (id) => async dispatch => {
+export const loadUser = (id) => async (dispatch) => {
   try {
     const res = await api.get(`/users/${id}`);
     console.log(res.data);
-    
+
     dispatch({
       type: USER_LOADED,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: AUTH_ERROR
+      type: AUTH_ERROR,
     });
   }
 };
 
-
 // Register User
-export const register = ({email, password }) => async dispatch => {
-  const body = JSON.stringify({email, password });
+export const register = ({ email, password }) => async (dispatch) => {
+  const body = JSON.stringify({ email, password });
 
   try {
     const res = await api.post('/users', body);
     console.log(res);
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
     dispatch(loadUser());
   } catch (err) {
@@ -50,13 +50,13 @@ export const register = ({email, password }) => async dispatch => {
       dispatch(setAlert('Пароль не соответствует требованиям. Выберите другой пароль', 'danger'));
     }
     dispatch({
-      type: REGISTER_FAIL
+      type: REGISTER_FAIL,
     });
   }
 };
 
 // Login User
-export const login = (email, password) => async dispatch => {
+export const login = (email, password) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   try {
@@ -70,27 +70,27 @@ export const login = (email, password) => async dispatch => {
 
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
 
+    store.dispatch(getUserSettings(localStorage.getItem('id')));
     // dispatch(loadUser());
   } catch (err) {
     console.log(err.response.statusText, err.response.status);
     if (err.response.status === 403) {
-     dispatch(setAlert('Неверный пароль', 'danger'));
+      dispatch(setAlert('Неверный пароль', 'danger'));
     } else if (err.response.status === 404) {
       dispatch(setAlert('Пользователь с таким электронным адресом не зарегистрирован', 'danger'));
     }
 
     dispatch({
-      type: LOGIN_FAIL
+      type: LOGIN_FAIL,
     });
   }
 };
 
 // Logout / Clear Profile
-export const logout = () => dispatch => {
+export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
   localStorage.clear();
-  
 };

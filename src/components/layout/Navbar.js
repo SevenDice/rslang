@@ -20,14 +20,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
     const clickHandler = (e) => {
       if (e.target.className === 'visible') {
-        console.log('ретурн');
         return;
       } else if (e.target.closest('.menuToggle')) {
         menuToggle();
-        console.log('toggle');
       } else {
         closeToggle();
-        console.log('close');
       }
     };
 
@@ -37,7 +34,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
       <li>
-        <Link to='/profiles'>Разработчики</Link>
+        <Link to='/aboutus'>Разработчики</Link>
       </li>
       <li>
         <Link to='/dashboard'>
@@ -55,7 +52,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to='/profiles'>Разработчики</Link>
+        <Link to='/aboutus'>Разработчики</Link>
       </li>
       <li>
         <Link to='/register'>Регистрация</Link>
@@ -79,7 +76,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             </a>
             <div id='menu' ref={menu}>
               {/* !loading &&  */ <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
-              <a href='#menu' className='close' ref={closeIcon}></a>
+              <div href='#menu' className='close' ref={closeIcon}></div>
             </div>
           </li>
         </ul>

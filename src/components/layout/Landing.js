@@ -187,12 +187,12 @@ const Landing = ({ isAuthenticated }) => {
           </header>
           <ul className='actions stacked'>
             <li>
-              <a href='#' className='button fit primary'>
+              <a href='https://rs.school/' className='button fit primary'>
                 Activate
               </a>
             </li>
             <li>
-              <a href='#' className='button fit'>
+              <a href='https://rs.school/' className='button fit'>
                 Learn More
               </a>
             </li>
@@ -203,27 +203,27 @@ const Landing = ({ isAuthenticated }) => {
       <footer id='footer'>
         <ul className='icons'>
           <li>
-            <a href='#' className='icon brands fa-twitter'>
+            <a href='https://rs.school/' className='icon brands fa-twitter'>
               <span className='label'>Twitter</span>
             </a>
           </li>
           <li>
-            <a href='#' className='icon brands fa-facebook-f'>
+            <a href='https://rs.school/' className='icon brands fa-facebook-f'>
               <span className='label'>Facebook</span>
             </a>
           </li>
           <li>
-            <a href='#' className='icon brands fa-instagram'>
+            <a href='https://rs.school/' className='icon brands fa-instagram'>
               <span className='label'>Instagram</span>
             </a>
           </li>
           <li>
-            <a href='#' className='icon brands fa-dribbble'>
+            <a href='https://rs.school/' className='icon brands fa-dribbble'>
               <span className='label'>Dribbble</span>
             </a>
           </li>
           <li>
-            <a href='#' className='icon solid fa-envelope'>
+            <a href='https://rs.school/' className='icon solid fa-envelope'>
               <span className='label'>Email</span>
             </a>
           </li>
