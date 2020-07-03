@@ -44,8 +44,8 @@ export default function WordInput({
 }
 
 WordInput.propTypes = {
-  foreignWord: PropTypes.string,
-  foreignPhrase: PropTypes.string,
+  wordForeign: PropTypes.string,
+  wordTextExample: PropTypes.string,
   handleSuccess: PropTypes.func,
   isCorrect: PropTypes.bool
 };

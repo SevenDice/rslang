@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function LanguageCardFooter({ wordDetails, partOfSpeech }) {
+export default function LanguageCardFooter({ wordDetails, partOfSpeech, wordImage}) {
 
   return (
     <div className="language-card-footer">
       <div className="language-card-footer--word-data-container">
+        
         {wordDetails ? `${wordDetails}, ${partOfSpeech}` : partOfSpeech}
       </div>
 

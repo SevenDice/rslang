@@ -20,13 +20,6 @@ const DashboardActions = () => {
       }
       {
         <div className='dash-buttons'>
-          <Link to='/training-levels' className='btn btn-light'>
-            <i className='text-primary' /> Уровни
-          </Link>
-        </div>
-      }
-      {
-        <div className='dash-buttons'>
           <Link to='/EnglishPuzzle' className='btn btn-light'>
             <i className='text-primary' /> Английский в пазлах
           </Link>

@@ -68,7 +68,7 @@ export default class WordInputField extends React.Component {
             border: none;
             background: ${polar2};
             box-sizing: border-box;
-            width: calc(${foreignWord.length} * 1rem + 5px);
+            width: calc(${foreignWord.length} * 1.6rem + 8px) !important;
           }
           word-input-field--input:focus {
             outline: none;

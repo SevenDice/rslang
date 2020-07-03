@@ -1,7 +1,11 @@
 import React from "react";
 import Lingvist from "./Lingvist";
+// import { Redirect } from 'react-router-dom';
+
+const DATA_URL = 'https://raw.githubusercontent.com/AlinaKutya/rslang-data/master/';
 
 class LingvistData {
+  
   constructor(words = {}, index = 0) {
     this.words = words;
     this._index = index;
@@ -11,11 +15,7 @@ class LingvistData {
     return this._index;
   }
   set index(newIndex) {
-    console.log(newIndex);
     // need to check if newIndex valid or other methods will break
-    if(typeof newIndex === 'undefined'){
-      console.log("Опа епта");
-    }
     this._index = newIndex;
 
   }
@@ -49,16 +49,16 @@ class LingvistData {
     return this.words[this.index].word;
   }
   get wordImage() {
-    return this.words[this.index].image;
+    return DATA_URL + this.words[this.index].image;
   }
   get wordAudio() {
-    return this.words[this.index].audio;
+    return DATA_URL + this.words[this.index].audio;
   }
   get wordAudioMeaning() {
-    return this.words[this.index].audioMeaning;
+    return DATA_URL + this.words[this.index].audioMeaning;
   }
   get wordAudioExample() {
-    return this.words[this.index].audioExample;
+    return DATA_URL + this.words[this.index].audioExample;
   }
   get wordTextMeaning() {
     return this.words[this.index].textMeaning;

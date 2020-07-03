@@ -38,9 +38,11 @@ export default function LanguageCard({
         isCorrect={isCorrect}
       />
       <LanguageCardFooter
+      wordImage={wordImage}
        // wordDetails={wordDetails}
        // partOfSpeech={partOfSpeech}
       />
+      <img className = "word-image" src={wordImage} alt=""/>
       <style jsx="true">{`
         .language-card {
           position: relative;
@@ -56,18 +58,30 @@ export default function LanguageCard({
           padding: 0px 10px;
           border-radius: 10px;
         }
+        .word-image {
+          margin: auto;
+        }
       `}</style>
     </div>
   );
 }
 
 LanguageCard.propTypes = {
-  foreignWord: PropTypes.string,
-  foreignPhrase: PropTypes.string,
-  nativePhrase: PropTypes.string,
-  nativeWord: PropTypes.arrayOf(PropTypes.string),
-  wordStrength: PropTypes.number,
-  wordDetails: PropTypes.string,
+  wordId: PropTypes.string,
+  wordGroup: PropTypes.number,
+  wordPage: PropTypes.number,
+  wordForeign: PropTypes.string,
+  wordImage: PropTypes.string,
+  wordAudio: PropTypes.string,
+  wordAudioMeaning: PropTypes.string,
+  wordAudioExample: PropTypes.string,
+  wordTextMeaning: PropTypes.string,
+  wordTextExample: PropTypes.string,
+  wordTranscription: PropTypes.string,
+  wordTextExampleTranslate: PropTypes.string,
+  wordTextMeaningTranslate: PropTypes.string,
+  wordTranslate: PropTypes.string,
+  wordsPerExampleSentence: PropTypes.number,
   partOfSpeech: PropTypes.string,
   handleSuccess: PropTypes.func,
   isCorrect: PropTypes.bool

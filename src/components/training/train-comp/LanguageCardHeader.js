@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 // import ProgressInfo from './ProgressInfo';
 import ToggleNativePhrase from './ToggleNativePhrase';
 
-export default function LanguageCardHeader({ wordTextExampleTranslate/*, wordStrength */}) {
+export default function LanguageCardHeader({ wordTextExampleTranslate, wordImage/*, wordStrength */}) {
+  console.log(wordImage);
   const [isShow, setIsShow] = useState(false);
   const toggleShow = () => {
     setIsShow(!isShow);
@@ -14,8 +15,7 @@ export default function LanguageCardHeader({ wordTextExampleTranslate/*, wordStr
       <p className={`header ${isShow || 'hide-header'}`}>
         {wordTextExampleTranslate && wordTextExampleTranslate}
       </p>
-
-      <div>Тест</div>
+      
       <ToggleNativePhrase isShow={isShow} toggleShow={toggleShow} />
       <style jsx="true">{`
         .language-card-header {
@@ -25,7 +25,7 @@ export default function LanguageCardHeader({ wordTextExampleTranslate/*, wordStr
         }
         .header {
           position: absolute;
-          top: -80px;
+          top: -50px;
           transition: all 500ms;
           font-size: 1rem;
         }
