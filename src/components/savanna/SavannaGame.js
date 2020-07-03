@@ -28,15 +28,19 @@ const SavannaGame = (props) => {
   const [trueAnswers, setTrueAnswers] = React.useState(0);
 
   function checkAnswer(event) {
-    console.log(event.target.id);
+    // console.log(event.target.id);
     const answeredID = event.target.id.replace("answer-", "");
     const currentID = props.words.words[currPosition].id;
-    console.log(answeredID === currentID);
+    // console.log(answeredID === currentID);
     if (answeredID === currentID) {
       setCurrPosition(currPosition + 1);
       setTrueAnswers(trueAnswers + 1);
     } else {
       setCurrPosition(currPosition + 1);
+    }
+    if (currPosition + 1 < questions) {
+      console.log(currPosition);
+      showNextQuestion();
     }
     if (currPosition === questions - 1) {
       console.log(trueAnswers, currPosition, questions);
@@ -50,6 +54,9 @@ const SavannaGame = (props) => {
         "true answers percentage: " + (trueAnswers / questions) * 100 + "%"
       );
     } else {
+        alert("true answers percentage: " +
+        ((trueAnswers + 1) / questions) * 100 +
+        "%")
       console.log(
         "true answers percentage: " +
           ((trueAnswers + 1) / questions) * 100 +
@@ -58,12 +65,34 @@ const SavannaGame = (props) => {
     }
   }
 
+  function showNextQuestion() {
+    const currentItem = document.querySelector(".case-" + currPosition);
+    const nextItem = document.querySelector(".case-" + (currPosition + 1));
+    // console.log(currentItem.classList);
+    // console.log(nextItem.classList);
+    currentItem.classList.remove("enabled");
+    currentItem.classList.add("disabled");
+    nextItem.classList.add("enabled");
+    nextItem.classList.remove("disabled");
+  }
+
   return (
-    <div>
+    <div className='questions'>
       {props.words.words.map((word, index) => {
         if (index < props.words.words.length - 3) {
           return (
-            <div key={word.id} id={"question-" + word.id}>
+            <div
+              className={
+                "case" +
+                " " +
+                "case-" +
+                index +
+                " " +
+                (index === 0 ? "enabled" : "disabled")
+              }
+              key={word.id}
+              id={"question-" + word.id}
+            >
               <p className="question">
                 {index + 1}. {word.word}
               </p>
@@ -99,7 +128,18 @@ const SavannaGame = (props) => {
           );
         } else {
           return (
-            <div key={word.id} id={"question-" + word.id}>
+            <div
+              className={
+                "case" +
+                " " +
+                "case-" +
+                index +
+                " " +
+                (index === 0 ? "enabled" : "disabled")
+              }
+              key={word.id}
+              id={"question-" + word.id}
+            >
               <p className="question">
                 {index + 1}. {word.word}
               </p>

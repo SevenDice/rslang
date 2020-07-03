@@ -30,3 +30,23 @@
         background-color: #ed4933;
     }
 }
+
+
+.questions{
+    position: relative;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.case{
+    position: absolute;
+    width: 100%;
+    transition: all .5s;
+
+    &.enabled{
+        transform: translateX(0);
+    }
+    &.disabled{
+        transform: translateX(150%);
+    }
+}
