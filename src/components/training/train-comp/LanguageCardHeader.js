@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import ProgressInfo from './ProgressInfo';
+// import { Link } from 'react-router-dom';
+// import ProgressInfo from './ProgressInfo';
 import ToggleNativePhrase from './ToggleNativePhrase';
 
-export default function LanguageCardHeader({ nativePhrase, wordStrength }) {
+export default function LanguageCardHeader({ wordTextExampleTranslate/*, wordStrength */}) {
   const [isShow, setIsShow] = useState(false);
   const toggleShow = () => {
     setIsShow(!isShow);
@@ -12,15 +12,12 @@ export default function LanguageCardHeader({ nativePhrase, wordStrength }) {
   return (
     <div className="language-card-header">
       <p className={`header ${isShow || 'hide-header'}`}>
-        {nativePhrase && nativePhrase}
+        {wordTextExampleTranslate && wordTextExampleTranslate}
       </p>
-      <Link href="/levels">
-        <div>
-          <ProgressInfo wordStrength={wordStrength} />
-        </div>
-      </Link>
+
+      <div>Тест</div>
       <ToggleNativePhrase isShow={isShow} toggleShow={toggleShow} />
-      <style jsx>{`
+      <style jsx="true">{`
         .language-card-header {
           display: flex;
           justify-content: space-between;

@@ -54,9 +54,9 @@ export const updateUserStats = (userId, params) => async (dispatch) => {
 // Get user settings
 export const getUserSettings = (userId) => async (dispatch) => {
   try {
-    console.log(`getUserSettings for ${userId}`);
+    //console.log(`getUserSettings for ${userId}`);
     const res = await api.get(`/users/${userId}/settings`);
-    console.log(res.data);
+    //console.log(res.data);
 
     dispatch({
       type: USER_SETTINGS_LOADED,

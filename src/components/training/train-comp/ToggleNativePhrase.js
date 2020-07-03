@@ -12,7 +12,7 @@ export default function ToggleNativePhrase({ isShow, toggleShow }) {
       onClick={handleClick}
     >
       ^
-      <style jsx>{`
+      <style jsx="true">{`
         .toggle-native-phrase {
           transition: transform 300ms;
         }

@@ -8,7 +8,7 @@ export default function Tooltip({ display, direction = 'bottom', children }) {
     <span className={`sf-tooltip--container sf-tooltip--${direction}`}>
       <span className="sf-tooltip" data-display={display} />
       {children}
-      <style jsx>{`
+      <style jsx="true">{`
         .sf-tooltip--container {
           position: relative;
         }

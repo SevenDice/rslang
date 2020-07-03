@@ -16,7 +16,6 @@ import Speakit from '../speakIt/Speakit';
 import Stats from '../stats/Stats';
 import Dictionary from '../dictionary/Dictionary';
 import Training from '../training/Training';
-import Levels from '../training/Levels';
 
 const Routes = (props) => {
   return (
@@ -35,8 +34,7 @@ const Routes = (props) => {
         <PrivateRoute exact path='/englishpuzzle' component={EnglishPuzzle} />
         <PrivateRoute exact path='/sprint' component={Sprint} />
         <PrivateRoute exact path='/speakIt' component={Speakit} />
-        <PrivateRoute exact path='/training' component={Training} />
-        <PrivateRoute exact path='/training-levels' component={Levels} />
+        <Route exact path='/training' component={Training} />
 
         <Route component={NotFound} />
       </Switch>

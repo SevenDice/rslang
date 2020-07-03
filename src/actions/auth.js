@@ -17,7 +17,7 @@ import { getUserSettings } from '../actions/profile';
 export const loadUser = (id) => async (dispatch) => {
   try {
     const res = await api.get(`/users/${id}`);
-    console.log(res.data);
+    //console.log(res.data);
 
     dispatch({
       type: USER_LOADED,

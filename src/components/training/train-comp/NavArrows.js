@@ -23,7 +23,7 @@ export default function NavArrows({
       >
         <div className="sf-nav-arrows--arrow">R</div>
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .sf-nav-arrows {
           display: flex;
         }

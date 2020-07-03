@@ -48,7 +48,7 @@ export default class WordInputField extends React.Component {
             onChange={this.handleChange}
           />
         </form>
-        <style jsx>{`
+        <style jsx="true">{`
           .word-input-field {
             display: inline-block;
             font-family: monospace;

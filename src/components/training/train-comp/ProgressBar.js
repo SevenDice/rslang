@@ -12,7 +12,7 @@ export default function ProgressBar({ num }) {
         <div className="sf-progress-bar--bar---fill" />
       </div>
       <div className="sf-progress-bar--num">100</div>
-      <style jsx>{`
+      <style jsx="true">{`
         .sf-progress-bar {
           display: flex;
         }

@@ -3,27 +3,27 @@ import PropTypes from 'prop-types';
 import WordInputField from './WordInputField';
 
 export default function WordInput({
-  foreignWord = '',
-  foreignPhrase = '',
+  wordForeign = '',
+  wordTextExample = '',
   handleSuccess,
   isCorrect
 }) {
-  const [front, end] = foreignPhrase.split('*');
+  const [front, end] = wordTextExample.replace(/<b.*>.*?<\/b>/ig,'*').split('*')
   return (
     <div className="word-input">
       <div className="word-input--article">
         <span>{front}</span>
         {isCorrect ? (
-          <span className="word-input--correct-word">{foreignWord}</span>
+          <span className="word-input--correct-word">{wordForeign}</span>
         ) : (
           <WordInputField
-            foreignWord={foreignWord}
+            foreignWord={wordForeign}
             handleSuccess={handleSuccess}
           />
         )}
         <span>{end}</span>
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .word-input {
           font-size: 1.5rem;
           display: inline-block;

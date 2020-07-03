@@ -9,7 +9,7 @@ export default function HintLetter({ letter, isCorrect }) {
       }`}
     >
       {letter}
-      <style jsx>{`
+      <style jsx="true">{`
         .hint-letter--correct {
           color: green;
         }
