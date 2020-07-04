@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { frost2, polar4, green } from './Colors';
 
 export default function ProgressBar({ num }) {
   return (
@@ -13,25 +12,10 @@ export default function ProgressBar({ num }) {
       </div>
       <div className="sf-progress-bar--num">100</div>
       <style jsx="true">{`
-        .sf-progress-bar {
-          display: flex;
-        }
-        .sf-progress-bar--num {
-          padding: 0 5px;
-          color: ${frost2};
-        }
-        .sf-progress-bar--bar {
-          position: relative;
-          align-self: center;
-          width: 500px;
-          height: 10px;
-          border-radius: 5px;
-          background: ${polar4};
-        }
         .sf-progress-bar--bar---fill {
           position: absolute;
           height: 10px;
-          background: ${green};
+          background: #A3BE8C;
           border-radius: 5px;
           width: calc(1% * ${num});
         }

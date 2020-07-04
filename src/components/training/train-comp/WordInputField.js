@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { polar2 } from './Colors';
 import HintLetter from './HintLetter';
 import { compareAttemptWithCorrectWord } from '../../../utils/lib';
 
@@ -49,33 +48,13 @@ export default class WordInputField extends React.Component {
           />
         </form>
         <style jsx="true">{`
-          .word-input-field {
-            display: inline-block;
-            font-family: monospace;
-          }
-          .word-input-field--letter-container,
-          .word-input-field--input {
-            font-family: monospace;
-            font-size: 1.5rem;
-            padding: 5px;
-          }
-          .word-input-field--letter-container {
-            position: absolute;
-          }
           .word-input-field--input {
             color: green;
             outline: none;
             border: none;
-            background: ${polar2};
+            background: #ECEFF4;
             box-sizing: border-box;
             width: calc(${foreignWord.length} * 1.6rem + 8px) !important;
-          }
-          word-input-field--input:focus {
-            outline: none;
-          }
-          .word-input-field span {
-            opacity: 0.5;
-            pointer-events: none;
           }
         `}</style>
       </div>

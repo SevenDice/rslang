@@ -111,21 +111,7 @@ export default class Lingvist extends React.Component {
           <div className="native-word">{wordTranslate}</div>
         </div>
         <ProgressBar num={currentIndex + 1} />
-        <style jsx="true">{`
-          .lingvist {
-            min-height: 350px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-          }
-          .native-word {
-            position: relative;
-            top: 30px;
-            left: 40px;
-          }
-        `}</style>
+
         {/* <div>Для дебага:</div>
         <div>Id: <b>{wordId}</b></div>
         <div>Группа: <b>{wordGroup}</b></div>

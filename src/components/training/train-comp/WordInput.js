@@ -23,22 +23,6 @@ export default function WordInput({
         )}
         <span>{end}</span>
       </div>
-      <style jsx="true">{`
-        .word-input {
-          font-size: 1.5rem;
-          display: inline-block;
-          color: green;
-        }
-        .word-input--correct-word {
-          color: lightgreen;
-          border-bottom-width: 2px;
-          border-bottom-style: solid;
-        }
-        .word-input--article {
-          display: inline-block;
-          margin-right: 5px;
-        }
-      `}</style>
     </div>
   );
 }

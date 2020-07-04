@@ -16,23 +16,6 @@ export default function LanguageCardHeader({ wordTextExampleTranslate, wordImage
       </p>
       
       <ToggleNativePhrase isShow={isShow} toggleShow={toggleShow} />
-      <style jsx="true">{`
-        .language-card-header {
-          display: flex;
-          justify-content: space-between;
-          padding: 5px 5px 0px 25px;
-        }
-        .header {
-          position: absolute;
-          top: -50px;
-          transition: all 500ms;
-          font-size: 1rem;
-        }
-        .hide-header {
-          transform: translateY(20px);
-          opacity: 0;
-        }
-      `}</style>
     </div>
   );
 }

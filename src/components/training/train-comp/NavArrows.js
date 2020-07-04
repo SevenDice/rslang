@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { polar4 } from './Colors';
 
 export default function NavArrows({
   onLeftClick,
@@ -24,32 +23,6 @@ export default function NavArrows({
         <div className="sf-nav-arrows--arrow">R</div>
       </div>
       <style jsx="true">{`
-        .sf-nav-arrows {
-          display: flex;
-        }
-        .sf-nav-arrows--arrow-container {
-          display: flex;
-          justify-content: center;
-          min-height: 100%;
-          min-width: 20px;
-        }
-        .sf-nav-arrows--arrow-container:hover {
-          cursor: pointer;
-        }
-        .sf-nav-arrows--arrow-container:active {
-          background: ${polar4};
-        }
-        .sf-nav-arrows--arrow-container.sf-nav-arrows--left-arrow-container:hover
-          .arrow {
-          transform: translateX(-3px);
-        }
-        .sf-nav-arrows--arrow-container.sf-nav-arrows--right-arrow-container:hover
-          .arrow {
-          transform: translateX(3px);
-        }
-        .sf-nav-arrows--arrow {
-          align-self: center;
-        }
         .sf-nav-arrows--arrow-container.sf-nav-arrows--left-arrow-container {
           visibility: ${isPrev ? 'hidden' : 'visible'};
         }
