@@ -105,11 +105,11 @@ function SpeakitGame() {
       imgSrc = gameResults[transcript].image;
       if (gameResults[transcript].done === false) {
         console.log('слово названо впервые');
-        /* const newRes = {
-          ...gameResults,
-          [transcript]: { ...gameResults[transcript], done: true },
-        }; */
 
+        //  const newRes = {
+        //   ...gameResults,
+        //   [transcript]: { ...gameResults[transcript], done: true },
+        // };
         // setGameResults(newRes); эта строчка не работает
         array[transcript].done = true; //обновление происходит за счет array
         //почему так?

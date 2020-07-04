@@ -1,6 +1,6 @@
 import React from 'react';
 import SpeakitGame from './SpeakitGame';
-
+import { Link } from 'react-router-dom';
 const Speakit = () => {
   const [isStarted, setIsStarted] = React.useState(false);
 
@@ -10,6 +10,10 @@ const Speakit = () => {
 
   return (
     <div className='speakit-startpage'>
+      {' '}
+      <Link to='/dashboard'>
+        <div className='speakit-exit' title='Выйти на главную страницу' />
+      </Link>
       {isStarted ? (
         <SpeakitGame />
       ) : (
