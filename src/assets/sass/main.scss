@@ -441,9 +441,7 @@ header {
     top: -0.25em;
   }
 
-  h2 + p {
-  }
-
+  h2 + p,
   h3 + p {
     font-size: 1.1em;
   }
@@ -2175,4 +2173,94 @@ ul li {
   color: #4e4852;
   padding-left: 5px;
   margin-left: 10px;
+}
+.cards-startpage {
+  @include vendor('background', ('url("../../../img/bg7.jpg")'));
+  background-size: cover;
+  padding: 60px 50px 10px;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.training-card {
+  position: relative;
+  color: #4e4852;
+  padding: 15px;
+  border-radius: 5px;
+  width: 800px;
+  height: 450px;
+  background-color: #c7c7c7f8;
+}
+
+.arrow {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.arrow-left {
+  background: url('./images/arrow-left.svg') no-repeat center;
+}
+
+.arrow-right {
+  background: url('./images/arrow-right.svg') no-repeat center;
+}
+
+.card-upper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-eng-sentense {
+  flex-basis: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.card-img {
+  display: inline-block;
+  border-radius: 5px;
+  width: 250px;
+
+  @media screen and (max-width: 680px) {
+    width: 130px;
+  }
+}
+
+.card-divider {
+  margin: 30px 0;
+  height: 1px;
+  background-color: #1814252d;
+}
+.card-word-translation {
+  font-size: 1.7rem;
+  margin-bottom: 20px !important;
+}
+.cardP {
+  margin-bottom: 10px;
+}
+
+.card-transcription {
+  font-style: italic;
+}
+
+.word-input {
+  margin: 5px;
+  padding: 2px !important;
+}
+
+.card-audio {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: url('./images/card-audio.png') no-repeat center;
 }

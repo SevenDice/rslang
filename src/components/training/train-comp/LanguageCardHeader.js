@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import ToggleNativePhrase from './ToggleNativePhrase';
 
 export default function LanguageCardHeader({ wordTextExampleTranslate, wordImage/*, wordStrength */}) {
-  console.log(wordImage);
   const [isShow, setIsShow] = useState(false);
   const toggleShow = () => {
     setIsShow(!isShow);

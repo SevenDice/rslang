@@ -1,25 +1,38 @@
 import React from "react";
-import "./Template.scss";
 
 function Template() {
   return (
-    <section className="wrapper style5">
-        <h1 className="large text-primary">Тестовая верстка</h1>
-        <div class="card text-center">
-          <div class="card-header">Featured</div>
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">
-              With supporting text below as a natural lead-in to additional
-              content.
-            </p>
-            {/* <a href="#" class="btn btn-primary">
-              Go somewhere
-            </a> */}
+    <div className='cards-startpage'>
+      <div className='arrow arrow-left' />
+      <div className='training-card'>
+        <div className='card-upper'>
+          <div className='card-eng-sentense'>
+            The students
+            <input type='text' className='word-input' style={{ width: '60px' }} autoFocus></input>
+            they have too much homework
           </div>
-          <div class="card-footer text-muted">2 days ago</div>
+
+          <img
+            className='card-img'
+            src='https://raw.githubusercontent.com/AlinaKutya/rslang-data/master/files/27_0523.jpg'
+            alt=''
+          />
         </div>
-    </section>
+        <div className='card-divider'></div>
+        <div className='card-lower'>
+          <div className='card-word-translation cardP'>согласны</div>
+          <div className='card-sentense-translation cardP'>
+            Студенты согласны, что у них слишком большое задание на реакте
+          </div>
+          <div className='card-word-meaning cardP'>
+            Согласиться - значит иметь такое же убеждение, как и другой человек
+          </div>
+          <div className='card-transcription cardP'>[agriiee]</div>
+        </div>
+        <div className='card-audio' />
+      </div>
+      <div className='arrow arrow-right' />
+    </div>
   );
 }
 
