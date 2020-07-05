@@ -16,7 +16,7 @@ export default function ProgressInfo({ wordStrength }) {
           Find out more
         </span>
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .progress-info--container {
           display: flex;
           align-items: center;

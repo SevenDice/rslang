@@ -15,7 +15,10 @@ import {
   USER_WORD_UPDATED,
   USER_WORD_UPDATE_ERROR,
   USER_WORD_DELETED,
-  USER_WORD_DELETE_ERROR } from './types'
+  USER_WORD_DELETE_ERROR,
+  USER_AGGREGATED_WORDS_LOADED,
+  USER_AGGREGATED_WORDS_LOAD_ERROR
+ } from './types'
   
 // Get word by id
 export const getWordById = (wordId) => async dispatch => {
@@ -34,10 +37,10 @@ export const getWordById = (wordId) => async dispatch => {
 };
 
 // Get a chunk of words
-export const getChunkOfWords = (group, page, wordsPerExampleSentenceLTE, wordsPerPage) => async dispatch => {
+export const getChunkOfWords = (group, page) => async dispatch => {
   try {
-    const res = await api.get(`/words?page=${page}&group=${group}&wordsPerExampleSentenceLTE=${wordsPerExampleSentenceLTE}&wordsPerPage=${wordsPerPage}`);
-
+    const res = await api.get(`/words?&group=${group}page=${page}`);
+    console.log(res.data);
     dispatch({
       type: CHUNK_WORDS_LOADED,
       payload: res.data
@@ -81,11 +84,49 @@ export const getAllUserWords = userId => async dispatch => {
   }
 };
 
+//Get User Aggregated words
+export const getAggregatedUserWords = (userId, group, wordsPerPage, filter)  => async dispatch => {
+  try {
+    let request=`/users/${userId}/aggregatedWords?`;
+    if ((typeof group !== 'undefined') && (group !== null) && (group !== '')){
+      request = request + `group=${group}`;
+    }
+    if ((typeof wordsPerPage !== 'undefined') && (wordsPerPage !== null) && (wordsPerPage !== '')){
+      if (request === `/users/${userId}/aggregatedWords?`){
+        request= request +`wordsPerPage=${wordsPerPage}`;  
+      }
+      else{
+        request= request +`&wordsPerPage=${wordsPerPage}`; 
+      }  
+    }
+    if ((typeof filter !== 'undefined') && (filter !== null) && (filter !=='')){
+      if (request === `/users/${userId}/aggregatedWords?`){
+        request = request +`filter=${filter}`;
+      }
+      else{
+        request = request +`&filter=${filter}`;
+      }    
+    }
+
+    ///console.log(request);
+    const res = await api.get(request);
+    //console.log(res.data);
+    dispatch({
+      type: USER_AGGREGATED_WORDS_LOADED,
+      payload: res.data[0].paginatedResults
+    });
+  } catch (err) {
+    dispatch({
+      type: USER_AGGREGATED_WORDS_LOAD_ERROR
+    });
+  }
+};
+
 // Create a user word
 export const createUserWord = (userId, wordId, params) => async dispatch => {
   try {
     const res = await api.post(`/users/${userId}/words/${wordId}`, params);
-
+    console.log(res.data);
     dispatch({
       type: USER_WORD_CREATED,
       payload: res.data

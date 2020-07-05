@@ -43,7 +43,7 @@ export default class SelectField extends React.Component {
             </div>
           );
         })}
-        <style jsx>{`
+        <style jsx="true">{`
           .select-field-options {
             display: inline-block;
             padding: 5px 7px;

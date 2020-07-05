@@ -1,27 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState /* , useEffect */ } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createProfile, getCurrentProfile, deleteAccount } from '../../actions/profile';
-
-const initialState = {
-  level: '',
-  wordsPerDay: '',
-  newWords: '',
-  wordTranslate: true,
-  sentenceWithMeaning: false,
-  sentenceWithCurrentWord: true,
-  wordTranscription: false,
-  wordPicture: true,
-  wordAutoPlay: false,
-  currentWordTranslate: true,
-  translateSentenceWithWord: false,
-  skipToNextCard: false,
-  deleteFromTrainList: true,
-  moveToHardWordsGroup: false,
-  getCustomWordsForTrain: true,
-  moveToGroups: true,
-};
+import { connect, useSelector } from 'react-redux';
+import {
+  createProfile,
+  getCurrentProfile,
+  deleteAccount,
+  updateUserSettings,
+} from '../../actions/profile';
+import store from '../../store';
+import { setAlert } from '../../actions/alert';
 
 const ProfileForm = ({
   profile: { profile, loading },
@@ -30,14 +18,15 @@ const ProfileForm = ({
   history,
   deleteAccount,
 }) => {
-  const [formData, setFormData] = useState(initialState);
+  const settings = useSelector((state) => state.profile.settings);
+  const [formData, setFormData] = useState(settings);
+  
 
-  useEffect(() => {
-    console.log('first mount');
-    console.log(formData);
+  // Зачем это?
+  /* useEffect(() => {
     if (!profile) getCurrentProfile();
     if (!loading && profile) {
-      const profileData = { ...initialState };
+      const profileData = { ...formData };
       for (const key in profile) {
         if (key in profileData) profileData[key] = profile[key];
       }
@@ -45,11 +34,10 @@ const ProfileForm = ({
         if (key in profileData) profileData[key] = profile.social[key];
       }
     }
-  }, [loading, getCurrentProfile, profile]);
+  }, [loading, getCurrentProfile, profile]); */
 
   const {
     level,
-    wordsPerDay,
     newWords,
     wordTranslate,
     sentenceWithMeaning,
@@ -64,56 +52,87 @@ const ProfileForm = ({
     moveToHardWordsGroup,
     getCustomWordsForTrain,
     moveToGroups,
-  } = formData;
+  } = formData.optional;
 
   const onChange = (e) => {
-    console.log('change');
-    setFormData({ ...formData, [e.target.name]: e.target.checked });
-    console.log(formData);
+    if (e.target.name === 'wordsPerDay') {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    } else if (e.target.name === 'newWords' || e.target.name === 'level') {
+      setFormData({
+        ...formData,
+        optional: { ...formData.optional, [e.target.name]: e.target.value },
+      });
+    } else {
+      setFormData({
+        ...formData,
+        optional: { ...formData.optional, [e.target.name]: e.target.checked },
+      });
+    }
   };
 
+  const userHistory = useHistory();
   const onSubmit = (e) => {
     e.preventDefault();
-    createProfile(formData, history, profile ? true : false);
+    const newSettings = { ...formData };
+    delete newSettings.id;
+    store.dispatch(updateUserSettings(localStorage.getItem('id'), newSettings));
+    store.dispatch(setAlert('Настройки сохранены'));
+    userHistory.go(-2);
   };
 
   return (
     <section className='wrapper style5'>
       <div className='inner'>
-        <h1 className='large text-primary'>Редактировать настройки</h1>
+        <h1 className='large text-primary'>Настройки</h1>
         <p className='lead'>
           <i className='fas fa-user' /> Изменение настроек пользователя
         </p>
-        <small>* = Обязательное поле</small>
+        <small>Уровень сложности (* = Обязательное поле)</small>
         <form className='form' onSubmit={onSubmit}>
           <div className='form-group'>
-            <select name='level' value={level} onChange={onChange}>
+            <select name='level' value={level} onChange={onChange} className='level-select'>
               <option>* Выберите уровень сложности изучения</option>
-              <option value='Beginner'>Начальный</option>
-              <option value='Elementary'>Элементарный</option>
-              <option value='Intermediate'>Средний</option>
-              <option value='Upper Intermediate'>Средне-продвинутый</option>
-              <option value='Advanced'>Продвинутый</option>
-              <option value='Proficiency'>В совершенстве</option>
+              <option value='0'>Начальный</option>
+              <option value='1'>Элементарный</option>
+              <option value='2'>Средний</option>
+              <option value='3'>Средне-продвинутый</option>
+              <option value='4'>Продвинутый</option>
+              <option value='5'>В совершенстве</option>
             </select>
           </div>
           <div className='form-group'>
-            <input type='text' name='wordsPerDay' value={wordsPerDay} onChange={onChange} />
-            <small className='form-text'>Укажите количество изучаемых слов в день</small>
+            <small className='form-text'>Укажите количество изучаемых слов в день:</small>
+            <input
+              type='number'
+              min='5'
+              max='50'
+              name='wordsPerDay'
+              value={formData.wordsPerDay}
+              onChange={onChange}
+              className='number-input'
+            />
           </div>
           <div className='form-group'>
-            <input type='text' name='newWords' value={newWords} onChange={onChange} />
-            <small className='form-text'>Укажите количество новых изучаемых слов в день</small>
+            <small className='form-text'>Укажите количество новых изучаемых слов в день:</small>
+            <input
+              type='number'
+              min='5'
+              max='25'
+              name='newWords'
+              value={newWords}
+              onChange={onChange}
+              className='number-input'
+            />
           </div>
+          <br />
           <div className='form-group'>
-            <p>Настройка информации, отображаемой на карточках со словами</p>
-            <p>На карточках будет отображаться:</p>
+            <p className='p600'>На карточках будет отображаться:</p>
             <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
                 id='wordTranslate'
                 name='wordTranslate'
-                checked={formData.wordTranslate}
+                checked={wordTranslate}
                 value={wordTranslate}
                 onChange={onChange}
               />
@@ -124,7 +143,7 @@ const ProfileForm = ({
                 type='checkbox'
                 id='sentenceWithMeaning'
                 name='sentenceWithMeaning'
-                checked={formData.sentenceWithMeaning}
+                checked={sentenceWithMeaning}
                 value={sentenceWithMeaning}
                 onChange={onChange}
               />
@@ -135,7 +154,7 @@ const ProfileForm = ({
                 type='checkbox'
                 id='sentenceWithCurrentWord'
                 name='sentenceWithCurrentWord'
-                checked={formData.sentenceWithCurrentWord}
+                checked={sentenceWithCurrentWord}
                 value={sentenceWithCurrentWord}
                 onChange={onChange}
               />
@@ -148,7 +167,7 @@ const ProfileForm = ({
                 type='checkbox'
                 id='wordTranscription'
                 name='wordTranscription'
-                checked={formData.wordTranscription}
+                checked={wordTranscription}
                 value={wordTranscription}
                 onChange={onChange}
               />
@@ -160,7 +179,7 @@ const ProfileForm = ({
                 type='checkbox'
                 id='wordPicture'
                 name='wordPicture'
-                checked={formData.wordPicture}
+                checked={wordPicture}
                 value={wordPicture}
                 onChange={onChange}
               />
@@ -170,13 +189,13 @@ const ProfileForm = ({
           </div>
 
           <div className='form-group'>
-            <p>Настройки автовоспроизведения:</p>
+            <p className='p600'>Настройки автовоспроизведения:</p>
             <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
                 id='wordAutoPlay'
                 name='wordAutoPlay'
-                checked={formData.wordAutoPlay}
+                checked={wordAutoPlay}
                 value={wordAutoPlay}
                 onChange={onChange}
               />
@@ -186,13 +205,13 @@ const ProfileForm = ({
           </div>
 
           <div className='form-group'>
-            <p>После правильного ввода слова будут показаны:</p>
+            <p className='p600'>После правильного ввода слова будут показаны:</p>
             <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
                 id='currentWordTranslate'
                 name='currentWordTranslate'
-                checked={formData.currentWordTranslate}
+                checked={currentWordTranslate}
                 value={currentWordTranslate}
                 onChange={onChange}
               />
@@ -204,7 +223,7 @@ const ProfileForm = ({
                 type='checkbox'
                 id='translateSentenceWithWord'
                 name='translateSentenceWithWord'
-                checked={formData.translateSentenceWithWord}
+                checked={translateSentenceWithWord}
                 value={translateSentenceWithWord}
                 onChange={onChange}
               />
@@ -216,14 +235,14 @@ const ProfileForm = ({
           </div>
 
           <div className='form-group'>
-            <p>Дополнительные настройки:</p>
+            <p className='p600'>Дополнительные настройки:</p>
 
             <div className='col-6 col-12-small'>
               <input
                 type='checkbox'
                 id='deleteFromTrainList'
                 name='deleteFromTrainList'
-                checked={formData.deleteFromTrainList}
+                checked={deleteFromTrainList}
                 value={deleteFromTrainList}
                 onChange={onChange}
               />
@@ -237,7 +256,7 @@ const ProfileForm = ({
                 type='checkbox'
                 id='moveToHardWordsGroup'
                 name='moveToHardWordsGroup'
-                checked={formData.moveToHardWordsGroup}
+                checked={moveToHardWordsGroup}
                 value={moveToHardWordsGroup}
                 onChange={onChange}
               />
@@ -251,7 +270,7 @@ const ProfileForm = ({
                 type='checkbox'
                 id='getCustomWordsForTrain'
                 name='getCustomWordsForTrain'
-                checked={formData.getCustomWordsForTrain}
+                checked={getCustomWordsForTrain}
                 value={getCustomWordsForTrain}
                 onChange={onChange}
               />
@@ -263,7 +282,7 @@ const ProfileForm = ({
                 type='checkbox'
                 id='skipToNextCard'
                 name='skipToNextCard'
-                checked={formData.skipToNextCard}
+                checked={skipToNextCard}
                 value={skipToNextCard}
                 onChange={onChange}
               />
@@ -277,7 +296,7 @@ const ProfileForm = ({
                 type='checkbox'
                 id='moveToGroups'
                 name='moveToGroups'
-                checked={formData.moveToGroups}
+                checked={moveToGroups}
                 value={moveToGroups}
                 onChange={onChange}
               />
@@ -289,14 +308,14 @@ const ProfileForm = ({
           </div>
 
           <input type='submit' className='button primary' value='Сохранить' />
-          <Link className='btn btn-light my-1' to='/dashboard'>
+          <Link className='cancel' to='/dashboard'>
             Отмена
           </Link>
         </form>
 
         <div className='my-2'>
           <button
-            className='btn btn-danger'
+            className='button primary delete'
             onClick={() => deleteAccount(localStorage.getItem('id'))}>
             <i className='fas fa-user-minus' /> Удалить мой аккаунт
           </button>

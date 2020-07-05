@@ -19,7 +19,7 @@ export default function ProgressCircles({ wordStrength }) {
   return (
     <div className="sf-progress-circles">
       {makeDots()}
-      <style jsx>{`
+      <style jsx="true">{`
         .sf-progress-circles {
           display: flex;
           align-items: center;
@@ -36,7 +36,7 @@ ProgressCircles.propTypes = {
 export function ProgressCircle({ color, isFilled }) {
   return (
     <div className="sf-progress-circle">
-      <style jsx>{`
+      <style jsx="true">{`
         .sf-progress-circle {
           height: 9px;
           width: 9px;

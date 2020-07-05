@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 const NotFound = () => {
   return (
-    <section class='wrapper style5'>
-      <div class='inner'>
+    <section className='wrapper style5'>
+      <div className='inner'>
         <h1 className='x-large text-primary'>
           <i className='fas fa-exclamation-triangle' /> Страница не найдена
         </h1>
