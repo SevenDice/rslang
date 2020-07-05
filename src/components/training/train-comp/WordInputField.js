@@ -32,6 +32,7 @@ export default class WordInputField extends React.Component {
   render() {
     const { value, prevAttempt, giveHelp } = this.state;
     const { foreignWord = '' } = this.props;
+    
     return (
       <div className="word-input-field">
         <form onSubmit={this.handleSubmit}>
@@ -41,7 +42,7 @@ export default class WordInputField extends React.Component {
             </span>
           )}
           <input
-            className="word-input-field--input"
+            className="word-input word-input-field--input"
             type="text"
             value={value}
             onChange={this.handleChange}

@@ -6,13 +6,7 @@ import './Training.scss'
 const Training = (props) => {
 
   return (
-    <section className='wrapper style5'>
-      <div className='inner'>
-        <h1 className='large text-primary'>Изучение новых слов</h1>
         <LingvistModel foreignWords={dataWords.words} />
-      </div>
-    </section>
-    
   );
 };
 

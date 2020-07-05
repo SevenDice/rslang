@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import WordInput from './WordInput';
-import LanguageCardHeader from './LanguageCardHeader';
+import React from "react";
+import PropTypes from "prop-types";
+import WordInput from "./WordInput";
+import ProgressBar from "./ProgressBar";
 
 export default function LanguageCard({
   wordId,
@@ -20,20 +20,32 @@ export default function LanguageCard({
   wordTranslate,
   wordsPerExampleSentence,
   handleSuccess,
-  isCorrect
+  isCorrect,
+  currentIndex,
 }) {
   return (
-    <div className="language-card">
-      <LanguageCardHeader
-        wordTextExampleTranslate={wordTextExampleTranslate}
-      />
+    <div className="training-card">
       <WordInput
         wordForeign={wordForeign}
+        wordAudioExample={wordAudioExample}
         wordTextExample={wordTextExample}
-        wordTranslate={wordTranslate}
+        wordImage={wordImage}
         handleSuccess={handleSuccess}
         isCorrect={isCorrect}
       />
+      <div className="card-divider"></div>
+      <div className="card-lower">
+        <div className="card-word-translation cardP">{wordTranslate}</div>
+        <div className="card-sentense-translation cardP">
+          {wordTextExampleTranslate}
+        </div>
+        <div className="card-word-meaning cardP">
+          {wordTextMeaningTranslate}
+        </div>
+        <div className="card-transcription cardP">{wordTranscription}</div>
+      </div>
+      <ProgressBar num={currentIndex + 1} />
+      <div className="card-audio" />
     </div>
   );
 }
@@ -56,5 +68,5 @@ LanguageCard.propTypes = {
   wordsPerExampleSentence: PropTypes.number,
   partOfSpeech: PropTypes.string,
   handleSuccess: PropTypes.func,
-  isCorrect: PropTypes.bool
+  isCorrect: PropTypes.bool,
 };

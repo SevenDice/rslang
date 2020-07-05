@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Modal from "./Modal";
 import NavArrows from "./NavArrows";
 import LanguageCard from "./LanguageCard";
-import ProgressBar from "./ProgressBar";
 
 export default class Lingvist extends React.Component {
   state = {
@@ -79,9 +78,7 @@ export default class Lingvist extends React.Component {
         {/* <LevelsInfo toggleModal={this.toggleModal} /> */}
       </Modal>
     ) : (
-      <div className="lingvist">
-        <div />
-        <div className="lingvist--container">
+      <div className="cards-startpage">
           <NavArrows
             isPrev={isPrev}
             onLeftClick={this.handleLeftClick}
@@ -106,28 +103,10 @@ export default class Lingvist extends React.Component {
               toggleModal={this.toggleModal}
               handleSuccess={this.handleSuccess}
               isCorrect={isPrev}
+              currentIndex={currentIndex}
             />
           </NavArrows>
-          <div className="native-word">{wordTranslate}</div>
-        </div>
-        <ProgressBar num={currentIndex + 1} />
-
-        {/* <div>Для дебага:</div>
-        <div>Id: <b>{wordId}</b></div>
-        <div>Группа: <b>{wordGroup}</b></div>
-        <div>Страница слова: <b>{wordPage}</b></div>
-        <div>Слово на англ.: <b>{wordForeign}</b></div>
-        <div>Картинка: <b>{wordImage}</b></div>
-        <div>Произ. слова на англ.: <b>{wordAudio}</b></div>
-        <div>Произ. значения слова на англ.: <b>{wordAudioMeaning}</b></div>
-        <div>Произ. предл. со словом на англ.: <b>{wordAudioExample}</b></div>
-        <div>Значение слова на англ.: <b>{wordTextMeaning}</b></div>
-        <div>Предл. со словом на англ.: <b>{wordTextExample}</b></div>
-        <div>Транскрипция: <b>{wordTranscription}</b></div>
-        <div>Предл. со словом на рус.: <b>{wordTextExampleTranslate}</b></div>
-        <div>Значение слова на рус.: <b>{wordTextMeaningTranslate}</b></div>
-        <div>Слово на рус.: <b>{wordTranslate}</b></div>
-        <div>Кол-во слов предложении: <b>{wordsPerExampleSentence}</b></div> */}
+        <div/>
       </div>
     );
   }
