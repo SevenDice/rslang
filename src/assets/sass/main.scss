@@ -2202,6 +2202,7 @@ ul li {
 }
 
 .speakit-game-wrapper {
+  position: relative;
   background-color: #ffffff21;
   height: 100%;
   border-radius: 5px;
@@ -2301,7 +2302,7 @@ ul li {
   margin-bottom: 10px;
 }
 
-//words
+// speak it words
 .word-container {
   height: 70px;
   width: 200px;
@@ -2415,4 +2416,91 @@ ul li {
   background: url('./images/exit-game.png') no-repeat center;
   background-size: cover;
   cursor: pointer;
+}
+
+.results-body {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 15px 10px;
+  position: relative;
+  color: #4e4852;
+}
+
+.results-close {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background: url('./images/speakit-close.png') no-repeat center;
+  background-size: cover;
+}
+
+.results-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.results-word-wrapper {
+  display: flex;
+  margin-left: 5px;
+  align-items: center;
+  padding: 5px;
+}
+
+.incorrectWords,
+.correctWords {
+  padding: 10px 20px;
+}
+
+.results-word-audio {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background: url('./images/audio.png') no-repeat center;
+  background-size: cover;
+  margin-right: 5px;
+}
+
+.results-word-transcr {
+  font-style: italic;
+  margin: 0 10px;
+}
+
+.results-word {
+  font-weight: bold;
+}
+
+.results-newgame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.incorrect-title,
+.correct-title {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.amount {
+  color: #fff;
+  padding: 0 10px;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.incorrect-amount {
+  background-color: #da5b4c;
+}
+
+.correct-amount {
+  background-color: #01af61;
 }

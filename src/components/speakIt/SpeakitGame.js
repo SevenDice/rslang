@@ -7,6 +7,7 @@ import Word from './Word';
 import Loading from './Loading';
 import cloneDeep from 'lodash.clonedeep';
 import Star from './Star';
+import Results from './Results';
 
 const initialWord = {
   word: null,
@@ -26,6 +27,7 @@ function SpeakitGame() {
   const [isTraining, setIsTraining] = React.useState(true);
   const [currentWord, setCurrentWord] = React.useState(initialWord);
   let [gameResults, setGameResults] = React.useState({});
+  const [isResultsShown, setIsResultsShown] = React.useState(false);
   const img = React.useRef(null);
   const [stars, setStars] = React.useState([]);
 
@@ -38,6 +40,7 @@ function SpeakitGame() {
       res.forEach(
         (el) =>
           (gameRes[el.word] = {
+            word: el['word'],
             done: false,
             image: el['image'],
             audio: el['audio'],
@@ -63,7 +66,7 @@ function SpeakitGame() {
     playWord(audio);
   };
 
-  const StartHandler = () => {
+  const startHandler = () => {
     stop = false;
     recognition.start();
     setCurrentWord(initialWord);
@@ -84,6 +87,14 @@ function SpeakitGame() {
     setStars([]);
   };
 
+  const openResults = () => {
+    setIsResultsShown(true);
+  };
+
+  const closeResults = () => {
+    setIsResultsShown(false);
+  };
+
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const recognition = new window.SpeechRecognition();
   recognition.interimResults = false;
@@ -91,6 +102,9 @@ function SpeakitGame() {
   recognition.lang = 'en-US';
 
   recognition.addEventListener('result', (e) => {
+    console.log(words);
+    console.log(array);
+    console.log(gameResults);
     if (stop) return;
 
     const transcript = Array.from(e.results)
@@ -202,11 +216,14 @@ function SpeakitGame() {
             <button className='button primary' onClick={restartHandler}>
               Повторить слова
             </button>
-            <button className='button primary' onClick={StartHandler}>
+            <button className='button primary' onClick={startHandler}>
               Начать говорить
             </button>
-            <button className='button primary'>Результат</button>
+            <button className='button primary' onClick={openResults}>
+              Результат
+            </button>
           </div>
+          {isResultsShown ? <Results onClick={closeResults} results={gameResults} /> : ''}
         </div>
       )}
     </div>
