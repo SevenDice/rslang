@@ -55,6 +55,15 @@ function SpeakitGame() {
     });
   }, [level]);
 
+  React.useEffect(() => {
+    stop = false;
+    return () => {
+      stop = true;
+      strs = [];
+      imgSrc = 'files/microphones.png';
+    };
+  }, []);
+
   const clickHandler = (e) => {
     if (!isTraining) return;
     const el = e.target.closest('.word-container');
