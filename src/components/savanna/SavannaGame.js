@@ -1,50 +1,40 @@
 import React from "react";
 
 const SavannaGame = (props) => {
-  //   console.log(props.words.words);
-  //   async function getWords() {
-  //     const url =
-  //       "https://afternoon-falls-25894.herokuapp.com/words?page=0&group=0";
-
-  //     const data = await fetch(url);
-  //     const res = await data.json();
-  //     console.log(res);
-  //     setWords({
-  //         words: res,
-  //       });
-  //     return res;
-  //   }
-
-  //   getWords()
-
-  //   const [words, setWords] = React.useState({
-  //     words: [],
-  //   });
-
   const questions = props.words.words.length;
 
   const [currPosition, setCurrPosition] = React.useState(0);
 
   const [trueAnswers, setTrueAnswers] = React.useState(0);
 
+  const [mistakes, setMistakes] = React.useState(0);
+
   function checkAnswer(event) {
-    // console.log(event.target.id);
     const answeredID = event.target.id.replace("answer-", "");
     const currentID = props.words.words[currPosition].id;
-    // console.log(answeredID === currentID);
+
     if (answeredID === currentID) {
       setCurrPosition(currPosition + 1);
       setTrueAnswers(trueAnswers + 1);
     } else {
       setCurrPosition(currPosition + 1);
+      setMistakes(mistakes + 1);
+      if (mistakes < 5) {
+        document
+          .querySelector(".life:nth-child(" + (mistakes + 1) + "n)")
+          .classList.add("disabled");
+      }
     }
     if (currPosition + 1 < questions) {
       console.log(currPosition);
       showNextQuestion();
     }
-    if (currPosition === questions - 1) {
-      console.log(trueAnswers, currPosition, questions);
+    if (currPosition === questions - 1 || mistakes === 4) {
       checkPercentage();
+
+      setTimeout(() => {
+        props.stopGame();
+      }, 3000);
     }
   }
 
@@ -54,9 +44,11 @@ const SavannaGame = (props) => {
         "true answers percentage: " + (trueAnswers / questions) * 100 + "%"
       );
     } else {
-        alert("true answers percentage: " +
-        ((trueAnswers + 1) / questions) * 100 +
-        "%")
+      alert(
+        "true answers percentage: " +
+          ((trueAnswers + 1) / questions) * 100 +
+          "%"
+      );
       console.log(
         "true answers percentage: " +
           ((trueAnswers + 1) / questions) * 100 +
@@ -71,13 +63,21 @@ const SavannaGame = (props) => {
     // console.log(currentItem.classList);
     // console.log(nextItem.classList);
     currentItem.classList.remove("enabled");
-    currentItem.classList.add("disabled");
+    currentItem.classList.add("answered");
     nextItem.classList.add("enabled");
     nextItem.classList.remove("disabled");
   }
 
   return (
-    <div className='questions'>
+    <div className="questions">
+      <div className="lifes">
+        <div className="life"></div>
+        <div className="life"></div>
+        <div className="life"></div>
+        <div className="life"></div>
+        <div className="life"></div>
+      </div>
+
       {props.words.words.map((word, index) => {
         if (index < props.words.words.length - 3) {
           return (

@@ -92,7 +92,7 @@ const Savanna = () => {
           >
             Сбросить игру
           </button>
-          <SavannaGame words={words}></SavannaGame>
+          <SavannaGame words={words} stopGame = {toggleGamingMode}></SavannaGame>
         </div>
       )}
     </section>
