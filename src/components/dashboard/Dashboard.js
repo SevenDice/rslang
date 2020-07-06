@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 //import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import DashboardActions from './DashboardActions';
 import { getCurrentProfile } from '../../actions/profile';
 
@@ -12,6 +12,7 @@ const Dashboard = ({
   // auth: { user },
   // profile: { profile }
 }) => {
+  const name = useSelector((state) => state.auth.user.name);
   useEffect(() => {
     getCurrentProfile(localStorage.getItem('id'));
   }, [getCurrentProfile]);
@@ -20,7 +21,7 @@ const Dashboard = ({
       <div className='inner'>
         <h1 className='large text-primary'>Главная</h1>
         <p className='lead'>
-          <i className='fas fa-user' /> Добро пожаловать, {localStorage.getItem('email')}
+          <i className='fas fa-user' /> Добро пожаловать, {name}
         </p>
         <Fragment>
           <DashboardActions />
