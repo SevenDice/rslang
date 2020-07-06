@@ -32,9 +32,6 @@ function Results({ onClick, results }) {
             <ResultsWord key={el.word} {...el} />
           ))}
         </div>
-        <div className='results-newgame'>
-          <button className='button primary results-button'>Новая игра</button>
-        </div>
       </div>
     </div>
   );

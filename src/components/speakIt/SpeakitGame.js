@@ -17,9 +17,10 @@ const initialWord = {
 
 let array = [];
 let imgSrc = 'files/microphones.png';
-let stop = false;
+
 let clone = {};
 let strs = [];
+let isListening = true;
 
 function SpeakitGame() {
   const level = useSelector((state) => state.profile.settings.optional.level) || 0;
@@ -55,10 +56,16 @@ function SpeakitGame() {
     });
   }, [level]);
 
+  const timer = () => {
+    setTimeout(() => {
+      setIsTraining(true);
+    }, 4000);
+  };
+
   React.useEffect(() => {
-    stop = false;
+    isListening = true;
     return () => {
-      stop = true;
+      isListening = false;
       strs = [];
       imgSrc = 'files/microphones.png';
     };
@@ -76,7 +83,7 @@ function SpeakitGame() {
   };
 
   const startHandler = () => {
-    stop = false;
+    isListening = true;
     recognition.start();
     setCurrentWord(initialWord);
     console.log(currentWord);
@@ -88,8 +95,10 @@ function SpeakitGame() {
   };
 
   const restartHandler = () => {
-    stop = true;
-    setIsTraining(true);
+    isListening = false;
+    console.log('isListening ? ');
+    console.log(isListening);
+    timer();
     setCurrentWord(initialWord);
     recognition.abort(); // это не работает?
     setGameResults(clone);
@@ -114,8 +123,9 @@ function SpeakitGame() {
     console.log(words);
     console.log(array);
     console.log(gameResults);
-    if (stop) return;
-
+    console.log('isListening? ', isListening);
+    if (!isListening) return;
+    console.log('если не стоп');
     const transcript = Array.from(e.results)
       .map((result) => result[0])
       .map((result) => result.transcript.toLowerCase())
@@ -153,14 +163,15 @@ function SpeakitGame() {
   });
 
   recognition.addEventListener('end', () => {
-    console.log('stop? ', stop);
+    console.log('isListening? ', isListening);
     console.log('конец');
+    if (!isListening) return;
     if (strs.length === 10) {
       console.log('10 угадано');
       recognition.abort();
       return;
     }
-    if (!stop) {
+    if (isListening) {
       recognition.start();
     }
   });
@@ -222,10 +233,16 @@ function SpeakitGame() {
             ))}
           </div>
           <div className='speakit-game-controls'>
-            <button className='button primary' onClick={restartHandler}>
+            <button
+              className='button primary'
+              onClick={restartHandler}
+              disabled={isTraining ? true : false}>
               Повторить слова
             </button>
-            <button className='button primary' onClick={startHandler}>
+            <button
+              className='button primary'
+              onClick={startHandler}
+              disabled={isTraining ? false : true}>
               Начать говорить
             </button>
             <button className='button primary' onClick={openResults}>
