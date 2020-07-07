@@ -22,9 +22,11 @@
 @keyframes slide-down {
   0% {
     transform: translateY(-100px);
+    color: #ffffff;
   }
   100% {
     transform: translateY(0);
+    color: #ff0000;
   }
 }
 
@@ -85,14 +87,21 @@
     font-size: 30px;
     margin-bottom: 40px;
     // margin-bottom: 0;
-    transition: all .5s;
+    transition: all 5s;
+    color: #ff0000;
+    transform: translateY(0);
+    // transform: translateY(-100px);
+    // color: #ffffff;
   }
 
   &.enabled {
     transform: translateX(0);
 
     & .question {
-      animation: slide-down 5s linear infinite;
+      animation: slide-down 5s linear 1;
+
+      // transform: translateY(0);
+      // color: #ff0000;
     }
   }
   &.disabled {
@@ -101,6 +110,36 @@
   &.answered {
     transform: translateX(-150%);
   }
+
+
+  & .answer{
+    &.true{
+      background: green;
+      &:hover{
+        background: green;
+      }
+      &:active{
+        background: green;
+      }
+      &:focus{
+        background: green;
+      }
+    }
+    &.false{
+      background: red;
+      &:hover{
+        background: red;
+      }
+      &:active{
+        background: red;
+      }
+      &:focus{
+        background: red;
+      }
+    }
+  }
+
+
 }
 
 .counter {
@@ -128,24 +167,21 @@
   }
 }
 
-
-.lifes{
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    top: -100px;
-    
-
+.lifes {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: -100px;
 }
 
-.life{
-    width: 50px;
-    height: 50px;
-    background: url("heart.svg") center center no-repeat;
-    background-size: 100%;
-    transition: all .5s;
+.life {
+  width: 50px;
+  height: 50px;
+  background: url("heart.svg") center center no-repeat;
+  background-size: 100%;
+  transition: all 0.5s;
 
-    &.disabled{
-        filter: grayscale(.7);
-    }
+  &.disabled {
+    filter: grayscale(0.7);
+  }
 }

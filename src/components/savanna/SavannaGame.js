@@ -13,9 +13,13 @@ const SavannaGame = (props) => {
     const answeredID = event.target.id.replace("answer-", "");
     const currentID = props.words.words[currPosition].id;
 
+    console.log(event.target);
+
     if (answeredID === currentID) {
       setCurrPosition(currPosition + 1);
       setTrueAnswers(trueAnswers + 1);
+
+      event.target.classList.add("true");
     } else {
       setCurrPosition(currPosition + 1);
       setMistakes(mistakes + 1);
@@ -24,32 +28,31 @@ const SavannaGame = (props) => {
           .querySelector(".life:nth-child(" + (mistakes + 1) + "n)")
           .classList.add("disabled");
       }
+
+      event.target.classList.add("false");
+      document
+        .querySelector(".case.enabled #answer-" + currentID)
+        .classList.add("true");
     }
     if (currPosition + 1 < questions) {
-      console.log(currPosition);
-      showNextQuestion();
+      setTimeout(() => {
+        showNextQuestion();
+      }, 2000);
     }
-    if (currPosition === questions - 1 || mistakes === 4) {
+    if (mistakes === 4 || currPosition === questions - 1) {
       checkPercentage();
 
-      setTimeout(() => {
-        props.stopGame();
-      }, 3000);
+      props.stopGame();
     }
   }
 
   function checkPercentage() {
     if (trueAnswers === 0) {
-      console.log(
+      alert(
         "true answers percentage: " + (trueAnswers / questions) * 100 + "%"
       );
     } else {
       alert(
-        "true answers percentage: " +
-          ((trueAnswers + 1) / questions) * 100 +
-          "%"
-      );
-      console.log(
         "true answers percentage: " +
           ((trueAnswers + 1) / questions) * 100 +
           "%"
@@ -60,6 +63,10 @@ const SavannaGame = (props) => {
   function showNextQuestion() {
     const currentItem = document.querySelector(".case-" + currPosition);
     const nextItem = document.querySelector(".case-" + (currPosition + 1));
+
+    if(currentItem === null){
+      return
+    }
     // console.log(currentItem.classList);
     // console.log(nextItem.classList);
     currentItem.classList.remove("enabled");
@@ -68,8 +75,52 @@ const SavannaGame = (props) => {
     nextItem.classList.remove("disabled");
   }
 
+  let q = document.querySelectorAll(".question");
+
+  q.forEach((item) => {
+    item.addEventListener("animationend", watchTimeForAnswer, { once: true });
+  });
+
+  
+  function watchTimeForAnswer(event) {
+    
+    const currentID = props.words.words[currPosition].id;
+    
+    console.dir(event.target.innerText);
+
+    setCurrPosition(currPosition + 1);
+    
+
+    setMistakes(mistakes + 1);
+    if (mistakes < 5) {
+      document
+        .querySelector(".life:nth-child(" + (mistakes + 1) + "n)")
+        .classList.add("disabled");
+    }
+
+    if(document
+      .querySelector(".case.enabled #answer-" + currentID) === null ){
+        return
+      }
+
+    document
+      .querySelector(".case.enabled #answer-" + currentID)
+      .classList.add("true");
+
+    if (currPosition + 1 < questions) {
+      setTimeout(() => {
+        showNextQuestion();
+      }, 2000);
+    }
+    if (mistakes === 4 || currPosition === questions - 1) {
+      checkPercentage();
+
+      props.stopGame();
+    }
+  }
+
   return (
-    <div className="questions">
+    <div className="questions" onChange={watchTimeForAnswer}>
       <div className="lifes">
         <div className="life"></div>
         <div className="life"></div>
