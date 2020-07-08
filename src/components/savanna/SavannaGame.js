@@ -13,8 +13,6 @@ const SavannaGame = (props) => {
     const answeredID = event.target.id.replace("answer-", "");
     const currentID = props.words.words[currPosition].id;
 
-    console.log(event.target);
-
     if (answeredID === currentID) {
       setCurrPosition(currPosition + 1);
       setTrueAnswers(trueAnswers + 1);
@@ -64,11 +62,10 @@ const SavannaGame = (props) => {
     const currentItem = document.querySelector(".case-" + currPosition);
     const nextItem = document.querySelector(".case-" + (currPosition + 1));
 
-    if(currentItem === null){
-      return
+    if (currentItem === null) {
+      return;
     }
-    // console.log(currentItem.classList);
-    // console.log(nextItem.classList);
+
     currentItem.classList.remove("enabled");
     currentItem.classList.add("answered");
     nextItem.classList.add("enabled");
@@ -81,27 +78,27 @@ const SavannaGame = (props) => {
     item.addEventListener("animationend", watchTimeForAnswer, { once: true });
   });
 
-  
   function watchTimeForAnswer(event) {
-    
     const currentID = props.words.words[currPosition].id;
-    
-    console.dir(event.target.innerText);
 
     setCurrPosition(currPosition + 1);
-    
 
     setMistakes(mistakes + 1);
     if (mistakes < 5) {
+      if (
+        document.querySelector(".life:nth-child(" + (mistakes + 1) + "n)") ===
+        null
+      ) {
+        return;
+      }
       document
         .querySelector(".life:nth-child(" + (mistakes + 1) + "n)")
         .classList.add("disabled");
     }
 
-    if(document
-      .querySelector(".case.enabled #answer-" + currentID) === null ){
-        return
-      }
+    if (document.querySelector(".case.enabled #answer-" + currentID) === null) {
+      return;
+    }
 
     document
       .querySelector(".case.enabled #answer-" + currentID)
@@ -130,101 +127,38 @@ const SavannaGame = (props) => {
       </div>
 
       {props.words.words.map((word, index) => {
-        if (index < props.words.words.length - 3) {
-          return (
-            <div
-              className={
-                "case" +
-                " " +
-                "case-" +
-                index +
-                " " +
-                (index === 0 ? "enabled" : "disabled")
-              }
-              key={word.id}
-              id={"question-" + word.id}
-            >
-              <p className="question">
-                {index + 1}. {word.word}
-              </p>
-              <button
-                className="button primary answer"
-                id={"answer-" + word.id}
-                onClick={checkAnswer}
-              >
-                {word.wordTranslate}
-              </button>
-              <button
-                className="button primary answer"
-                id={"answer-" + props.words.words[index + 1].id}
-                onClick={checkAnswer}
-              >
-                {props.words.words[index + 1].wordTranslate}
-              </button>
-              <button
-                className="button primary answer"
-                id={"answer-" + props.words.words[index + 2].id}
-                onClick={checkAnswer}
-              >
-                {props.words.words[index + 2].wordTranslate}
-              </button>
-              <button
-                className="button primary answer"
-                id={"answer-" + props.words.words[index + 3].id}
-                onClick={checkAnswer}
-              >
-                {props.words.words[index + 3].wordTranslate}
-              </button>
-            </div>
-          );
-        } else {
-          return (
-            <div
-              className={
-                "case" +
-                " " +
-                "case-" +
-                index +
-                " " +
-                (index === 0 ? "enabled" : "disabled")
-              }
-              key={word.id}
-              id={"question-" + word.id}
-            >
-              <p className="question">
-                {index + 1}. {word.word}
-              </p>
-              <button
-                className="button primary answer"
-                id={"answer-" + word.id}
-                onClick={checkAnswer}
-              >
-                {word.wordTranslate}
-              </button>
-              <button
-                className="button primary answer"
-                id={"answer-" + props.words.words[index - 1].id}
-                onClick={checkAnswer}
-              >
-                {props.words.words[index - 1].wordTranslate}
-              </button>
-              <button
-                className="button primary answer"
-                id={"answer-" + props.words.words[index - 2].id}
-                onClick={checkAnswer}
-              >
-                {props.words.words[index - 2].wordTranslate}
-              </button>
-              <button
-                className="button primary answer"
-                id={"answer-" + props.words.words[index - 3].id}
-                onClick={checkAnswer}
-              >
-                {props.words.words[index - 3].wordTranslate}
-              </button>
-            </div>
-          );
-        }
+        return (
+          <div
+            className={
+              "case" +
+              " " +
+              "case-" +
+              index +
+              " " +
+              (index === 0 ? "enabled" : "disabled")
+            }
+            key={word.id}
+            id={"question-" + word.id}
+          >
+            <p className="question">
+              {index + 1}. {word.word}
+            </p>
+
+            {props.buttons.buttons[index].map((btn) => {
+              return (
+                <button
+                  key = {'btn-' + btn}
+                  className="button primary answer"
+                  id={"answer-" + props.words.words[btn].id}
+                  onClick={checkAnswer}
+                >
+                  {props.words.words[btn].wordTranslate}
+                </button>
+              );
+            })}
+          </div>
+        );
+        
       })}
     </div>
   );
