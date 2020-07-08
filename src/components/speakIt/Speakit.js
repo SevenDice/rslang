@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 const Speakit = ({ getUserSettings, profile: { settings } }) => {
   const [isStarted, setIsStarted] = React.useState(false);
-
   const startHandler = () => {
     setIsStarted(!isStarted);
   };

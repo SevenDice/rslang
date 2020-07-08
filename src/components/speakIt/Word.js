@@ -11,7 +11,6 @@ function Word({
   currentWord,
   isTraining,
   gameResults,
-  array,
 }) {
   return (
     <div
