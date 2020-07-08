@@ -41,7 +41,7 @@ const Speakit = ({ getUserSettings, profile: { settings } }) => {
                 <br /> Постарайтесь подсветить все слова.
                 <br /> Удачи :)
               </p>
-              <button onClick={startHandler} className='button primary'>
+              <button onClick={startHandler} className='button'>
                 Начать игру
               </button>
             </div>

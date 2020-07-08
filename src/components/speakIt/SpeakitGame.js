@@ -13,7 +13,7 @@ import Results from './Results';
 import recognition from './recognition';
 
 // объявление переменных, нужных для хранения данных об игре
-let imgSrc = 'files/microphones.png';
+let imgSrc = 'files/m1.jpg';
 let clone = {};
 let strs = [];
 let isListening = true;
@@ -21,7 +21,7 @@ let words = [];
 let results = {};
 const initialWord = {
   word: null,
-  image: 'files/microphones.png',
+  image: 'files/m1.jpg',
   translation: null,
 };
 
@@ -242,19 +242,13 @@ function SpeakitGame() {
               ))}
           </div>
           <div className='speakit-game-controls'>
-            <button
-              className='button primary'
-              onClick={stopHandler}
-              disabled={isTraining ? true : false}>
-              Остановиться
+            <button className='button' onClick={stopHandler} disabled={isTraining ? true : false}>
+              Остановиться и повторить
             </button>
-            <button
-              className='button primary'
-              onClick={startHandler}
-              disabled={isTraining ? false : true}>
-              Начать говорить
+            <button className='button' onClick={startHandler} disabled={isTraining ? false : true}>
+              Начать говорить слова
             </button>
-            <button className='button primary' onClick={openResults}>
+            <button className='button' onClick={openResults}>
               Результат
             </button>
           </div>
