@@ -92,7 +92,6 @@ export const getCurrentProfile = (id) => async (dispatch) => {
   try {
     const res = await api.get(`/users/${id}`);
 
-    localStorage.setItem('email', res.data.email);
     dispatch({
       type: GET_PROFILE,
       payload: res.data,

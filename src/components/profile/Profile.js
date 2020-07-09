@@ -8,10 +8,11 @@ import { getCurrentProfile } from '../../actions/profile';
 
 const Profile = ({ getCurrentProfile, profile: { profile }, auth, match }) => {
   useEffect(() => {
-    getCurrentProfile(localStorage.getItem('id'));
-  }, [getCurrentProfile]);
+    getCurrentProfile(match.params.id);
+  }, [getCurrentProfile, match.params.id]);
 
   return (
+    <Fragment>
     <section className='wrapper style5'>
       <div className='inner'>
         {
@@ -22,13 +23,15 @@ const Profile = ({ getCurrentProfile, profile: { profile }, auth, match }) => {
           ) : (
             <Fragment>
               <h1 className='large text-primary'>Профиль пользователя</h1>
-              {
+              { auth.isAuthenticated &&
+                auth.loading === false &&
+                auth.user._id === profile.user._id && (
                 <div className='dash-buttons'>
                   <Link to='/edit-profile' className='btn btn-light'>
                     Редактировать настройки
                   </Link>
                 </div>
-              }
+                )}
               {
                 <div className='dash-buttons'>
                   <Link to='/stats' className='btn btn-light'>
@@ -48,6 +51,7 @@ const Profile = ({ getCurrentProfile, profile: { profile }, auth, match }) => {
         }
       </div>
     </section>
+    </Fragment>
   );
 };
 

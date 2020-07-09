@@ -1,5 +1,4 @@
 import api from '../utils/api';
-import setAuthToken from '../utils/setAuthToken';
 import { setAlert } from './alert';
 import {
   REGISTER_SUCCESS,
@@ -14,10 +13,11 @@ import store from '../store';
 import { getUserSettings } from '../actions/profile';
 
 // Load User
-export const loadUser = (id) => async (dispatch) => {
+export const loadUser = userId => async (dispatch) => {
   try {
-    const res = await api.get(`/users/${id}`);
-    //console.log(res.data);
+    const res = await api.get(`/users/${userId}`);
+
+    //store.dispatch(getUserSettings(userId));
 
     dispatch({
       type: USER_LOADED,
@@ -57,32 +57,22 @@ export const register = ({ email, password }) => async (dispatch) => {
 
 // Login User
 export const login = (email, password) => async (dispatch) => {
-  const body = JSON.stringify({ email, password });
-
+  const body = { email, password };
+  
   try {
     const res = await api.post('/signin', body);
-    console.log(res.data);
-    const token = res.data.token;
-    const id = res.data.userId;
-    localStorage.setItem('token', token);
-    localStorage.setItem('id', id);
-    setAuthToken(token);
+    localStorage.setItem('id', res.data.userId);
+    //console.log(res);
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
+    dispatch(loadUser(res.data.userId))
 
-    store.dispatch(getUserSettings(localStorage.getItem('id')));
-    // dispatch(loadUser());
+
   } catch (err) {
-    console.log(err.response.statusText, err.response.status);
-    if (err.response.status === 403) {
-      dispatch(setAlert('Неверный пароль', 'danger'));
-    } else if (err.response.status === 404) {
-      dispatch(setAlert('Пользователь с таким электронным адресом не зарегистрирован', 'danger'));
-    }
-
+    
     dispatch({
       type: LOGIN_FAIL,
     });

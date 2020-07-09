@@ -14,7 +14,8 @@ const Login = ({ login, isAuthenticated }) => {
 
   const { email, password } = formData;
 
-  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +23,7 @@ const Login = ({ login, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    store.dispatch(getUserSettings(localStorage.getItem('id')));
+    //store.dispatch(getUserSettings(localStorage.getItem('id')));
     return <Redirect to='/dashboard' />;
   }
 
