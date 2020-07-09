@@ -3,59 +3,71 @@ import React from "react";
 const SavannaGame = (props) => {
   const questions = props.words.words.length;
 
+  const [modalWindow, setModalWindow] = React.useState(false);
+
   const [currPosition, setCurrPosition] = React.useState(0);
 
   const [trueAnswers, setTrueAnswers] = React.useState(0);
 
   const [mistakes, setMistakes] = React.useState(0);
+  const [mistakesWords, setMistakesWords] = React.useState([]);
 
   function checkAnswer(event) {
     const answeredID = event.target.id.replace("answer-", "");
     const currentID = props.words.words[currPosition].id;
 
-    if (answeredID === currentID) {
-      setCurrPosition(currPosition + 1);
-      setTrueAnswers(trueAnswers + 1);
+    if (modalWindow === false) {
+      if (answeredID === currentID) {
+        setCurrPosition(currPosition + 1);
+        setTrueAnswers(trueAnswers + 1);
 
-      event.target.classList.add("true");
-    } else {
-      setCurrPosition(currPosition + 1);
-      setMistakes(mistakes + 1);
-      if (mistakes < 5) {
+        event.target.classList.add("true");
+      } else {
+        setMistakesWords(
+          mistakesWords.concat([props.words.words[currPosition]])
+        );
+        setCurrPosition(currPosition + 1);
+        setMistakes(mistakes + 1);
+        if (mistakes < 5) {
+          document
+            .querySelector(".life:nth-child(" + (mistakes + 1) + "n)")
+            .classList.add("disabled");
+        }
+
+        event.target.classList.add("false");
         document
-          .querySelector(".life:nth-child(" + (mistakes + 1) + "n)")
-          .classList.add("disabled");
+          .querySelector(".case.enabled #answer-" + currentID)
+          .classList.add("true");
       }
+      if (currPosition + 1 < questions) {
+        setTimeout(() => {
+          showNextQuestion();
+        }, 1000);
+      }
+      if (mistakes === 4 || currPosition === questions - 1) {
+        checkPercentage();
 
-      event.target.classList.add("false");
-      document
-        .querySelector(".case.enabled #answer-" + currentID)
-        .classList.add("true");
-    }
-    if (currPosition + 1 < questions) {
-      setTimeout(() => {
-        showNextQuestion();
-      }, 2000);
-    }
-    if (mistakes === 4 || currPosition === questions - 1) {
-      checkPercentage();
-
-      props.stopGame();
+        // props.stopGame();
+      }
     }
   }
 
   function checkPercentage() {
-    if (trueAnswers === 0) {
-      alert(
-        "true answers percentage: " + (trueAnswers / questions) * 100 + "%"
-      );
-    } else {
-      alert(
-        "true answers percentage: " +
-          ((trueAnswers + 1) / questions) * 100 +
-          "%"
-      );
-    }
+    setTimeout(() => {
+      setModalWindow(true);
+    }, 1000);
+
+    // if (trueAnswers === 0) {
+    //   alert(
+    //     "true answers percentage: " + (trueAnswers / questions) * 100 + "%"
+    //   );
+    // } else {
+    //   alert(
+    //     "true answers percentage: " +
+    //       ((trueAnswers + 1) / questions) * 100 +
+    //       "%"
+    //   );
+    // }
   }
 
   function showNextQuestion() {
@@ -79,40 +91,50 @@ const SavannaGame = (props) => {
   });
 
   function watchTimeForAnswer(event) {
-    const currentID = props.words.words[currPosition].id;
+    if (modalWindow === false) {
+      if (props.words.words[currPosition] === undefined) {
+        return;
+      }
 
-    setCurrPosition(currPosition + 1);
+      const currentID = props.words.words[currPosition].id;
 
-    setMistakes(mistakes + 1);
-    if (mistakes < 5) {
+      setMistakesWords(mistakesWords.concat([props.words.words[currPosition]]));
+
+      setCurrPosition(currPosition + 1);
+
+      setMistakes(mistakes + 1);
+      if (mistakes < 5) {
+        if (
+          document.querySelector(".life:nth-child(" + (mistakes + 1) + "n)") ===
+          null
+        ) {
+          return;
+        }
+        document
+          .querySelector(".life:nth-child(" + (mistakes + 1) + "n)")
+          .classList.add("disabled");
+      }
+
       if (
-        document.querySelector(".life:nth-child(" + (mistakes + 1) + "n)") ===
-        null
+        document.querySelector(".case.enabled #answer-" + currentID) === null
       ) {
         return;
       }
+
       document
-        .querySelector(".life:nth-child(" + (mistakes + 1) + "n)")
-        .classList.add("disabled");
-    }
+        .querySelector(".case.enabled #answer-" + currentID)
+        .classList.add("true");
 
-    if (document.querySelector(".case.enabled #answer-" + currentID) === null) {
-      return;
-    }
+      if (currPosition + 1 < questions) {
+        setTimeout(() => {
+          showNextQuestion();
+        }, 1000);
+      }
+      if (mistakes === 4 || currPosition === questions - 1) {
+        checkPercentage();
 
-    document
-      .querySelector(".case.enabled #answer-" + currentID)
-      .classList.add("true");
-
-    if (currPosition + 1 < questions) {
-      setTimeout(() => {
-        showNextQuestion();
-      }, 2000);
-    }
-    if (mistakes === 4 || currPosition === questions - 1) {
-      checkPercentage();
-
-      props.stopGame();
+        // props.stopGame();
+      }
     }
   }
 
@@ -125,6 +147,38 @@ const SavannaGame = (props) => {
         <div className="life"></div>
         <div className="life"></div>
       </div>
+
+      {modalWindow ? (
+        <div className="savanna__modalwindow">
+          <div className="inner">
+            <p className="modal__heading">
+              {trueAnswers === 0
+                ? "Процент правильных ответов: " +
+                  (trueAnswers / questions) * 100 +
+                  "%"
+                : "Процент правильных ответов: " +
+                  ((trueAnswers + 1) / questions) * 100 +
+                  "%"}
+            </p>
+            <p className="modal__text">Слова, на которых Вы ошиблись:</p>
+            {mistakesWords.map((mistWord, index) => {
+              if (index <= 4) {
+                return (
+                  <p className="modal__text" key={index}>
+                    {mistWord.word + " - " + mistWord.wordTranslate}
+                  </p>
+                );
+              }
+            })}
+            <button
+              className="button primary savanna__close"
+              onClick={props.stopGame}
+            >
+              Закрыть
+            </button>
+          </div>
+        </div>
+      ) : null}
 
       {props.words.words.map((word, index) => {
         return (
@@ -147,7 +201,7 @@ const SavannaGame = (props) => {
             {props.buttons.buttons[index].map((btn) => {
               return (
                 <button
-                  key = {'btn-' + btn}
+                  key={"btn-" + btn}
                   className="button primary answer"
                   id={"answer-" + props.words.words[btn].id}
                   onClick={checkAnswer}
@@ -158,7 +212,6 @@ const SavannaGame = (props) => {
             })}
           </div>
         );
-        
       })}
     </div>
   );
