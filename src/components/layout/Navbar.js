@@ -11,11 +11,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   React.useEffect(() => {
     const menuToggle = () => {
-      menu.current.classList.add('visible');
+      menu.current && menu.current.classList.add('visible');
     };
 
     const closeToggle = () => {
-      menu.current.classList.remove('visible');
+      menu.current && menu.current.classList.remove('visible');
     };
 
     const clickHandler = (e) => {

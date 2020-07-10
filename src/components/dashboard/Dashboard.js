@@ -8,20 +8,17 @@ import { getCurrentProfile } from '../../actions/profile';
 
 const Dashboard = ({
   getCurrentProfile,
-  auth: { user }, // id, name, email
-  profile: { profile },
+  auth: { user }
 }) => {
-  const userid = localStorage.getItem('id');
   useEffect(() => {
-    getCurrentProfile(userid);
-  }, [userid]);
-  console.log(user);
+    getCurrentProfile(localStorage.getItem('id'));
+  }, [getCurrentProfile]);
   return (
     <section className='wrapper style5'>
       <div className='inner'>
         <h1 className='large text-primary'>Главная</h1>
         <p className='lead'>
-          <i className='fas fa-user' /> Добро пожаловать, {user.email}
+          <i className='fas fa-user' /> Добро пожаловать, {user?.name ?? user?.email}
         </p>
         <Fragment>
           <DashboardActions />
@@ -40,7 +37,6 @@ Dashboard.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,
-  datas: state.datas,
 });
 
 export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);

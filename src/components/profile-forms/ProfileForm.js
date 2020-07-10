@@ -51,7 +51,7 @@ const ProfileForm = ({
     moveToHardWordsGroup,
     getCustomWordsForTrain,
     moveToGroups,
-  } = formData.optional;
+  } = formData?.optional;
 
   const onChange = (e) => {
     if (e.target.name === 'wordsPerDay') {
@@ -86,11 +86,10 @@ const ProfileForm = ({
         <p className='lead'>
           <i className='fas fa-user' /> Изменение настроек пользователя
         </p>
-        <small>Уровень сложности (* = Обязательное поле)</small>
+        <small>Уровень сложности</small>
         <form className='form' onSubmit={onSubmit}>
           <div className='form-group'>
             <select name='level' value={level} onChange={onChange} className='level-select'>
-              <option>* Выберите уровень сложности изучения</option>
               <option value='0'>Начальный</option>
               <option value='1'>Элементарный</option>
               <option value='2'>Средний</option>

@@ -23,7 +23,7 @@ const Login = ({ login, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    //store.dispatch(getUserSettings(localStorage.getItem('id')));
+    store.dispatch(getUserSettings(localStorage.getItem('id')));
     return <Redirect to='/dashboard' />;
   }
 
