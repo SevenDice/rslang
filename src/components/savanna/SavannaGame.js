@@ -160,16 +160,21 @@ const SavannaGame = (props) => {
                   ((trueAnswers + 1) / questions) * 100 +
                   "%"}
             </p>
-            <p className="modal__text">Слова, на которых Вы ошиблись:</p>
-            {mistakesWords.map((mistWord, index) => {
-              if (index <= 4) {
-                return (
-                  <p className="modal__text" key={index}>
-                    {mistWord.word + " - " + mistWord.wordTranslate}
-                  </p>
-                );
-              }
-            })}
+            {mistakes > 0 ? (
+              <p className="modal__text">Слова, на которых Вы ошиблись:</p>
+            ) : null}
+
+            {mistakes > 0 
+              ? mistakesWords.map((mistWord, index) => {
+                  if (index <= 4) {
+                    return (
+                      <p className="modal__text" key={index}>
+                        {mistWord.word + " - " + mistWord.wordTranslate}
+                      </p>
+                    );
+                  }
+                })
+              : null}
             <button
               className="button primary savanna__close"
               onClick={props.stopGame}
