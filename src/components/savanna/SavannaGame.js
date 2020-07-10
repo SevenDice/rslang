@@ -12,6 +12,10 @@ const SavannaGame = (props) => {
   const [mistakes, setMistakes] = React.useState(0);
   const [mistakesWords, setMistakesWords] = React.useState([]);
 
+  // React.useEffect(() => {
+  //   console.log(modalWindow, currPosition, trueAnswers, mistakes)
+  // })
+
   function checkAnswer(event) {
     const answeredID = event.target.id.replace("answer-", "");
     const currentID = props.words.words[currPosition].id;
@@ -39,12 +43,18 @@ const SavannaGame = (props) => {
           .querySelector(".case.enabled #answer-" + currentID)
           .classList.add("true");
       }
-      if (currPosition + 1 < questions) {
+      if (currPosition + 1 < questions ) {
         setTimeout(() => {
           showNextQuestion();
         }, 1000);
       }
       if (mistakes === 4 || currPosition === questions - 1) {
+        //
+        const currentItem = document.querySelector(".case-" + currPosition);
+        currentItem.classList.remove("enabled");
+        currentItem.classList.add("answered");
+        //
+
         checkPercentage();
 
         // props.stopGame();
@@ -56,18 +66,6 @@ const SavannaGame = (props) => {
     setTimeout(() => {
       setModalWindow(true);
     }, 1000);
-
-    // if (trueAnswers === 0) {
-    //   alert(
-    //     "true answers percentage: " + (trueAnswers / questions) * 100 + "%"
-    //   );
-    // } else {
-    //   alert(
-    //     "true answers percentage: " +
-    //       ((trueAnswers + 1) / questions) * 100 +
-    //       "%"
-    //   );
-    // }
   }
 
   function showNextQuestion() {
@@ -91,6 +89,16 @@ const SavannaGame = (props) => {
   });
 
   function watchTimeForAnswer(event) {
+    // console.log(event.target.parentNode.id.replace('question-', ''))
+
+    let id = event.target.parentNode.id.replace("question-", "");
+
+    console.log(event.target, modalWindow, currPosition);
+
+    if (modalWindow === true) {
+      return;
+    }
+
     if (modalWindow === false) {
       if (props.words.words[currPosition] === undefined) {
         return;
@@ -131,6 +139,10 @@ const SavannaGame = (props) => {
         }, 1000);
       }
       if (mistakes === 4 || currPosition === questions - 1) {
+        const currentItem = document.querySelector(".case-" + currPosition);
+        currentItem.classList.remove("enabled");
+        currentItem.classList.add("answered");
+
         checkPercentage();
 
         // props.stopGame();
@@ -157,14 +169,14 @@ const SavannaGame = (props) => {
                   (trueAnswers / questions) * 100 +
                   "%"
                 : "Процент правильных ответов: " +
-                  ((trueAnswers + 1) / questions) * 100 +
+                  ((trueAnswers ) / questions) * 100 +
                   "%"}
             </p>
             {mistakes > 0 ? (
               <p className="modal__text">Слова, на которых Вы ошиблись:</p>
             ) : null}
 
-            {mistakes > 0 
+            {mistakes > 0
               ? mistakesWords.map((mistWord, index) => {
                   if (index <= 4) {
                     return (
