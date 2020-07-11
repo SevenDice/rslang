@@ -13,14 +13,14 @@ export default function NavArrows({
         className="sf-nav-arrows--arrow-container sf-nav-arrows--left-arrow-container"
         onClick={onLeftClick}
       >
-        {isPrev ? null : <div className="sf-nav-arrows--arrow"><i class="fas fa-arrow-left"></i></div>}
+        {isPrev ? null : <div className="sf-nav-arrows--arrow"><i className="fas fa-arrow-left"></i></div>}
       </div>
       {children}
       <div
         className="sf-nav-arrows--arrow-container sf-nav-arrows--right-arrow-container"
         onClick={onRightClick}
       >
-        <div className="sf-nav-arrows--arrow"><i class="fas fa-arrow-right"></i></div>
+        <div className="sf-nav-arrows--arrow"><i className="fas fa-arrow-right"></i></div>
       </div>
       <style jsx="true">{`
         .sf-nav-arrows--arrow-container.sf-nav-arrows--left-arrow-container {

@@ -1,14 +1,22 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
 import DashboardActions from './DashboardActions';
 import Spinner from '../layout/Spinner';
+import { getCurrentProfile } from '../../actions/profile';
 
 
-const Dashboard = ({ props
+const Dashboard = ({
+  getCurrentProfile,
 }) => {
   
   const username = useSelector((state) => state.auth.user.name)
+  const userid = localStorage.getItem('id');
+  useEffect(() => {
+    getCurrentProfile(userid);
+  }, [getCurrentProfile, userid]);
+  
+
   return (
     username === null ? (<Spinner />):(
     <section className='wrapper style5'>
@@ -28,11 +36,14 @@ const Dashboard = ({ props
 };
 
 Dashboard.propTypes = {
-  auth: PropTypes.object.isRequired
+  getCurrentProfile: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
