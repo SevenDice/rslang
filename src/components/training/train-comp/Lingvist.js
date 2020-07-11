@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Modal from "./Modal";
 import NavArrows from "./NavArrows";
 import LanguageCard from "./LanguageCard";
-import ProgressBar from "./ProgressBar";
+import { useSelector } from 'react-redux';
 
 export default class Lingvist extends React.Component {
   state = {
@@ -18,23 +18,25 @@ export default class Lingvist extends React.Component {
     const { currentIndex, updateIndex } = this.props;
     if (this.props.currentIndex < 1) return;
     if (this.state.isPrev) return;
-    this.setState({ isPrev: true });
-    updateIndex(currentIndex - 1);
+      this.setState({ isPrev: true });
+      updateIndex(currentIndex - 1);
   };
   handleRightClick = () => {
     const { currentIndex, updateIndex } = this.props;
+    const count = useSelector((state) => state.profile.settings.wordsPerDay);
     if (this.state.isPrev) {
-      this.setState({
-        isPrev: false,
-      });
-      updateIndex(currentIndex + 1);
-    } else {
-      // TODO should trigger form submission
-    }
+      this.setState({ isPrev: false });
+      if (currentIndex<count-1){
+        updateIndex(currentIndex + 1);
+      }
+  }
   };
   handleSuccess = () => {
     const { currentIndex, updateIndex } = this.props;
-    updateIndex(currentIndex + 1);
+    const count = useSelector((state) => state.profile.settings.wordsPerDay);
+    if (currentIndex<count-1){
+      updateIndex(currentIndex + 1);
+    }
   };
   render() {
     const { showModal, isPrev } = this.state;
@@ -79,9 +81,7 @@ export default class Lingvist extends React.Component {
         {/* <LevelsInfo toggleModal={this.toggleModal} /> */}
       </Modal>
     ) : (
-      <div className="lingvist">
-        <div />
-        <div className="lingvist--container">
+      <div className="cards-startpage">
           <NavArrows
             isPrev={isPrev}
             onLeftClick={this.handleLeftClick}
@@ -106,42 +106,10 @@ export default class Lingvist extends React.Component {
               toggleModal={this.toggleModal}
               handleSuccess={this.handleSuccess}
               isCorrect={isPrev}
+              currentIndex={currentIndex}
             />
           </NavArrows>
-          <div className="native-word">{wordTranslate}</div>
-        </div>
-        <ProgressBar num={currentIndex + 1} />
-        <style jsx="true">{`
-          .lingvist {
-            min-height: 350px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-          }
-          .native-word {
-            position: relative;
-            top: 30px;
-            left: 40px;
-          }
-        `}</style>
-        {/* <div>Для дебага:</div>
-        <div>Id: <b>{wordId}</b></div>
-        <div>Группа: <b>{wordGroup}</b></div>
-        <div>Страница слова: <b>{wordPage}</b></div>
-        <div>Слово на англ.: <b>{wordForeign}</b></div>
-        <div>Картинка: <b>{wordImage}</b></div>
-        <div>Произ. слова на англ.: <b>{wordAudio}</b></div>
-        <div>Произ. значения слова на англ.: <b>{wordAudioMeaning}</b></div>
-        <div>Произ. предл. со словом на англ.: <b>{wordAudioExample}</b></div>
-        <div>Значение слова на англ.: <b>{wordTextMeaning}</b></div>
-        <div>Предл. со словом на англ.: <b>{wordTextExample}</b></div>
-        <div>Транскрипция: <b>{wordTranscription}</b></div>
-        <div>Предл. со словом на рус.: <b>{wordTextExampleTranslate}</b></div>
-        <div>Значение слова на рус.: <b>{wordTextMeaningTranslate}</b></div>
-        <div>Слово на рус.: <b>{wordTranslate}</b></div>
-        <div>Кол-во слов предложении: <b>{wordsPerExampleSentence}</b></div> */}
+        <div/>
       </div>
     );
   }
@@ -165,4 +133,5 @@ Lingvist.propTypes = {
   wordsPerExampleSentence: PropTypes.number,
   currentIndex: PropTypes.number,
   updateIndex: PropTypes.func,
+  profile: PropTypes.object.isRequired
 };

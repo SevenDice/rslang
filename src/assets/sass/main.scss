@@ -955,8 +955,8 @@ table {
   tbody {
     tr {
       border: solid 1px _palette(border);
-      border-left: 0;
-      border-right: 0;
+      border-left: solid 1px _palette(border);
+      border-right: solid 1px _palette(border);
 
       &:nth-child(2n + 1) {
         background-color: _palette(border-bg);
@@ -972,7 +972,7 @@ table {
     color: _palette(fg-bold);
     font-size: 0.9em;
     font-weight: _font(weight-bold);
-    padding: 0 0.75em 0.75em 0.75em;
+    /*padding: 0 0.75em 0.75em 0.75em;*/
     text-align: left;
   }
 
@@ -991,8 +991,8 @@ table {
       tr {
         td {
           border: solid 1px _palette(border);
-          border-left-width: 0;
-          border-top-width: 0;
+          border-left-width: solid 1px _palette(border);
+          border-top-width: solid 1px _palette(border);
 
           &:first-child {
             border-left-width: 1px;

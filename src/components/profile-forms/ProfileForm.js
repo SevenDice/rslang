@@ -20,22 +20,7 @@ const ProfileForm = ({
 }) => {
   const settings = useSelector((state) => state.profile.settings);
   const [formData, setFormData] = useState(settings);
-  
-
-  // Зачем это?
-  /* useEffect(() => {
-    if (!profile) getCurrentProfile();
-    if (!loading && profile) {
-      const profileData = { ...formData };
-      for (const key in profile) {
-        if (key in profileData) profileData[key] = profile[key];
-      }
-      for (const key in profile.social) {
-        if (key in profileData) profileData[key] = profile.social[key];
-      }
-    }
-  }, [loading, getCurrentProfile, profile]); */
-
+  const username = useSelector((state) => state.auth.user.name);
   const {
     level,
     newWords,
@@ -85,7 +70,7 @@ const ProfileForm = ({
       <div className='inner'>
         <h1 className='large text-primary'>Настройки</h1>
         <p className='lead'>
-          <i className='fas fa-user' /> Изменение настроек пользователя
+        <h1 className='fas fa-user large text-primary'> Изменение настроек пользователя {username}</h1>
         </p>
         <small>Уровень сложности (* = Обязательное поле)</small>
         <form className='form' onSubmit={onSubmit}>
@@ -326,6 +311,7 @@ const ProfileForm = ({
 };
 
 ProfileForm.propTypes = {
+  auth: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
@@ -333,6 +319,7 @@ ProfileForm.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   profile: state.profile,
 });
 

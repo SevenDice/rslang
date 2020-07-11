@@ -10,8 +10,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
 } from './types';
-import store from '../store';
-import { getUserSettings } from '../actions/profile';
+//import store from '../store';
+//import { getUserSettings } from '../actions/profile';
 
 // Load User
 export const loadUser = (id) => async (dispatch) => {
@@ -73,10 +73,10 @@ export const login = (email, password) => async (dispatch) => {
       payload: res.data,
     });
 
-    store.dispatch(getUserSettings(localStorage.getItem('id')));
+    //store.dispatch(getUserSettings(localStorage.getItem('id')));
     // dispatch(loadUser());
   } catch (err) {
-    console.log(err.response.statusText, err.response.status);
+    //console.log(err.response.statusText, err.response.status);
     if (err.response.status === 403) {
       dispatch(setAlert('Неверный пароль', 'danger'));
     } else if (err.response.status === 404) {

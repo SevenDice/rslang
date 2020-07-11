@@ -1,45 +1,38 @@
-import React, { Fragment, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-//import { Redirect } from 'react-router-dom';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
 import DashboardActions from './DashboardActions';
-import { getCurrentProfile } from '../../actions/profile';
+import Spinner from '../layout/Spinner';
 
-const Dashboard = ({
-  getCurrentProfile,
-  // deleteAccount,
-  // auth: { user },
-  // profile: { profile }
+
+const Dashboard = ({ props
 }) => {
-  const name = useSelector((state) => state.auth.user.name);
-  useEffect(() => {
-    getCurrentProfile(localStorage.getItem('id'));
-  }, [getCurrentProfile]);
+  
+  const username = useSelector((state) => state.auth.user.name)
   return (
+    username === null ? (<Spinner />):(
     <section className='wrapper style5'>
-      <div className='inner'>
-        <h1 className='large text-primary'>Главная</h1>
-        <p className='lead'>
-          <i className='fas fa-user' /> Добро пожаловать, {name}
-        </p>
-        <Fragment>
-          <DashboardActions />
-        </Fragment>
-      </div>
+        <div className='inner'>
+          <h1 className='large text-primary'>Главная</h1>
+          <p className='lead'>
+            <i className='fas fa-user' /> Добро пожаловать,{username}
+          </p>
+          {
+           <Fragment>
+              <DashboardActions />
+            </Fragment>
+          }  
+        </div>
     </section>
-  );
+  ))
 };
 
 Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
-  profile: state.profile,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

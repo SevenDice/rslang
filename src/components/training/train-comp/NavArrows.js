@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { polar4 } from './Colors';
 
 export default function NavArrows({
   onLeftClick,
@@ -14,42 +13,16 @@ export default function NavArrows({
         className="sf-nav-arrows--arrow-container sf-nav-arrows--left-arrow-container"
         onClick={onLeftClick}
       >
-        {isPrev ? null : <div className="sf-nav-arrows--arrow">L</div>}
+        {isPrev ? null : <div className="sf-nav-arrows--arrow"><i class="fas fa-arrow-left"></i></div>}
       </div>
       {children}
       <div
         className="sf-nav-arrows--arrow-container sf-nav-arrows--right-arrow-container"
         onClick={onRightClick}
       >
-        <div className="sf-nav-arrows--arrow">R</div>
+        <div className="sf-nav-arrows--arrow"><i class="fas fa-arrow-right"></i></div>
       </div>
       <style jsx="true">{`
-        .sf-nav-arrows {
-          display: flex;
-        }
-        .sf-nav-arrows--arrow-container {
-          display: flex;
-          justify-content: center;
-          min-height: 100%;
-          min-width: 20px;
-        }
-        .sf-nav-arrows--arrow-container:hover {
-          cursor: pointer;
-        }
-        .sf-nav-arrows--arrow-container:active {
-          background: ${polar4};
-        }
-        .sf-nav-arrows--arrow-container.sf-nav-arrows--left-arrow-container:hover
-          .arrow {
-          transform: translateX(-3px);
-        }
-        .sf-nav-arrows--arrow-container.sf-nav-arrows--right-arrow-container:hover
-          .arrow {
-          transform: translateX(3px);
-        }
-        .sf-nav-arrows--arrow {
-          align-self: center;
-        }
         .sf-nav-arrows--arrow-container.sf-nav-arrows--left-arrow-container {
           visibility: ${isPrev ? 'hidden' : 'visible'};
         }

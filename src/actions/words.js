@@ -16,8 +16,16 @@ import {
   USER_WORD_UPDATE_ERROR,
   USER_WORD_DELETED,
   USER_WORD_DELETE_ERROR,
-  USER_AGGREGATED_WORDS_LOADED,
-  USER_AGGREGATED_WORDS_LOAD_ERROR
+  USER_AGGREGATED_NEW_WORDS_LOADED,
+  USER_AGGREGATED_NEW_WORDS_LOAD_ERROR,
+  USER_AGGREGATED_EASY_WORDS_LOADED,
+  USER_AGGREGATED_EASY_WORDS_LOAD_ERROR,
+  USER_AGGREGATED_MEDIUM_WORDS_LOADED,
+  USER_AGGREGATED_MEDIUM_WORDS_LOAD_ERROR,
+  USER_AGGREGATED_HARD_WORDS_LOADED,
+  USER_AGGREGATED_HARD_WORDS_LOAD_ERROR,
+  USER_AGGREGATED_DELETED_WORDS_LOADED,
+  USER_AGGREGATED_DELETED_WORDS_LOAD_ERROR
  } from './types'
   
 // Get word by id
@@ -107,18 +115,63 @@ export const getAggregatedUserWords = (userId, group, wordsPerPage, filter)  => 
         request = request +`&filter=${filter}`;
       }    
     }
-
-    ///console.log(request);
     const res = await api.get(request);
-    //console.log(res.data);
-    dispatch({
-      type: USER_AGGREGATED_WORDS_LOADED,
-      payload: res.data[0].paginatedResults
-    });
+    if (filter === '{"userWord.difficulty":"new"}'){
+      dispatch({  
+        type: USER_AGGREGATED_NEW_WORDS_LOADED,
+        payload: res.data[0].paginatedResults
+      });
+    }
+    if (filter === '{"userWord.difficulty":"easy"}'){
+      dispatch({  
+        type: USER_AGGREGATED_EASY_WORDS_LOADED,
+        payload: res.data[0].paginatedResults
+      });
+    }
+    if (filter === '{"userWord.difficulty":"medium"}'){
+      dispatch({  
+        type: USER_AGGREGATED_MEDIUM_WORDS_LOADED,
+        payload: res.data[0].paginatedResults
+      });
+    }
+    if (filter === '{"userWord.difficulty":"hard"}'){
+      dispatch({  
+        type: USER_AGGREGATED_HARD_WORDS_LOADED,
+        payload: res.data[0].paginatedResults
+      });
+    }
+    if (filter === '{"userWord.difficulty":"deleted"}'){
+      dispatch({  
+        type: USER_AGGREGATED_DELETED_WORDS_LOADED,
+        payload: res.data[0].paginatedResults
+      });
+    }
   } catch (err) {
-    dispatch({
-      type: USER_AGGREGATED_WORDS_LOAD_ERROR
-    });
+    if (filter === '{"userWord.difficulty":"new"}'){
+      dispatch({
+        type: USER_AGGREGATED_NEW_WORDS_LOAD_ERROR
+      });
+    }
+    if (filter === '{"userWord.difficulty":"easy"}'){
+      dispatch({
+        type: USER_AGGREGATED_EASY_WORDS_LOAD_ERROR
+      });
+    }
+    if (filter === '{"userWord.difficulty":"medium"}'){
+      dispatch({
+        type: USER_AGGREGATED_MEDIUM_WORDS_LOAD_ERROR
+      });
+    }
+    if (filter === '{"userWord.difficulty":"hard"}'){
+      dispatch({
+        type: USER_AGGREGATED_HARD_WORDS_LOAD_ERROR
+      });
+    }
+    if (filter === '{"userWord.difficulty":"deleted"}'){
+      dispatch({
+        type: USER_AGGREGATED_DELETED_WORDS_LOAD_ERROR
+      });
+    }  
   }
 };
 
@@ -158,7 +211,6 @@ export const getUserWordById = (userId, wordId) => async dispatch => {
 export const updateUserWordById = (userId, wordId, params) => async dispatch => {
   try {
     const res = await api.put(`/users/${userId}/words/${wordId}`, params);
-
     dispatch({
       type: USER_WORD_UPDATED,
       payload: res.data

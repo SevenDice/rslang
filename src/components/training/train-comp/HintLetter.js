@@ -9,14 +9,6 @@ export default function HintLetter({ letter, isCorrect }) {
       }`}
     >
       {letter}
-      <style jsx="true">{`
-        .hint-letter--correct {
-          color: green;
-        }
-        .hint-letter--incorrect {
-          color: red;
-        }
-      `}</style>
     </span>
   );
 }
