@@ -91,9 +91,9 @@ const SavannaGame = (props) => {
   function watchTimeForAnswer(event) {
     // console.log(event.target.parentNode.id.replace('question-', ''))
 
-    let id = event.target.parentNode.id.replace("question-", "");
+    // let id = event.target.parentNode.id.replace("question-", "");
 
-    console.log(event.target, modalWindow, currPosition);
+    // console.log(event.target, modalWindow, currPosition);
 
     if (modalWindow === true) {
       return;

@@ -75,9 +75,16 @@ const Savanna = () => {
     return;
   }
 
+  function randomInteger(min, max) {
+    let rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
+  }
+
   async function getWords() {
-    const url =
-      "https://afternoon-falls-25894.herokuapp.com/words?page=0&group=0";
+    const page = randomInteger(0, 29);
+    const group = randomInteger(0, 5);
+
+    const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
 
     const data = await fetch(url);
     const res = await data.json();
@@ -101,7 +108,7 @@ const Savanna = () => {
           <p>
             Правила игры: за 5 секунд необходимо выбрать правильный вариант
             ответа из четырех предложенных. Всего необходимо будет ответить на
-            30 вопросов. Ошибиться можно будет всего 5 раз за всю игру.
+            20 вопросов. Ошибиться можно будет всего 5 раз за всю игру.
           </p>
           <button className="primary" id="button-start" onClick={startGame}>
             Начать игру
