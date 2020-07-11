@@ -16,7 +16,7 @@ export default class WordInputField extends React.Component {
       const correctLetters = compareAttemptWithCorrectWord(foreignWord, value);
       this.setState({ value: '', prevAttempt: correctLetters, giveHelp: true });
     } else {
-      this.setState({ value: '', prevAttempt: {} });
+      this.setState({ value: '', prevAttempt: {}, giveHelp: false  });
       handleSuccess();
     }
   };
@@ -55,7 +55,7 @@ export default class WordInputField extends React.Component {
             border: none;
             background: #ECEFF4;
             box-sizing: border-box;
-            width: calc(${foreignWord.length} * 1.6rem + 8px) !important;
+            width: calc(${foreignWord.length} * 16px) !important;
           }
         `}</style>
       </div>

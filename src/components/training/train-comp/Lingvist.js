@@ -55,24 +55,24 @@ export default class Lingvist extends React.Component {
       wordsPerExampleSentence,
       currentIndex,
     } = this.props;
-    console.log(
-      wordId +"\n",
-      wordGroup+"\n",
-      wordPage+"\n",
-      wordForeign+"\n",
-      wordImage+"\n",
-      wordAudio+"\n",
-      wordAudioMeaning+"\n",
-      wordAudioExample+"\n",
-      wordTextMeaning+"\n",
-      wordTextExample+"\n",
-      wordTranscription+"\n",
-      wordTextExampleTranslate+"\n",
-      wordTextMeaningTranslate+"\n",
-      wordTranslate+"\n",
-      wordsPerExampleSentence+"\n",
-      currentIndex
-    );
+    // console.log(
+    //   wordId +"\n",
+    //   wordGroup+"\n",
+    //   wordPage+"\n",
+    //   wordForeign+"\n",
+    //   wordImage+"\n",
+    //   wordAudio+"\n",
+    //   wordAudioMeaning+"\n",
+    //   wordAudioExample+"\n",
+    //   wordTextMeaning+"\n",
+    //   wordTextExample+"\n",
+    //   wordTranscription+"\n",
+    //   wordTextExampleTranslate+"\n",
+    //   wordTextMeaningTranslate+"\n",
+    //   wordTranslate+"\n",
+    //   wordsPerExampleSentence+"\n",
+    //   currentIndex
+    // );
     return showModal ? (
       <Modal>
         {/* <LevelsInfo toggleModal={this.toggleModal} /> */}
