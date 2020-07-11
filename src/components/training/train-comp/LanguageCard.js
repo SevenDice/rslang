@@ -48,15 +48,15 @@ export default function LanguageCard({
       <div className="card-divider"></div>
       <div className="card-lower">
         <div className="card-word-translation cardP">
-          <i class="fas fa-volume-up" onClick={playAudio(wordAudio)}></i>
+          <i className="fas fa-volume-up" onClick={playAudio(wordAudio)}></i>
           {wordTranslate}
         </div>
         <div className="card-sentense-translation cardP">
-          <i class="fas fa-volume-up" onClick={playAudio(wordAudioExample)}></i>
+          <i className="fas fa-volume-up" onClick={playAudio(wordAudioExample)}></i>
           {wordTextExampleTranslate}
         </div>
         <div className="card-word-meaning cardP">
-          <i class="fas fa-volume-up" onClick={playAudio(wordAudioMeaning)}></i>
+          <i className="fas fa-volume-up" onClick={playAudio(wordAudioMeaning)}></i>
           {wordTextMeaningTranslate}
         </div>
         <div className="card-transcription cardP">{wordTranscription}</div>
