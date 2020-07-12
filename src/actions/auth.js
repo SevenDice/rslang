@@ -41,6 +41,7 @@ export const register = ({name, email, password }) => async (dispatch) => {
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
+    localStorage.setItem('name', name);
     dispatch(loadUser());
   } catch (err) {
     console.log(err.response.statusText, err.response.status);
