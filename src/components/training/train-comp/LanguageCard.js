@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import WordInput from "./WordInput";
 import ProgressBar from "./ProgressBar";
-//import Sound from "react-sound";
+import Sound from "react-sound";
 
 export default function LanguageCard({
   wordId,
@@ -36,7 +36,7 @@ export default function LanguageCard({
 
   return (
     <div className="training-card">
-      {/* <Sound url={wordAudioExample} playStatus={Sound.status.PLAYING} /> */}
+      <Sound url={wordAudioExample} playStatus={Sound.status.PLAYING} />
       <WordInput
         wordForeign={wordForeign}
         wordTextExample={wordTextExample}

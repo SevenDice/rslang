@@ -10,7 +10,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     name: '',
     email: '',
     password: '',
-    password2: '',
+    password2: ''
   });
 
   const { name, email, password, password2 } = formData;
@@ -22,12 +22,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('Пароли не совпадают', 'danger');
     } else {
-      register({ email, password });
+      register({ name, email, password });
     }
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to='/login' />;
   }
 
   return (
@@ -39,7 +39,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       <form className='form' onSubmit={onSubmit}>
         <div>
           <input
-            type='email'
+            type='text'
             placeholder='Имя пользователя'
             name='name'
             value={name}
