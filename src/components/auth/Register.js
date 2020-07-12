@@ -39,7 +39,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       <form className='form' onSubmit={onSubmit}>
         <div>
           <input
-            type='name'
+            type='email'
             placeholder='Имя пользователя'
             name='name'
             value={name}
