@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { polar2 } from './Colors';
 import HintLetter from './HintLetter';
 import { compareAttemptWithCorrectWord } from '../../../utils/lib';
 
@@ -17,7 +16,7 @@ export default class WordInputField extends React.Component {
       const correctLetters = compareAttemptWithCorrectWord(foreignWord, value);
       this.setState({ value: '', prevAttempt: correctLetters, giveHelp: true });
     } else {
-      this.setState({ value: '', prevAttempt: {} });
+      this.setState({ value: '', prevAttempt: {}, giveHelp: false  });
       handleSuccess();
     }
   };
@@ -33,6 +32,7 @@ export default class WordInputField extends React.Component {
   render() {
     const { value, prevAttempt, giveHelp } = this.state;
     const { foreignWord = '' } = this.props;
+    
     return (
       <div className="word-input-field">
         <form onSubmit={this.handleSubmit}>
@@ -42,40 +42,20 @@ export default class WordInputField extends React.Component {
             </span>
           )}
           <input
-            className="word-input-field--input"
+            className="word-input word-input-field--input"
             type="text"
             value={value}
             onChange={this.handleChange}
           />
         </form>
-        <style jsx>{`
-          .word-input-field {
-            display: inline-block;
-            font-family: monospace;
-          }
-          .word-input-field--letter-container,
-          .word-input-field--input {
-            font-family: monospace;
-            font-size: 1.5rem;
-            padding: 5px;
-          }
-          .word-input-field--letter-container {
-            position: absolute;
-          }
+        <style jsx="true">{`
           .word-input-field--input {
             color: green;
             outline: none;
             border: none;
-            background: ${polar2};
+            background: #ECEFF4;
             box-sizing: border-box;
-            width: calc(${foreignWord.length} * 1rem + 5px);
-          }
-          word-input-field--input:focus {
-            outline: none;
-          }
-          .word-input-field span {
-            opacity: 0.5;
-            pointer-events: none;
+            width: calc(${foreignWord.length} * 16px) !important;
           }
         `}</style>
       </div>

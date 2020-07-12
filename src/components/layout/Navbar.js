@@ -75,7 +75,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
               <span>Меню</span>
             </a>
             <div id='menu' ref={menu}>
-              {/* !loading &&  */ <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
+
+            {/*!loading &&*/ <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
+
               <div href='#menu' className='close' ref={closeIcon}></div>
             </div>
           </li>

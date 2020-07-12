@@ -1,4 +1,4 @@
-import React, { useState /* , useEffect */ } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
@@ -6,6 +6,7 @@ import {
   createProfile,
   getCurrentProfile,
   deleteAccount,
+  getUserSettings,
   updateUserSettings,
 } from '../../actions/profile';
 import store from '../../store';
@@ -18,8 +19,12 @@ const ProfileForm = ({
   history,
   deleteAccount,
 }) => {
+
+  const userId = useSelector((state) => state.auth.user.id);
   const settings = useSelector((state) => state.profile.settings);
-  const [formData, setFormData] = useState(settings);
+  console.log(settings);
+  useEffect(() => {
+    store.dispatch(getUserSettings(userId));
 
   // Зачем это?
   /* useEffect(() => {
@@ -29,12 +34,15 @@ const ProfileForm = ({
       for (const key in profile) {
         if (key in profileData) profileData[key] = profile[key];
       }
-      for (const key in profile.social) {
-        if (key in profileData) profileData[key] = profile.social[key];
-      }
     }
   }, [loading, getCurrentProfile, profile]); */
 
+
+  }, [userId]);
+
+  const [formData, setFormData] = useState(settings);
+  //setFormData(settings);
+  const username = useSelector((state) => state.auth.user.name);
   const {
     level,
     newWords,
@@ -74,7 +82,8 @@ const ProfileForm = ({
     e.preventDefault();
     const newSettings = { ...formData };
     delete newSettings.id;
-    store.dispatch(updateUserSettings(localStorage.getItem('id'), newSettings));
+
+    store.dispatch(updateUserSettings(userId, newSettings));
     store.dispatch(setAlert('Настройки сохранены'));
     userHistory.go(-2);
   };
@@ -82,15 +91,14 @@ const ProfileForm = ({
   return (
     <section className='wrapper style5'>
       <div className='inner'>
-        <h1 className='large text-primary'>Настройки</h1>
+        <h1 className='large text-primary'> <i className='fas fa-user' /> Изменение настроек пользователя {username}</h1>
         <p className='lead'>
-          <i className='fas fa-user' /> Изменение настроек пользователя
         </p>
-        <small>Уровень сложности (* = Обязательное поле)</small>
+
+        <small>Уровень сложности</small>
         <form className='form' onSubmit={onSubmit}>
           <div className='form-group'>
             <select name='level' value={level} onChange={onChange} className='level-select'>
-              <option>* Выберите уровень сложности изучения</option>
               <option value='0'>Начальный</option>
               <option value='1'>Элементарный</option>
               <option value='2'>Средний</option>
@@ -325,6 +333,7 @@ const ProfileForm = ({
 };
 
 ProfileForm.propTypes = {
+  auth: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
@@ -332,9 +341,10 @@ ProfileForm.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile, deleteAccount })(
+export default connect(mapStateToProps, { createProfile, getCurrentProfile, getUserSettings, deleteAccount })(
   ProfileForm,
 );

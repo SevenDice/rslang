@@ -3,49 +3,39 @@ import PropTypes from 'prop-types';
 import WordInputField from './WordInputField';
 
 export default function WordInput({
-  foreignWord = '',
-  foreignPhrase = '',
+  wordImage,
+  wordForeign = '',
+  wordTextExample = '',
   handleSuccess,
   isCorrect
 }) {
-  const [front, end] = foreignPhrase.split('*');
+  const [front, end] = wordTextExample.replace(/<b.*>.*?<\/b>/ig,'*').split('*')
   return (
-    <div className="word-input">
-      <div className="word-input--article">
-        <span>{front}</span>
+    <div className="card-upper">
+      <div className="card-eng-sentense">
+        {front}
         {isCorrect ? (
-          <span className="word-input--correct-word">{foreignWord}</span>
+          <span className="word-input--correct-word">{wordForeign}</span>
         ) : (
           <WordInputField
-            foreignWord={foreignWord}
+            foreignWord={wordForeign}
             handleSuccess={handleSuccess}
           />
         )}
-        <span>{end}</span>
+        {end}
       </div>
-      <style jsx>{`
-        .word-input {
-          font-size: 1.5rem;
-          display: inline-block;
-          color: green;
-        }
-        .word-input--correct-word {
-          color: lightgreen;
-          border-bottom-width: 2px;
-          border-bottom-style: solid;
-        }
-        .word-input--article {
-          display: inline-block;
-          margin-right: 5px;
-        }
-      `}</style>
+      <img
+        className="card-img"
+        src={wordImage}
+        alt=""
+      />
     </div>
   );
 }
 
 WordInput.propTypes = {
-  foreignWord: PropTypes.string,
-  foreignPhrase: PropTypes.string,
+  wordForeign: PropTypes.string,
+  wordTextExample: PropTypes.string,
   handleSuccess: PropTypes.func,
   isCorrect: PropTypes.bool
 };
