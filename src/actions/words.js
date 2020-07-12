@@ -25,216 +25,217 @@ import {
   USER_AGGREGATED_HARD_WORDS_LOADED,
   USER_AGGREGATED_HARD_WORDS_LOAD_ERROR,
   USER_AGGREGATED_DELETED_WORDS_LOADED,
-  USER_AGGREGATED_DELETED_WORDS_LOAD_ERROR
- } from './types'
-  
+  USER_AGGREGATED_DELETED_WORDS_LOAD_ERROR,
+} from './types';
+
 // Get word by id
-export const getWordById = (wordId) => async dispatch => {
+export const getWordById = (wordId) => async (dispatch) => {
   try {
     const res = await api.get(`/words/${wordId}`);
 
     dispatch({
       type: WORD_LOADED,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: WORD_LOAD_ERROR
+      type: WORD_LOAD_ERROR,
     });
   }
 };
 
 // Get a chunk of words
-export const getChunkOfWords = (group, page) => async dispatch => {
+export const getChunkOfWords = (group, page) => async (dispatch) => {
   try {
     const res = await api.get(`/words?&group=${group}page=${page}`);
     console.log(res.data);
     dispatch({
       type: CHUNK_WORDS_LOADED,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: CHUNK_WORDS_LOAD_ERROR
+      type: CHUNK_WORDS_LOAD_ERROR,
     });
   }
 };
 
 // Get a total number of words. If wordsPerExampleSentenceLTE is specified then returns number of full pages.
-export const getNumberOfWords = (group, wordsPerExampleSentenceLTE, wordsPerPage) => async dispatch => {
+export const getNumberOfWords = (group, wordsPerExampleSentenceLTE, wordsPerPage) => async (
+  dispatch,
+) => {
   try {
-    const res = await api.get(`/words/count?group=${group}&wordsPerExampleSentenceLTE=${wordsPerExampleSentenceLTE}&wordsPerPage=${wordsPerPage}`);
+    const res = await api.get(
+      `/words/count?group=${group}&wordsPerExampleSentenceLTE=${wordsPerExampleSentenceLTE}&wordsPerPage=${wordsPerPage}`,
+    );
 
     dispatch({
       type: NUMBER_WORDS_LOADED,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: NUMBER_WORDS_LOAD_ERROR
+      type: NUMBER_WORDS_LOAD_ERROR,
     });
   }
 };
 
 // Gets all user words
-export const getAllUserWords = userId => async dispatch => {
+export const getAllUserWords = (userId) => async (dispatch) => {
   try {
     const res = await api.get(`/users/${userId}/words`);
 
     dispatch({
       type: USER_WORDS_LOADED,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: USER_WORDS_LOAD_ERROR
+      type: USER_WORDS_LOAD_ERROR,
     });
   }
 };
 
 //Get User Aggregated words
-export const getAggregatedUserWords = (userId, group, wordsPerPage, filter)  => async dispatch => {
+export const getAggregatedUserWords = (userId, group, wordsPerPage, filter) => async (dispatch) => {
   try {
-    let request=`/users/${userId}/aggregatedWords?`;
-    if ((typeof group !== 'undefined') && (group !== null) && (group !== '')){
+    let request = `/users/${userId}/aggregatedWords?`;
+    if (typeof group !== 'undefined' && group !== null && group !== '') {
       request = request + `group=${group}`;
     }
-    if ((typeof wordsPerPage !== 'undefined') && (wordsPerPage !== null) && (wordsPerPage !== '')){
-      if (request === `/users/${userId}/aggregatedWords?`){
-        request= request +`wordsPerPage=${wordsPerPage}`;  
+    if (typeof wordsPerPage !== 'undefined' && wordsPerPage !== null && wordsPerPage !== '') {
+      if (request === `/users/${userId}/aggregatedWords?`) {
+        request = request + `wordsPerPage=${wordsPerPage}`;
+      } else {
+        request = request + `&wordsPerPage=${wordsPerPage}`;
       }
-      else{
-        request= request +`&wordsPerPage=${wordsPerPage}`; 
-      }  
     }
-    if ((typeof filter !== 'undefined') && (filter !== null) && (filter !=='')){
-      if (request === `/users/${userId}/aggregatedWords?`){
-        request = request +`filter=${filter}`;
+    if (typeof filter !== 'undefined' && filter !== null && filter !== '') {
+      if (request === `/users/${userId}/aggregatedWords?`) {
+        request = request + `filter=${filter}`;
+      } else {
+        request = request + `&filter=${filter}`;
       }
-      else{
-        request = request +`&filter=${filter}`;
-      }    
     }
     const res = await api.get(request);
-    console.log(res.data);
-    if (filter === '{"userWord.difficulty":"new"}'){
-      dispatch({  
+    if (filter === '{"userWord.difficulty":"new"}') {
+      dispatch({
         type: USER_AGGREGATED_NEW_WORDS_LOADED,
-        payload: res.data[0].paginatedResults
+        payload: res.data[0].paginatedResults,
       });
     }
-    if (filter === '{"userWord.difficulty":"easy"}'){
-      dispatch({  
+    if (filter === '{"userWord.difficulty":"easy"}') {
+      dispatch({
         type: USER_AGGREGATED_EASY_WORDS_LOADED,
-        payload: res.data[0].paginatedResults
+        payload: res.data[0].paginatedResults,
       });
     }
-    if (filter === '{"userWord.difficulty":"medium"}'){
-      dispatch({  
+    if (filter === '{"userWord.difficulty":"medium"}') {
+      dispatch({
         type: USER_AGGREGATED_MEDIUM_WORDS_LOADED,
-        payload: res.data[0].paginatedResults
+        payload: res.data[0].paginatedResults,
       });
     }
-    if (filter === '{"userWord.difficulty":"hard"}'){
-      dispatch({  
+    if (filter === '{"userWord.difficulty":"hard"}') {
+      dispatch({
         type: USER_AGGREGATED_HARD_WORDS_LOADED,
-        payload: res.data[0].paginatedResults
+        payload: res.data[0].paginatedResults,
       });
     }
-    if (filter === '{"userWord.difficulty":"deleted"}'){
-      dispatch({  
+    if (filter === '{"userWord.difficulty":"deleted"}') {
+      dispatch({
         type: USER_AGGREGATED_DELETED_WORDS_LOADED,
-        payload: res.data[0].paginatedResults
+        payload: res.data[0].paginatedResults,
       });
     }
   } catch (err) {
-    if (filter === '{"userWord.difficulty":"new"}'){
+    if (filter === '{"userWord.difficulty":"new"}') {
       dispatch({
-        type: USER_AGGREGATED_NEW_WORDS_LOAD_ERROR
+        type: USER_AGGREGATED_NEW_WORDS_LOAD_ERROR,
       });
     }
-    if (filter === '{"userWord.difficulty":"easy"}'){
+    if (filter === '{"userWord.difficulty":"easy"}') {
       dispatch({
-        type: USER_AGGREGATED_EASY_WORDS_LOAD_ERROR
+        type: USER_AGGREGATED_EASY_WORDS_LOAD_ERROR,
       });
     }
-    if (filter === '{"userWord.difficulty":"medium"}'){
+    if (filter === '{"userWord.difficulty":"medium"}') {
       dispatch({
-        type: USER_AGGREGATED_MEDIUM_WORDS_LOAD_ERROR
+        type: USER_AGGREGATED_MEDIUM_WORDS_LOAD_ERROR,
       });
     }
-    if (filter === '{"userWord.difficulty":"hard"}'){
+    if (filter === '{"userWord.difficulty":"hard"}') {
       dispatch({
-        type: USER_AGGREGATED_HARD_WORDS_LOAD_ERROR
+        type: USER_AGGREGATED_HARD_WORDS_LOAD_ERROR,
       });
     }
-    if (filter === '{"userWord.difficulty":"deleted"}'){
+    if (filter === '{"userWord.difficulty":"deleted"}') {
       dispatch({
-        type: USER_AGGREGATED_DELETED_WORDS_LOAD_ERROR
+        type: USER_AGGREGATED_DELETED_WORDS_LOAD_ERROR,
       });
-    }  
+    }
   }
 };
 
 // Create a user word
-export const createUserWord = (userId, wordId, params) => async dispatch => {
+export const createUserWord = (userId, wordId, params) => async (dispatch) => {
   try {
     const res = await api.post(`/users/${userId}/words/${wordId}`, params);
     console.log(res.data);
     dispatch({
       type: USER_WORD_CREATED,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: USER_WORD_CREATE_ERORR
+      type: USER_WORD_CREATE_ERORR,
     });
   }
 };
 
 // Gets a user word by id
-export const getUserWordById = (userId, wordId) => async dispatch => {
+export const getUserWordById = (userId, wordId) => async (dispatch) => {
   try {
     const res = await api.get(`/users/${userId}/words/${wordId}`);
 
     dispatch({
       type: USER_WORD_LOADED,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: USER_WORD_LOAD_ERROR
+      type: USER_WORD_LOAD_ERROR,
     });
   }
 };
 
 // Updates a user word by id
-export const updateUserWordById = (userId, wordId, params) => async dispatch => {
+export const updateUserWordById = (userId, wordId, params) => async (dispatch) => {
   try {
     const res = await api.put(`/users/${userId}/words/${wordId}`, params);
     dispatch({
       type: USER_WORD_UPDATED,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: USER_WORD_UPDATE_ERROR
+      type: USER_WORD_UPDATE_ERROR,
     });
   }
 };
 
 // Deletes user words by id
-export const deleteUserWordById = (userId, wordId) => async dispatch => {
+export const deleteUserWordById = (userId, wordId) => async (dispatch) => {
   try {
     const res = await api.delete(`/users/${userId}/words/${wordId}`);
 
     dispatch({
       type: USER_WORD_DELETED,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: USER_WORD_DELETE_ERROR
+      type: USER_WORD_DELETE_ERROR,
     });
   }
 };
