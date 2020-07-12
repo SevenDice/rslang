@@ -1,0 +1,48 @@
+export default [
+  {
+    img: './kirill.jpg',
+    name: 'Кирилл Гурин, 25',
+    loc: 'Россия, Волгоград',
+    tlg: 'https://t.me/se7endc',
+    vk: 'https://vk.com/kirillseven',
+    git: 'https://github.com/sevendice',
+    role:
+      'начальная структура проекта (ядро), компонент "Изучение новых слов", работа с API, промо-страница',
+  },
+  {
+    img: './sergei1.jpg',
+    name: 'Сергей Синякин, 34',
+    loc: 'Россия, Волгоград',
+    tlg: 'https://t.me/Sinyakin86',
+    vk: 'https://vk.com/idsinyakinss',
+    git: 'https://github.com/behemoth86',
+    role: 'работа с API, компоненты "Словарь" и "Статистика", авторизация',
+  },
+  {
+    img: './alina.jpg',
+    name: 'Алина Кутыева, 23',
+    loc: 'Россия, Санкт-Петербург',
+    tlg: 'https://t.me/kutyeva',
+    vk: 'https://vk.com/id470878147',
+    git: 'https://github.com/AlinaKutya',
+    role: 'компонент "Настройки", дизайн, landing page, авторизация, игра SpeakIt',
+  },
+  {
+    img: './vika.jpg',
+    name: 'Виктория Трипутина, 25',
+    loc: 'Беларусь, Минск',
+    tlg: 'https://t.me/vickymarshmallow',
+    vk: 'https://vk.com/krendelushka',
+    git: 'https://github.com/wviktor93',
+    role: 'функциональность приложения, игра Savanna',
+  },
+  {
+    img: './angelina.jpg',
+    name: 'Ангелина Герман, 21',
+    loc: 'Беларусь, Минск',
+    tlg: 'https://t.me/',
+    vk: 'https://vk.com/id100106622',
+    git: 'https://github.com/angygerman',
+    role: 'игра AudioCall',
+  },
+];
