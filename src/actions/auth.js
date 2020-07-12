@@ -1,8 +1,6 @@
 import api from '../utils/api';
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
-import { getUserSettings } from '../actions/profile';
-import store from '../store';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -14,7 +12,7 @@ import {
 } from './types';
 
 // Load User
-export const loadUser = (id) => async (dispatch) => {
+export const loadUser = (userId) => async (dispatch) => {
 
   try {
     const res = await api.get(`/users/${userId}`);

@@ -177,6 +177,7 @@ const SavannaGame = (props) => {
             ) : null}
 
             {mistakes > 0
+              // eslint-disable-next-line array-callback-return
               ? mistakesWords.map((mistWord, index) => {
                   if (index <= 4) {
                     return (
