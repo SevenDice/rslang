@@ -38,30 +38,27 @@ const Landing = ({ isAuthenticated }) => {
         <div className='inner'>
           <header className='major'>
             <h2 className='landing-logo'>
-              Arcu aliquet vel lobortis ata nisl
-              <br />
-              eget augue amet aliquet nisl cep donec
+              RS Lang представляет собой максимально эффективный и комфортный способ изучения
+              английского языка
             </h2>
             <p>
-              Aliquam ut ex ut augue consectetur interdum. Donec amet imperdiet eleifend
-              <br />
-              fringilla tincidunt. Nullam dui leo Aenean mi ligula, rhoncus ullamcorper.
+              Стань одним из пользователей стремительно набирающего популярность приложения RS Lang
             </p>
           </header>
           <ul className='icons major'>
             <li>
               <span className='icon fa-gem major style1'>
-                <span className='label'>Lorem</span>
+                <span className='label'>R</span>
               </span>
             </li>
             <li>
               <span className='icon fa-heart major style2'>
-                <span className='label'>Ipsum</span>
+                <span className='label'>S</span>
               </span>
             </li>
             <li>
               <span className='icon solid fa-code major style3'>
-                <span className='label'>Dolor</span>
+                <span className='label'>L</span>
               </span>
             </li>
           </ul>
@@ -71,50 +68,38 @@ const Landing = ({ isAuthenticated }) => {
       <section id='two' className='wrapper alt style2'>
         <section className='spotlight'>
           <div className='image'>
-            <img src='pic01.jpg' alt='' />
+            <img src='11.jpg' alt='' />
           </div>
           <div className='content'>
             <h2 className='landing-logo'>
-              Magna primis lobortis
-              <br />
-              sed ullamcorper
+              If you fall asleep now, you will dream. If you study now, you will live your dream.
             </h2>
             <p>
-              Aliquam ut ex ut augue consectetur interdum. Donec hendrerit imperdiet. Mauris
-              eleifend fringilla nullam aenean mi ligula.
+              Если ты сейчас уснешь, то тебе, конечно, приснится твоя мечта, но если же ты сейчас
+              выучишься, то воплотишь свою мечту в жизнь.
             </p>
           </div>
         </section>
         <section className='spotlight'>
           <div className='image'>
-            <img src='pic02.jpg' alt='' />
+            <img src='22.jpg' alt='' />
           </div>
           <div className='content'>
             <h2 className='landing-logo'>
-              Tortor dolore feugiat
-              <br />
-              elementum magna
+              You are always a student, never a master. You have to keep moving forward.
             </h2>
-            <p>
-              Aliquam ut ex ut augue consectetur interdum. Donec hendrerit imperdiet. Mauris
-              eleifend fringilla nullam aenean mi ligula.
-            </p>
+            <p>Вы всегда ученик, и никогда — мастер. Вы должны продолжать двигаться вперед.</p>
           </div>
         </section>
         <section className='spotlight'>
           <div className='image'>
-            <img src='pic03.jpg' alt='' />
+            <img src='33.jpg' alt='' />
           </div>
           <div className='content'>
             <h2 className='landing-logo'>
-              Augue eleifend aliquet
-              <br />
-              sed condimentum
+              When you think it’s too late, the truth is, it’s still early.
             </h2>
-            <p>
-              Aliquam ut ex ut augue consectetur interdum. Donec hendrerit imperdiet. Mauris
-              eleifend fringilla nullam aenean mi ligula.
-            </p>
+            <p>Когда ты думаешь, что уже слишком поздно, на самом деле, все еще рано.</p>
           </div>
         </section>
       </section>
@@ -122,54 +107,54 @@ const Landing = ({ isAuthenticated }) => {
       <section id='three' className='wrapper style3 special'>
         <div className='inner'>
           <header className='major'>
-            <h2 className='landing-logo'>Accumsan mus tortor nunc aliquet</h2>
+            <h2 className='landing-logo'>Основные преимущества RS Lang</h2>
             <p>
-              Aliquam ut ex ut augue consectetur interdum. Donec amet imperdiet eleifend
+              RS Lang сочетает в себе множество форм обучения
               <br />
-              fringilla tincidunt. Nullam dui leo Aenean mi ligula, rhoncus ullamcorper.
+              для вашего всестороннего развития английского языка.
             </p>
           </header>
           <ul className='features'>
-            <li className='icon fa-paper-plane'>
-              <h3 className='landing-logo'>Arcu accumsan</h3>
+            <li className='icon solid fa-headphones-alt'>
+              <h3 className='landing-logo'>Слушайте</h3>
               <p>
-                Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam
-                amet leo Aenean ligula consequat consequat.
+                Благодаря возможности прослушивания английских слов на языке оригинала ваше
+                произношение сразу же формируется корректным образом.
               </p>
             </li>
-            <li className='icon solid fa-laptop'>
-              <h3 className='landing-logo'>Ac Augue Eget</h3>
+            <li className='icon solid fa-microphone'>
+              <h3 className='landing-logo'>Говорите</h3>
               <p>
-                Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam
-                amet leo Aenean ligula consequat consequat.
+                Тренируйте ваше произношение в игре SpeakIt, произнося слова в микрофон, и получайте
+                обратную связь о вашем произношении.
+              </p>
+            </li>
+            <li className='icon solid fa-gamepad'>
+              <h3 className='landing-logo'>Играйте</h3>
+              <p>
+                Доказано, что игровая форма обучения является одной из самых эффективных. А также
+                весёлых и увлекательных!
+              </p>
+            </li>
+            <li className='icon solid fa-graduation-cap'>
+              <h3 className='landing-logo'>Повышайте уровень</h3>
+              <p>
+                В приложении существует несколько уровней сложности обучения. Повышайте уровень
+                постепенно. В таком случае процесс обучения будет максимально комфортным.
+              </p>
+            </li>
+            <li className='icon solid fa-mobile'>
+              <h3 className='landing-logo'>Учитесь с любого девайся</h3>
+              <p>
+                Нет компьютера под рукой? Не проблема! Приложением можно пользоваться также с
+                телефона и планшета.
               </p>
             </li>
             <li className='icon solid fa-code'>
-              <h3 className='landing-logo'>Mus Scelerisque</h3>
+              <h3 className='landing-logo'>Активная разработка</h3>
               <p>
-                Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam
-                amet leo Aenean ligula consequat consequat.
-              </p>
-            </li>
-            <li className='icon solid fa-headphones-alt'>
-              <h3 className='landing-logo'>Mauris Imperdiet</h3>
-              <p>
-                Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam
-                amet leo Aenean ligula consequat consequat.
-              </p>
-            </li>
-            <li className='icon fa-heart'>
-              <h3 className='landing-logo'>Aenean Primis</h3>
-              <p>
-                Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam
-                amet leo Aenean ligula consequat consequat.
-              </p>
-            </li>
-            <li className='icon fa-flag'>
-              <h3 className='landing-logo'>Tortor Ut</h3>
-              <p>
-                Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam
-                amet leo Aenean ligula consequat consequat.
+                Команда разработчиков на постоянной основе улучшает функционал приложения и создает
+                новые формы обучения для вашего удобства.
               </p>
             </li>
           </ul>
@@ -179,22 +164,22 @@ const Landing = ({ isAuthenticated }) => {
       <section id='cta' className='wrapper style4'>
         <div className='inner'>
           <header>
-            <h2 className='landing-logo'>Arcue ut vel commodo</h2>
+            <h2 className='landing-logo'>Сейчас самое время</h2>
             <p>
-              Aliquam ut ex ut augue consectetur interdum endrerit imperdiet amet eleifend
-              fringilla.
+              Сделайте шаг навстречу свободному владению английским прямо сейчас – начните изучение
+              языка с RS Lang{' '}
             </p>
           </header>
           <ul className='actions stacked'>
             <li>
-              <a href='https://rs.school/' className='button fit primary'>
-                Activate
-              </a>
+              <Link to='/login' className='button primary'>
+                Войти в аккаунт
+              </Link>
             </li>
             <li>
-              <a href='https://rs.school/' className='button fit'>
-                Learn More
-              </a>
+              <Link to='/register' className='button'>
+                Создать аккаунт
+              </Link>
             </li>
           </ul>
         </div>
@@ -202,31 +187,10 @@ const Landing = ({ isAuthenticated }) => {
 
       <footer id='footer'>
         <ul className='icons'>
-          <li>
-            <a href='https://rs.school/' className='icon brands fa-twitter'>
-              <span className='label'>Twitter</span>
-            </a>
-          </li>
-          <li>
-            <a href='https://rs.school/' className='icon brands fa-facebook-f'>
-              <span className='label'>Facebook</span>
-            </a>
-          </li>
-          <li>
-            <a href='https://rs.school/' className='icon brands fa-instagram'>
-              <span className='label'>Instagram</span>
-            </a>
-          </li>
-          <li>
-            <a href='https://rs.school/' className='icon brands fa-dribbble'>
-              <span className='label'>Dribbble</span>
-            </a>
-          </li>
-          <li>
-            <a href='https://rs.school/' className='icon solid fa-envelope'>
-              <span className='label'>Email</span>
-            </a>
-          </li>
+          <a href='https://rs.school/'>
+            <i className='fa fa-bell-o' aria-hidden='true'></i>
+            Rolling Scopes School
+          </a>
         </ul>
         <ul className='copyright'>
           <li>&copy; Untitled</li>
