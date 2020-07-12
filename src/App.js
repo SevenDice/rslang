@@ -18,15 +18,16 @@ setTimeout(() => {
 }, 500);
 
 const App = () => {
-  if (localStorage.getItem('token')) {
-    setAuthToken(localStorage.getItem('token'));
-  }
-  if (localStorage.getItem('id')) {
-    store.dispatch(loadUser(localStorage.getItem('id')));
-  }
+  useEffect(() => {
+    setAuthToken(localStorage.token);
+    if(localStorage.token) {
+      store.dispatch(loadUser(localStorage.getItem('id')));
+    }
+
+  }, []);
 
   return (
-    <div id='page-wrapper'>
+    <Provider store={store}>
       <Router>
         <Fragment>
           <Navbar />
@@ -36,7 +37,7 @@ const App = () => {
           </Switch>
         </Fragment>
       </Router>
-    </div>
+    </Provider>
   );
 };
 

@@ -13,10 +13,10 @@ import Savanna from '../savanna/Savanna';
 import EnglishPuzzle from '../englishpuzzle/EnglishPuzzle';
 import Sprint from '../sprint/Sprint';
 import Speakit from '../speakIt/Speakit';
-import Stats from '../stats/Stats';
+import Statistics from '../statistics/Statistics';
+import StatisticsDay from '../statistics/StatisticsDay';
 import Dictionary from '../dictionary/Dictionary';
 import Training from '../training/Training';
-import Levels from '../training/Levels';
 
 const Routes = (props) => {
   return (
@@ -29,15 +29,15 @@ const Routes = (props) => {
         <PrivateRoute exact path='/profile' component={Profile} />
         <PrivateRoute exact path='/dashboard' component={Dashboard} />
         <PrivateRoute exact path='/edit-profile' component={ProfileForm} />
-        <PrivateRoute exact path='/stats' component={Stats} />
+        <PrivateRoute exact path='/statistics' component={Statistics} />
+        <PrivateRoute exact path='/statisticsday' component={StatisticsDay} />
         <PrivateRoute exact path='/dictionary' component={Dictionary} />
         <PrivateRoute exact path='/savanna' component={Savanna} />
         <PrivateRoute exact path='/englishpuzzle' component={EnglishPuzzle} />
         <PrivateRoute exact path='/sprint' component={Sprint} />
         <PrivateRoute exact path='/speakIt' component={Speakit} />
         <PrivateRoute exact path='/training' component={Training} />
-        <PrivateRoute exact path='/training-levels' component={Levels} />
-
+        
         <Route component={NotFound} />
       </Switch>
     </section>
