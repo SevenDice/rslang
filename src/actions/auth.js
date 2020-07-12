@@ -1,6 +1,6 @@
 import api from '../utils/api';
-import setAuthToken from '../utils/setAuthToken';
 import { setAlert } from './alert';
+import setAuthToken from '../utils/setAuthToken';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -10,13 +10,12 @@ import {
   LOGIN_FAIL,
   LOGOUT,
 } from './types';
-import store from '../store';
-import { getUserSettings } from '../actions/profile';
 
 // Load User
-export const loadUser = (id) => async (dispatch) => {
+export const loadUser = (userId) => async (dispatch) => {
+
   try {
-    const res = await api.get(`/users/${id}`);
+    const res = await api.get(`/users/${userId}`);
     console.log(res.data);
 
     dispatch({
@@ -31,8 +30,9 @@ export const loadUser = (id) => async (dispatch) => {
 };
 
 // Register User
-export const register = ({ email, password }) => async (dispatch) => {
-  const body = JSON.stringify({ email, password });
+
+export const register = ({name, email, password }) => async (dispatch) => {
+  const body = { name, email, password };
 
   try {
     const res = await api.post('/users', body);
@@ -61,20 +61,17 @@ export const login = (email, password) => async (dispatch) => {
 
   try {
     const res = await api.post('/signin', body);
-    console.log(res.data);
     const token = res.data.token;
-    const id = res.data.userId;
-    localStorage.setItem('token', token);
-    localStorage.setItem('id', id);
     setAuthToken(token);
+    localStorage.setItem('id', res.data.userId);
+    //console.log(res);
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-
-    store.dispatch(getUserSettings(localStorage.getItem('id')));
-    // dispatch(loadUser());
+    
+    dispatch(loadUser(res.data.userId));
   } catch (err) {
     console.log(err.response.statusText, err.response.status);
     if (err.response.status === 403) {
@@ -82,7 +79,6 @@ export const login = (email, password) => async (dispatch) => {
     } else if (err.response.status === 404) {
       dispatch(setAlert('Пользователь с таким электронным адресом не зарегистрирован', 'danger'));
     }
-
     dispatch({
       type: LOGIN_FAIL,
     });

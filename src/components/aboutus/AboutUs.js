@@ -1,15 +1,16 @@
 import React from 'react';
+import info from './info';
+import AboutCard from './AboutCard';
 
 const AboutUs = () => {
   return (
-    /* <section className='wrapper style5'>
-      <div className='inner'>
-        <h1 className='large text-primary'>Здесь будет информация о нашей команде</h1>
-      </div>
-    </section> */
-    //или так:
     <section className='section-first'>
-      <h1 className='auth'>Здесь будет информация о нашей команде</h1>
+      <h1 className='auth'>Команда frontend-разработчиков</h1>
+      <div className='about-us'>
+        {info.map((el) => (
+          <AboutCard key={el.name} {...el} />
+        ))}
+      </div>
     </section>
   );
 };

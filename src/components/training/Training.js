@@ -1,82 +1,58 @@
-import React from 'react';
+import React, { Fragment, useEffect } from 'react';
 import LingvistModel from '../training/train-comp/LingvistModel';
+//import dataWords from '../../assets/words';
+import store from '../../store';
+import Spinner from '../layout/Spinner';
+import { getChunkOfWords, getAggregatedUserWords, createUserWord } from '../../actions/words';
+import { connect, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getUserSettings } from '../../actions/profile';
+import './Training.scss'
+//import words from '../../reducers/words';
 
-const Training = (props) => {
-  const data = {
-    words: [
-      {
-        foreignWord: 'trabajo',
-        foreignPhrase: 'El * duro',
-        nativePhrase: 'The hard work',
-        nativeWord: ['the work', 'the job'],
-        wordStrength: 1,
-        wordDetails: 'masculine, singular',
-        partOfSpeech: 'Noun',
-      },
-      {
-        foreignWord: 'tengo',
-        foreignPhrase: 'No * ni idea',
-        nativePhrase: 'I have no idea!',
-        nativeWord: ['I have'],
-        wordStrength: 3,
-        wordDetails: '',
-        partOfSpeech: 'Verb',
-      },
-      {
-        foreignWord: 'malo',
-        foreignPhrase: 'Mi español es *',
-        nativePhrase: 'My Spanish is bad',
-        nativeWord: ['bad'],
-        wordStrength: 3,
-        wordDetails: 'masculine',
-        partOfSpeech: 'Noun',
-      },
-      {
-        foreignWord: 'ayuda',
-        foreignPhrase: 'Necesito *',
-        nativePhrase: 'I need help',
-        nativeWord: ['help'],
-        wordStrength: 4,
-        wordDetails: 'feminine',
-        partOfSpeech: 'Noun',
-      },
-      {
-        foreignWord: 'suerte',
-        foreignPhrase: 'Buena *',
-        nativePhrase: 'Good luck',
-        nativeWord: ['luck'],
-        wordStrength: 1,
-        wordDetails: '',
-        partOfSpeech: 'Noun',
-      },
-    ],
-  };
+const Training = (words) => {
+  const userId = useSelector((state) => state.auth.user.id);
+  const wordsarrnew = useSelector((state) => state.words.newwords);
+  console.log(wordsarrnew);
+  const level = useSelector((state) => state.profile.settings.optional.level);
+  const newWords = useSelector((state) => state.profile.settings.optional.newWords);
+  const filternew='{"userWord.difficulty":"new"}';
+  useEffect(() => {
+    store.dispatch(getUserSettings(userId));
+    store.dispatch(getAggregatedUserWords(userId, level, newWords, filternew));
+  }, [userId, level, newWords, filternew]);
+
+  let wordsarrnew1 ={};
+  wordsarrnew1= Object.values(wordsarrnew);
+   console.log( wordsarrnew1);
+
   return (
-    <section class='wrapper style5'>
-      <div class='inner'>
-        <h1 className='large text-primary'>Изучение новых слов</h1>
-        {/* <h2>How to Use:</h2>
-        <p>
-          Complete the foreign language phrase by entering in the foreign language word that
-          completes the sentence.
-        </p>
-        <p>
-          If you get the word wrong, the correct word will appear to help you remember next time.
-        </p>
-        <p>Linguistic details regarding the target word are at the bottom of the card.</p>
-        <p>Note that the full sentence translation does NOT appear by default.</p>
-        <p>
-          This is to help you fill in the foreign word without translating the whole phrase into
-          your native language.
-        </p>
-        <p>
-          However, if you are stuck and think you would benefit from seeing the translation, click
-          the arrow in the upper right corner of the card to display the translation.
-        </p> */}
-        <LingvistModel foreignWords={data.words} />
-      </div>
-    </section>
+    <section className='wrapper style5'>
+    <div className='inner'>
+    <div>
+    {wordsarrnew1==={} && typeof wordsarrnew1==='undefined' ? (<Spinner />): 
+      (<Fragment>
+        <LingvistModel foreignWords={ wordsarrnew1 } />
+      </Fragment>)
+     
+    }
+    </div>
+    </div>
+    </section>    
   );
 };
 
-export default Training;
+Training.propTypes = {
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  words: PropTypes.object,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  profile: state.profile,
+  words: state.words
+});
+
+
+export default connect(mapStateToProps, {getChunkOfWords, getUserSettings, getAggregatedUserWords, createUserWord })(Training);

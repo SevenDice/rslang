@@ -6,15 +6,15 @@
 @import 'libs/html-grid';
 @import 'fontawesome-all.min.css';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic');
+@import './about.scss';
+@import 'speakIt';
 
 /*
 	Spectral by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
-
 // Breakpoints.
-
 @include breakpoints(
   (
     xlarge: (
@@ -441,9 +441,7 @@ header {
     top: -0.25em;
   }
 
-  h2 + p {
-  }
-
+  h2 + p,
   h3 + p {
     font-size: 1.1em;
   }
@@ -508,6 +506,7 @@ label {
 input[type='text'],
 input[type='password'],
 input[type='email'],
+input[type='name'],
 select,
 textarea {
   @include vendor('appearance', 'none');
@@ -956,8 +955,8 @@ table {
   tbody {
     tr {
       border: solid 1px _palette(border);
-      border-left: 0;
-      border-right: 0;
+      border-left: solid 1px _palette(border);
+      border-right: solid 1px _palette(border);
 
       &:nth-child(2n + 1) {
         background-color: _palette(border-bg);
@@ -973,7 +972,7 @@ table {
     color: _palette(fg-bold);
     font-size: 0.9em;
     font-weight: _font(weight-bold);
-    padding: 0 0.75em 0.75em 0.75em;
+    /*padding: 0 0.75em 0.75em 0.75em;*/
     text-align: left;
   }
 
@@ -992,8 +991,8 @@ table {
       tr {
         td {
           border: solid 1px _palette(border);
-          border-left-width: 0;
-          border-top-width: 0;
+          border-left-width: solid 1px _palette(border);
+          border-top-width: solid 1px _palette(border);
 
           &:first-child {
             border-left-width: 1px;
@@ -2101,7 +2100,7 @@ html {
   text-align: center;
   position: relative;
   padding: 80px 100px 0;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 input {
@@ -2176,6 +2175,89 @@ ul li {
   padding-left: 5px;
   margin-left: 10px;
 }
+
+.cards-startpage {
+  @include vendor('background', ('url("../../../img/bg7.jpg")'));
+  background-size: cover;
+  padding: 60px 50px 10px;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.training-card {
+  position: relative;
+  color: #4e4852;
+  padding: 15px;
+  border-radius: 5px;
+  width: 800px;
+  height: 450px;
+  background-color: #c7c7c7f8;
+}
+
+.arrow {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.card-upper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-eng-sentense {
+  flex-basis: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.card-img {
+  display: inline-block;
+  border-radius: 5px;
+  width: 250px;
+
+  @media screen and (max-width: 680px) {
+    width: 130px;
+  }
+}
+.card-divider {
+  margin: 30px 0;
+  height: 1px;
+  background-color: #1814252d;
+}
+.card-word-translation {
+  font-size: 1.7rem;
+  margin-bottom: 20px !important;
+}
+.cardP {
+  margin-bottom: 10px;
+}
+
+.card-transcription {
+  font-style: italic;
+}
+
+.word-input {
+  margin: 5px;
+  padding: 2px !important;
+}
+
+.card-audio {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: url('./images/card-audio.png') no-repeat center;
+}
+
 
 // Audio call game
 .audiocall {
@@ -2296,25 +2378,12 @@ ul li {
     }
   }
 
-  .progress-bar-hide {
-    position: fixed;
-    top: 48px;
-    left: 0;
-    height: 8px;
-    width: 100%;
-    background-image: linear-gradient(to right, #e5123a, #dd6700, #be9d00, #8cc82f, #12eb8d);
-
-    @include breakpoint('<=small') {
-      top: 44px;
-    }
-  }
-
   .progress-bar {
     position: fixed;
     top: 48px;
-    right: 0;
+    left: 0;
     height: 10px;
-    background-color: white;
+    background-color: red;
     transition-duration: 0.5s;
 
     @include breakpoint('<=small') {

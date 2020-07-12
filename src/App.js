@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Routes from './components/routing/Routes';
+import {Provider}  from 'react-redux'
 
 // Redux
 import store from './store';
@@ -10,6 +11,7 @@ import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
 import './assets/sass/main.scss';
+import './components/savanna/savanna.scss';
 
 document.querySelector('body').className = 'landing is-preload';
 
@@ -18,15 +20,16 @@ setTimeout(() => {
 }, 500);
 
 const App = () => {
-  if (localStorage.getItem('token')) {
-    setAuthToken(localStorage.getItem('token'));
-  }
-  if (localStorage.getItem('id')) {
-    store.dispatch(loadUser(localStorage.getItem('id')));
-  }
+  useEffect(() => {
+    setAuthToken(localStorage.token);
+    if(localStorage.token) {
+      store.dispatch(loadUser(localStorage.getItem('id')));
+    }
+
+  }, []);
 
   return (
-    <div id='page-wrapper'>
+    <Provider store={store}>
       <Router>
         <Fragment>
           <Navbar />
@@ -36,7 +39,7 @@ const App = () => {
           </Switch>
         </Fragment>
       </Router>
-    </div>
+    </Provider>
   );
 };
 
