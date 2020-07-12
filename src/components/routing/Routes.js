@@ -34,8 +34,7 @@ const Routes = (props) => {
         <PrivateRoute exact path='/englishpuzzle' component={EnglishPuzzle} />
         <PrivateRoute exact path='/sprint' component={Sprint} />
         <PrivateRoute exact path='/speakIt' component={Speakit} />
-        <Route exact path='/training' component={Training} />
-
+        <PrivateRoute exact path='/training' component={Training} />
         <Route component={NotFound} />
       </Switch>
     </section>

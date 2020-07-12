@@ -13,7 +13,7 @@ export default function WordInput({
   return (
     <div className="card-upper">
       <div className="card-eng-sentense">
-        {front}
+        <span className="front-sentence-part">{front}</span>
         {isCorrect ? (
           <span className="word-input--correct-word">{wordForeign}</span>
         ) : (
@@ -22,7 +22,7 @@ export default function WordInput({
             handleSuccess={handleSuccess}
           />
         )}
-        {end}
+       <span className="back-sentence-part">{end}</span>
       </div>
       <img
         className="card-img"
