@@ -10,6 +10,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
 } from './types';
+import store from '../store';
+import { getUserSettings } from './profile';
 
 // Load User
 export const loadUser = (userId) => async (dispatch) => {
@@ -63,15 +65,16 @@ export const login = (email, password) => async (dispatch) => {
   try {
     const res = await api.post('/signin', body);
     const token = res.data.token;
+    localStorage.setItem('token', token);
     setAuthToken(token);
     localStorage.setItem('id', res.data.userId);
+    localStorage.setItem('id', res.data.email);
     //console.log(res);
-
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    
+    store.dispatch(getUserSettings(localStorage.getItem('id')))
     dispatch(loadUser(res.data.userId));
   } catch (err) {
     console.log(err.response.statusText, err.response.status);

@@ -1,5 +1,6 @@
 import api from '../utils/api';
 import { setAlert } from './alert';
+import store from '../store';
 
 import {
   GET_PROFILE,
@@ -76,7 +77,7 @@ export const updateUserSettings = (userId, params) => async (dispatch) => {
   try {
     const res = await api.put(`/users/${userId}/settings`, JSON.stringify(params));
 
-    //store.dispatch(getUserSettings(userId));
+    store.dispatch(getUserSettings(userId));
 
     dispatch({
       type: USER_SETTINGS_UPDATED,

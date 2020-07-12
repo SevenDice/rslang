@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect /*, useSelector*/ } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import DashboardActions from './DashboardActions';
 import Spinner from '../layout/Spinner';
 import { getCurrentProfile } from '../../actions/profile';
@@ -10,8 +10,8 @@ const Dashboard = ({
   getCurrentProfile,
 }) => {
   
-  // const username = useSelector((state) => state.auth.user.name)
-  const username = localStorage.getItem('name');
+  const username = useSelector((state) => state.auth.user.name)
+  //const username = localStorage.getItem('name');
   const userid = localStorage.getItem('id');
   useEffect(() => {
     getCurrentProfile(userid);
