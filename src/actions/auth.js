@@ -1,6 +1,8 @@
 import api from '../utils/api';
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
+import { getUserSettings } from '../actions/profile';
+import store from '../store';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -10,11 +12,10 @@ import {
   LOGIN_FAIL,
   LOGOUT,
 } from './types';
-//import store from '../store';
-//import { getUserSettings } from '../actions/profile';
 
 // Load User
-export const loadUser = (userId) => async (dispatch) => {
+export const loadUser = (id) => async (dispatch) => {
+
   try {
     const res = await api.get(`/users/${userId}`);
     console.log(res.data);
@@ -31,6 +32,7 @@ export const loadUser = (userId) => async (dispatch) => {
 };
 
 // Register User
+
 export const register = ({name, email, password }) => async (dispatch) => {
   const body = { name, email, password };
 
@@ -70,8 +72,15 @@ export const login = (email, password) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
+    
     dispatch(loadUser(res.data.userId));
   } catch (err) {
+    console.log(err.response.statusText, err.response.status);
+    if (err.response.status === 403) {
+      dispatch(setAlert('Неверный пароль', 'danger'));
+    } else if (err.response.status === 404) {
+      dispatch(setAlert('Пользователь с таким электронным адресом не зарегистрирован', 'danger'));
+    }
     dispatch({
       type: LOGIN_FAIL,
     });

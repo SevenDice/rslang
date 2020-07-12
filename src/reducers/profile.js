@@ -61,6 +61,7 @@ export default function (state = initialState, action) {
         ...state,
         settings: payload,
       };
+
     case USER_SETTINGS_LOAD_ERROR:
       return {
         ...state,

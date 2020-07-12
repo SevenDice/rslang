@@ -12,7 +12,6 @@ import {
 import store from '../../store';
 import { setAlert } from '../../actions/alert';
 
-
 const ProfileForm = ({
   profile: { profile, loading },
   createProfile,
@@ -20,11 +19,24 @@ const ProfileForm = ({
   history,
   deleteAccount,
 }) => {
+
   const userId = useSelector((state) => state.auth.user.id);
   const settings = useSelector((state) => state.profile.settings);
   console.log(settings);
   useEffect(() => {
     store.dispatch(getUserSettings(userId));
+
+  // Зачем это?
+  /* useEffect(() => {
+    if (!profile) getCurrentProfile();
+    if (!loading && profile) {
+      const profileData = { ...formData };
+      for (const key in profile) {
+        if (key in profileData) profileData[key] = profile[key];
+      }
+    }
+  }, [loading, getCurrentProfile, profile]); */
+
 
   }, [userId]);
 
@@ -70,6 +82,7 @@ const ProfileForm = ({
     e.preventDefault();
     const newSettings = { ...formData };
     delete newSettings.id;
+
     store.dispatch(updateUserSettings(userId, newSettings));
     store.dispatch(setAlert('Настройки сохранены'));
     userHistory.go(-2);
@@ -81,6 +94,7 @@ const ProfileForm = ({
         <h1 className='large text-primary'> <i className='fas fa-user' /> Изменение настроек пользователя {username}</h1>
         <p className='lead'>
         </p>
+
         <small>Уровень сложности</small>
         <form className='form' onSubmit={onSubmit}>
           <div className='form-group'>
