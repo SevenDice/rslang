@@ -22,7 +22,6 @@ const ProfileForm = ({
 
   const userId = useSelector((state) => state.auth.user.id);
   const settings = useSelector((state) => state.profile.settings);
-  console.log(settings);
   useEffect(() => {
     store.dispatch(getUserSettings(userId));
 

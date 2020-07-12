@@ -23,7 +23,7 @@ const Dashboard = ({
         <div className='inner'>
           <h1 className='large text-primary'>Главная</h1>
           <p className='lead'>
-            <i className='fas fa-user' /> Добро пожаловать,{username}
+            <i className='fas fa-user' /> Добро пожаловать, {username}
           </p>
           {
            <Fragment>

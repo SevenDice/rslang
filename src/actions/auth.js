@@ -30,7 +30,6 @@ export const loadUser = (userId) => async (dispatch) => {
 };
 
 // Register User
-
 export const register = ({name, email, password }) => async (dispatch) => {
   const body = { name, email, password };
 
@@ -42,7 +41,8 @@ export const register = ({name, email, password }) => async (dispatch) => {
       payload: res.data,
     });
     localStorage.setItem('name', name);
-    dispatch(loadUser());
+    // dispatch(loadUser());
+    dispatch(login(email, password));
   } catch (err) {
     console.log(err.response.statusText, err.response.status);
     if (err.response.status === 417) {

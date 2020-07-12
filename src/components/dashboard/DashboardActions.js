@@ -34,7 +34,7 @@ const DashboardActions = () => {
       }
       {
         <div className='dash-buttons'>
-          <Link to='/audicall' className='btn btn-light'>
+          <Link to='/audiocall' className='btn btn-light'>
             <i className='text-primary' /> Аудиовызов
           </Link>
         </div>
