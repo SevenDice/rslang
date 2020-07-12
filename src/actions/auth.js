@@ -15,7 +15,6 @@ import { getUserSettings } from './profile';
 
 // Load User
 export const loadUser = (userId) => async (dispatch) => {
-
   try {
     const res = await api.get(`/users/${userId}`);
     console.log(res.data);
@@ -32,8 +31,8 @@ export const loadUser = (userId) => async (dispatch) => {
 };
 
 // Register User
-export const register = ({name, email, password }) => async (dispatch) => {
-  const body = { name, email, password };
+export const register = ({ name, email, password }) => async (dispatch) => {
+  const body = JSON.stringify({ name, email, password });
 
   try {
     const res = await api.post('/users', body);
@@ -68,13 +67,13 @@ export const login = (email, password) => async (dispatch) => {
     localStorage.setItem('token', token);
     setAuthToken(token);
     localStorage.setItem('id', res.data.userId);
-    localStorage.setItem('id', res.data.email);
+    localStorage.setItem('email', res.data.email);
     //console.log(res);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    store.dispatch(getUserSettings(localStorage.getItem('id')))
+    store.dispatch(getUserSettings(localStorage.getItem('id')));
     dispatch(loadUser(res.data.userId));
   } catch (err) {
     console.log(err.response.statusText, err.response.status);
