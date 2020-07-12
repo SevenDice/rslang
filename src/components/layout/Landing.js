@@ -45,23 +45,14 @@ const Landing = ({ isAuthenticated }) => {
               Стань одним из пользователей стремительно набирающего популярность приложения RS Lang
             </p>
           </header>
-          <ul className='icons major'>
-            <li>
-              <span className='icon fa-gem major style1'>
-                <span className='label'>R</span>
-              </span>
-            </li>
-            <li>
-              <span className='icon fa-heart major style2'>
-                <span className='label'>S</span>
-              </span>
-            </li>
-            <li>
-              <span className='icon solid fa-code major style3'>
-                <span className='label'>L</span>
-              </span>
-            </li>
-          </ul>
+          <iframe
+            width='560'
+            height='315'
+            title='neverGonnaGiveYouUp'
+            src='https://www.youtube.com/embed/dQw4w9WgXcQ'
+            frameBorder='0'
+            allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+            allowFullScreen></iframe>
         </div>
       </section>
 
