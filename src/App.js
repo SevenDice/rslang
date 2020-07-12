@@ -10,6 +10,7 @@ import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
 import './assets/sass/main.scss';
+import './components/savanna/savanna.scss';
 
 document.querySelector('body').className = 'landing is-preload';
 

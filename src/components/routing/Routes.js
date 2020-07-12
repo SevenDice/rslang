@@ -32,7 +32,8 @@ const Routes = (props) => {
         <PrivateRoute exact path='/statistics' component={Statistics} />
         <PrivateRoute exact path='/statisticsday' component={StatisticsDay} />
         <PrivateRoute exact path='/dictionary' component={Dictionary} />
-        <PrivateRoute exact path='/savanna' component={Savanna} />
+        <Route exact path='/savanna' component={Savanna} />
+        {/* поменять на PrivateRoute */}
         <PrivateRoute exact path='/englishpuzzle' component={EnglishPuzzle} />
         <PrivateRoute exact path='/sprint' component={Sprint} />
         <PrivateRoute exact path='/speakIt' component={Speakit} />
