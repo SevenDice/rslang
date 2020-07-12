@@ -15,7 +15,7 @@ import Statistics from '../statistics/Statistics';
 import StatisticsDay from '../statistics/StatisticsDay';
 import Dictionary from '../dictionary/Dictionary';
 import Training from '../training/Training';
-// import Audiocall from '../audiocall/Audiocall';
+import Audiocall from '../audiocall/Audiocall';
 
 const Routes = (props) => {
   return (
@@ -32,10 +32,10 @@ const Routes = (props) => {
         <PrivateRoute exact path='/statisticsday' component={StatisticsDay} />
         <PrivateRoute exact path='/dictionary' component={Dictionary} />
         <PrivateRoute exact path='/savanna' component={Savanna} />
-        {/* <PrivateRoute exact path='/audiocall' component={Audiocall} /> */}
+        <PrivateRoute exact path='/audiocall' component={Audiocall} />
         <PrivateRoute exact path='/speakIt' component={Speakit} />
         <PrivateRoute exact path='/training' component={Training} />
-        
+
         <Route component={NotFound} />
       </Switch>
     </section>
