@@ -95,9 +95,12 @@ export const getCurrentProfile = (id) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+    console.log('ошибка при загрузке профиля. посмотри profile.js 103 ');
+    console.log(err);
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      //нижняя строчка мне мешает и крашит мне приложение. временно закомментирована.
+      /* payload: { msg: err.response.statusText, status: err.response.status }, */
     });
   }
 };
