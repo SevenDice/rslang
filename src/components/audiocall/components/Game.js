@@ -6,10 +6,10 @@ import Button from './Button';
 import Score from './Score';
 import ProgressBar from "./ProgressBar";
 
-const SIMILAR_TRANSLATIONS = 4;
 const INITIAL_WORD_INDEX = 0;
 
-export const WORDS_PER_PAGE = 5;
+export const SIMILAR_TRANSLATIONS = 4;
+export const WORDS_PER_PAGE = 30;
 
 export const STATUS_WAITING = 'waiting';
 export const STATUS_NOT_SUCCESS = 'not_success';
@@ -26,8 +26,10 @@ class Game extends Component {
 
     this.handleAction = this.handleAction.bind(this);
     this.handleChoose = this.handleChoose.bind(this);
+    this.handleKey = this.handleKey.bind(this);
     this.statusIn = this.statusIn.bind(this);
 
+    this.word = createRef();
     this.score = createRef();
     this.repeat = createRef();
 
@@ -40,10 +42,16 @@ class Game extends Component {
 
   componentDidMount() {
     this.playSound();
+
+    document.addEventListener('keydown', this.handleKey);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKey);
   }
 
   prepareWords() {
-    this.wordbook = new Wordbook();
+    this.wordbook = (() => new Wordbook)();
     this.words = this.wordbook.getWordsByCriteria(this.props.level, WORDS_PER_PAGE);
   }
 
@@ -57,7 +65,6 @@ class Game extends Component {
 
   getSimilarTranslations(wordIndex) {
     return this.wordbook.getSimilarTranslations(
-      this.props.level,
       this.words[wordIndex].wordTranslate,
       SIMILAR_TRANSLATIONS
     );
@@ -73,6 +80,17 @@ class Game extends Component {
       case STATUS_NOT_SUCCESS:
       case STATUS_SUCCESS: return this.nextWord();
       default: this.showResults();
+    }
+  }
+
+  handleKey(event) {
+    switch (event.key) {
+      case 'Enter':
+        this.word.current.renewElements();
+        this.handleAction();
+        break;
+      default:
+        return;
     }
   }
 
@@ -154,7 +172,8 @@ class Game extends Component {
 
         <div>
           <Repeat ref={this.repeat} image={word.image} audio={word.audio} statusIn={this.statusIn} />
-          <Word status={this.state.status}
+          <Word ref={this.word}
+                status={this.state.status}
                 word={word.word}
                 wordTranslate={word.wordTranslate}
                 isLastWord={this.isLastWord()}

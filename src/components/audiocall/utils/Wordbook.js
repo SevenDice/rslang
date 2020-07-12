@@ -13,16 +13,22 @@ class Wordbook {
   }
 
   getRandomizedWordsByLevel(level) {
-    let words = [];
+    let words;
 
     switch (parseInt(level)) {
-      case 1: words = book1; break;
       case 2: words = book2; break;
       case 3: words = book3; break;
       case 4: words = book4; break;
       case 5: words = book5; break;
-      case 6: words = book6;
+      case 6: words = book6; break;
+      default: words = book1;
     }
+
+    return this.randomizeWords(words);
+  }
+
+  getRandomizedWords() {
+    let words = [ ...book1, ...book2, ...book3, ...book4, ...book5, ...book6 ];
 
     return this.randomizeWords(words);
   }
@@ -33,14 +39,14 @@ class Wordbook {
     });
   }
 
-  getSimilarTranslations(level, wordTranslate, total) {
-    const words = this.getRandomizedWordsByLevel(level);
+  getSimilarTranslations(wordTranslate, total) {
+    const words = this.getRandomizedWords();
     const [ firstLetter ] = wordTranslate;
 
     let translations = [];
 
     words.forEach((item) => {
-      if (translations.length === total) {
+      if (translations.length === total || item.wordTranslate === wordTranslate) {
         return;
       }
 
