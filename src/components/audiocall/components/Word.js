@@ -12,6 +12,7 @@ class Word extends Component {
 
     this.elements = [];
 
+    // eslint-disable-next-line array-callback-return
     this.props.similarTranslations.map((item, index) => {
       this.elements[index] = createRef();
     });
@@ -56,6 +57,7 @@ class Word extends Component {
     target.classList.add(isSuccess ? 'success' : 'not-success');
 
     if (!isSuccess) {
+      // eslint-disable-next-line array-callback-return
       this.elements.map((item) => {
         if (item.current.textContent === this.props.wordTranslate) {
           item.current.classList.add('success');

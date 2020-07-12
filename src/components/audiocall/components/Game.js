@@ -51,6 +51,7 @@ class Game extends Component {
   }
 
   prepareWords() {
+    // eslint-disable-next-line new-parens
     this.wordbook = (() => new Wordbook)();
     this.words = this.wordbook.getWordsByCriteria(this.props.level, WORDS_PER_PAGE);
   }
