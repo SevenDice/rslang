@@ -3,7 +3,7 @@ import store from '../store';
 import { LOGOUT, CLEAR_PROFILE } from '../actions/types';
 
 const api = axios.create({
-   baseURL: 'https://cors-anywhere.herokuapp.com/https://afternoon-falls-25894.herokuapp.com',
+  baseURL: 'https://cors-anywhere.herokuapp.com/https://afternoon-falls-25894.herokuapp.com',
   //baseURL: 'https://cors-anywhere.herokuapp.com/http://pacific-castle-12388.herokuapp.com',
   //baseURL: 'https://cors-anywhere.herokuapp.com/https://rslang-api.herokuapp.com',
   headers: {

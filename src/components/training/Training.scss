@@ -111,8 +111,12 @@
   margin-right: 5px;
 }
 .word-input-field {
+  padding-top: 25px;
   display: inline-block;
   font-family: monospace;
+   input  {
+    height: 30px  !important; 
+  }
 }
 .word-input-field--letter-container,
 .word-input-field--input {
@@ -133,4 +137,4 @@
 .fas {
   padding-right: 10px;
   cursor: pointer;
-} 
+}

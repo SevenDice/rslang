@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { getAggregatedUserWords, updateUserWordById } from '../../actions/words';
+import { getUserSettings } from '../../actions/profile';
 import store from '../../store';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
@@ -7,7 +8,7 @@ import { connect, useSelector } from 'react-redux';
 import { render } from '@testing-library/react';
 
 const Dictionary = (words) => {
-  const userId = useSelector((state) => state.profile.profile.id);
+  const userId = useSelector((state) => state.auth.user.id);
   const username = useSelector((state) => state.auth.user.name);
   const level = useSelector((state) => state.profile.settings.optional.level);
   const newWords = useSelector((state) => state.profile.settings.optional.newWords);
@@ -23,6 +24,7 @@ const Dictionary = (words) => {
   const wordsarrdeleted = useSelector((state) => state.words.deletedwords);
 
   useEffect(() => {
+    store.dispatch(getUserSettings(userId));
     store.dispatch(getAggregatedUserWords(userId, level, newWords, filternew));
     store.dispatch(getAggregatedUserWords(userId, level, newWords, filtereasy));
     store.dispatch(getAggregatedUserWords(userId, level, newWords, filtermedium));
@@ -77,9 +79,9 @@ const Dictionary = (words) => {
           <li className="nav-item">
             <a className="nav-link active"  data-toggle="tab" href="#newwords">Новые слова</a>
             <div id="new_words">
-            {typeof wordsarrnew1!=='undefined' ? 
+            {wordsarrnew1!=={} && typeof wordsarrnew1!=='undefined' ? 
             (<Fragment>
-            <table>
+             <table>
               <thead>
                 <tr>
                   <th>Слово</th>
@@ -121,7 +123,7 @@ const Dictionary = (words) => {
           <li className="nav-item">
             <a className="nav-link" data-toggle="tab" href="#easywords">Легкие слова</a>
             <div id="easy_words">
-            {typeof wordsarreasy1!=='undefined' ? 
+            {wordsarreasy1!=={} && typeof wordsarreasy1!=='undefined' ? 
             (<Fragment>
             <table>
               <thead>
@@ -164,7 +166,7 @@ const Dictionary = (words) => {
           <li className="nav-item">
             <a className="nav-link" data-toggle="tab" href="#mediumwords">Слова средней сложности</a>
             <div id="medium_words">
-            {typeof wordsarrmedium1!=='undefined' ? 
+            {wordsarrmedium1!=={} && typeof wordsarrmedium1!=='undefined'? 
             (<Fragment>
             <table>
               <thead>
@@ -309,6 +311,6 @@ const mapStateToProps = (state) => ({
   words: state.words,
 });
 
-export default connect(mapStateToProps, { getAggregatedUserWords, updateUserWordById })(
+export default connect(mapStateToProps, { getAggregatedUserWords, updateUserWordById, getUserSettings })(
   Dictionary
 );

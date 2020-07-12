@@ -116,6 +116,7 @@ export const getAggregatedUserWords = (userId, group, wordsPerPage, filter)  => 
       }    
     }
     const res = await api.get(request);
+    console.log(res.data);
     if (filter === '{"userWord.difficulty":"new"}'){
       dispatch({  
         type: USER_AGGREGATED_NEW_WORDS_LOADED,

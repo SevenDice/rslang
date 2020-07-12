@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Modal from "./Modal";
 import NavArrows from "./NavArrows";
 import LanguageCard from "./LanguageCard";
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 
 export default class Lingvist extends React.Component {
   state = {
@@ -23,20 +23,20 @@ export default class Lingvist extends React.Component {
   };
   handleRightClick = () => {
     const { currentIndex, updateIndex } = this.props;
-    const count = useSelector((state) => state.profile.settings.wordsPerDay);
+    //const count = useSelector((state) => state.profile.settings.wordsPerDay);
     if (this.state.isPrev) {
       this.setState({ isPrev: false });
-      if (currentIndex<count-1){
+      //if (currentIndex<count-1){
         updateIndex(currentIndex + 1);
-      }
+      //}
   }
   };
   handleSuccess = () => {
     const { currentIndex, updateIndex } = this.props;
-    const count = useSelector((state) => state.profile.settings.wordsPerDay);
-    if (currentIndex<count-1){
+    //const count = useSelector((state) => state.profile.settings.wordsPerDay);
+    //if (currentIndex<count-1){
       updateIndex(currentIndex + 1);
-    }
+    //}
   };
   render() {
     const { showModal, isPrev } = this.state;
@@ -133,5 +133,5 @@ Lingvist.propTypes = {
   wordsPerExampleSentence: PropTypes.number,
   currentIndex: PropTypes.number,
   updateIndex: PropTypes.func,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object
 };

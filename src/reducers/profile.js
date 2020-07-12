@@ -10,7 +10,26 @@ import {
 const initialState = {
   profile: null,
   loading: true,
-  settings: null,
+  settings: {
+    wordsPerDay: 10,
+    optional: {
+      level: 1,
+      newWords: 5,
+      wordTranslate: true,
+      sentenceWithMeaning: false,
+      sentenceWithCurrentWord: true,
+      wordTranscription: false,
+      wordPicture: true,
+      wordAutoPlay: false,
+      currentWordTranslate: true,
+      translateSentenceWithWord: false,
+      skipToNextCard: false,
+      deleteFromTrainList: true,
+      moveToHardWordsGroup: false,
+      getCustomWordsForTrain: true,
+      moveToGroups: true,
+    },
+  },
   error: {},
 };
 

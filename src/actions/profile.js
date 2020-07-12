@@ -6,50 +6,14 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
-  STATISTICS_LOADED,
-  STATISTICS_LOAD_ERROR,
-  STATISTICS_UPDATED,
-  STATISTICS_UPDATE_ERROR,
   USER_SETTINGS_LOADED,
   USER_SETTINGS_LOAD_ERROR,
   USER_SETTINGS_UPDATED,
   USER_SETTINGS_UPDATE_ERROR,
 } from './types';
-import store from '../store';
+//import store from '../store';
 
-// Get user statistics
-export const getUserStats = (userId) => async (dispatch) => {
-  try {
-    const res = await api.get(`/users/${userId}/statistics`);
-    console.log(res.data);
 
-    dispatch({
-      type: STATISTICS_LOADED,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: STATISTICS_LOAD_ERROR,
-    });
-  }
-};
-
-// Upserts new user statistics
-export const updateUserStats = (userId, params) => async (dispatch) => {
-  try {
-    const res = await api.put(`/users/${userId}/statistics`, JSON.stringify(params));
-    console.log(res.data);
-
-    dispatch({
-      type: STATISTICS_UPDATED,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: STATISTICS_UPDATE_ERROR,
-    });
-  }
-};
 
 // Get user settings
 export const getUserSettings = (userId) => async (dispatch) => {
@@ -73,8 +37,7 @@ export const getUserSettings = (userId) => async (dispatch) => {
 export const updateUserSettings = (userId, params) => async (dispatch) => {
   try {
     const res = await api.put(`/users/${userId}/settings`, JSON.stringify(params));
-    console.log('updateUserSettings');
-    store.dispatch(getUserSettings(userId));
+    //store.dispatch(getUserSettings(userId));
 
     dispatch({
       type: USER_SETTINGS_UPDATED,

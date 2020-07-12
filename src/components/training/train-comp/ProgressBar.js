@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { getUserSettings } from '../../../actions/profile';
+import store from '../../../store';
 export default function ProgressBar({ num }) {
+  const userId = localStorage.getItem('id');//useSelector((state) => state.auth.user.id);
   const count = useSelector((state) => state.profile.settings.wordsPerDay);
+  useEffect(() => {
+    store.dispatch(getUserSettings(userId));
+  }, [userId]);
   return (
     <div className="sf-progress-bar">
       <div className="sf-progress-bar--num">
@@ -27,5 +33,5 @@ export default function ProgressBar({ num }) {
 
 ProgressBar.propTypes = {
   num: PropTypes.number,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object
 };

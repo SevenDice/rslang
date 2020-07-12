@@ -6,7 +6,7 @@ import Spinner from '../layout/Spinner';
 import { connect, useSelector } from 'react-redux';
 
 const Statistics = (props) => {
-  const userId = useSelector((state) => state.profile.profile.id);
+  const userId = useSelector((state) => state.auth.user.id);
   const username = useSelector((state) => state.auth.user.name);
   useEffect(() => {
     store.dispatch(getStatistics(userId));

@@ -16,7 +16,6 @@ const Dashboard = ({
     getCurrentProfile(userid);
   }, [getCurrentProfile, userid]);
   
-
   return (
     username === null ? (<Spinner />):(
     <section className='wrapper style5'>
