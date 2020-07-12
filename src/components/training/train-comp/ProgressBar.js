@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { frost2, polar4, green } from './Colors';
-
+import { useSelector } from 'react-redux';
+import { getUserSettings } from '../../../actions/profile';
+import store from '../../../store';
 export default function ProgressBar({ num }) {
+  const userId = localStorage.getItem('id');//useSelector((state) => state.auth.user.id);
+  const count = useSelector((state) => state.profile.settings.wordsPerDay);
+  useEffect(() => {
+    store.dispatch(getUserSettings(userId));
+  }, [userId]);
   return (
     <div className="sf-progress-bar">
       <div className="sf-progress-bar--num">
@@ -11,27 +17,12 @@ export default function ProgressBar({ num }) {
       <div className="sf-progress-bar--bar">
         <div className="sf-progress-bar--bar---fill" />
       </div>
-      <div className="sf-progress-bar--num">100</div>
-      <style jsx>{`
-        .sf-progress-bar {
-          display: flex;
-        }
-        .sf-progress-bar--num {
-          padding: 0 5px;
-          color: ${frost2};
-        }
-        .sf-progress-bar--bar {
-          position: relative;
-          align-self: center;
-          width: 500px;
-          height: 10px;
-          border-radius: 5px;
-          background: ${polar4};
-        }
+      <div className="sf-progress-bar--num">{count}</div>
+      <style jsx="true">{`
         .sf-progress-bar--bar---fill {
           position: absolute;
           height: 10px;
-          background: ${green};
+          background: #A3BE8C;
           border-radius: 5px;
           width: calc(1% * ${num});
         }
@@ -41,5 +32,6 @@ export default function ProgressBar({ num }) {
 }
 
 ProgressBar.propTypes = {
-  num: PropTypes.number
+  num: PropTypes.number,
+  profile: PropTypes.object
 };

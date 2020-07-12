@@ -1,65 +1,88 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import WordInput from './WordInput';
-import LanguageCardHeader from './LanguageCardHeader';
-import LanguageCardFooter from './LanguageCardFooter';
-import { polar1 } from './Colors';
+import React from "react";
+import PropTypes from "prop-types";
+import WordInput from "./WordInput";
+import ProgressBar from "./ProgressBar";
+//import Sound from "react-sound";
 
 export default function LanguageCard({
-  foreignWord,
-  foreignPhrase,
-  nativePhrase,
-  nativeWord,
-  wordStrength,
-  wordDetails,
-  partOfSpeech,
+  wordId,
+  wordGroup,
+  wordPage,
+  wordForeign,
+  wordImage,
+  wordAudio,
+  wordAudioMeaning,
+  wordAudioExample,
+  wordTextMeaning,
+  wordTextExample,
+  wordTranscription,
+  wordTextExampleTranslate,
+  wordTextMeaningTranslate,
+  wordTranslate,
+  wordsPerExampleSentence,
   handleSuccess,
-  isCorrect
+  isCorrect,
+  currentIndex,
 }) {
+  
+  function playAudio(src) {
+    let audio = new Audio(src);
+
+    const start = () => {
+      audio.play();
+    };
+    return start;
+  }
+
   return (
-    <div className="language-card">
-      <LanguageCardHeader
-        nativePhrase={nativePhrase}
-        wordStrength={wordStrength}
-      />
+    <div className="training-card">
+      {/* <Sound url={wordAudioExample} playStatus={Sound.status.PLAYING} /> */}
       <WordInput
-        foreignWord={foreignWord}
-        foreignPhrase={foreignPhrase}
-        nativeWord={nativeWord}
+        wordForeign={wordForeign}
+        wordTextExample={wordTextExample}
+        wordImage={wordImage}
         handleSuccess={handleSuccess}
         isCorrect={isCorrect}
       />
-      <LanguageCardFooter
-        wordDetails={wordDetails}
-        partOfSpeech={partOfSpeech}
-      />
-      <style jsx>{`
-        .language-card {
-          position: relative;
-          background: ${polar1};
-          width: 560px;
-          height: 150px;
-          box-shadow: 0 8px 6px -6px black;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          box-sizing: border-box;
-          padding: 0px 10px;
-          border-radius: 10px;
-        }
-      `}</style>
+
+      <div className="card-divider"></div>
+      <div className="card-lower">
+        <div className="card-word-translation cardP">
+          <i className="fas fa-volume-up" onClick={playAudio(wordAudio)}></i>
+          {wordTranslate}
+        </div>
+        <div className="card-sentense-translation cardP">
+          <i className="fas fa-volume-up" onClick={playAudio(wordAudioExample)}></i>
+          {wordTextExampleTranslate}
+        </div>
+        <div className="card-word-meaning cardP">
+          <i className="fas fa-volume-up" onClick={playAudio(wordAudioMeaning)}></i>
+          {wordTextMeaningTranslate}
+        </div>
+        <div className="card-transcription cardP">{wordTranscription}</div>
+      </div>
+      <ProgressBar num={currentIndex + 1} />
     </div>
   );
 }
 
 LanguageCard.propTypes = {
-  foreignWord: PropTypes.string,
-  foreignPhrase: PropTypes.string,
-  nativePhrase: PropTypes.string,
-  nativeWord: PropTypes.arrayOf(PropTypes.string),
-  wordStrength: PropTypes.number,
-  wordDetails: PropTypes.string,
+  wordId: PropTypes.string,
+  wordGroup: PropTypes.number,
+  wordPage: PropTypes.number,
+  wordForeign: PropTypes.string,
+  wordImage: PropTypes.string,
+  wordAudio: PropTypes.string,
+  wordAudioMeaning: PropTypes.string,
+  wordAudioExample: PropTypes.string,
+  wordTextMeaning: PropTypes.string,
+  wordTextExample: PropTypes.string,
+  wordTranscription: PropTypes.string,
+  wordTextExampleTranslate: PropTypes.string,
+  wordTextMeaningTranslate: PropTypes.string,
+  wordTranslate: PropTypes.string,
+  wordsPerExampleSentence: PropTypes.number,
   partOfSpeech: PropTypes.string,
   handleSuccess: PropTypes.func,
-  isCorrect: PropTypes.bool
+  isCorrect: PropTypes.bool,
 };

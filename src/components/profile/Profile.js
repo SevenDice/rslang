@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-
 import { getCurrentProfile } from '../../actions/profile';
 
-const Profile = ({ getCurrentProfile, profile: { profile }, auth, match }) => {
+const Profile = ({ getCurrentProfile, profile: { profile }}) => {
+  
   useEffect(() => {
     getCurrentProfile(localStorage.getItem('id'));
   }, [getCurrentProfile]);
@@ -31,7 +31,7 @@ const Profile = ({ getCurrentProfile, profile: { profile }, auth, match }) => {
               }
               {
                 <div className='dash-buttons'>
-                  <Link to='/stats' className='btn btn-light'>
+                  <Link to='/statistics' className='btn btn-light'>
                     Посмотреть статистику
                   </Link>
                 </div>
