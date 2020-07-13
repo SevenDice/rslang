@@ -184,9 +184,10 @@ const Landing = ({ isAuthenticated }) => {
           </a>
         </ul>
         <ul className='copyright'>
-          <li>&copy; Untitled</li>
           <li>
-            Design: <a href='http://html5up.net'>HTML5 UP</a>
+            <a href='https://github.com/SevenDice/rslang' className='icon brands fa-github'>
+              репозиторий проекта
+            </a>
           </li>
         </ul>
       </footer>

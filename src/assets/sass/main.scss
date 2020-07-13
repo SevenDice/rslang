@@ -2244,13 +2244,16 @@ ul li {
   }
 
   @media screen and (max-width: 450px) {
-    flex-basis: 100%;
+    width: 100px;
   }
 }
 .card-divider {
   margin: 30px 0;
   height: 1px;
   background-color: #1814252d;
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
 }
 .card-word-translation {
   font-size: 1.7rem;
@@ -2258,6 +2261,9 @@ ul li {
 }
 .cardP {
   margin-bottom: 10px;
+  @media screen and (max-width: 450px) {
+    margin-bottom: 5px !important;
+  }
 }
 
 .card-transcription {
@@ -2267,6 +2273,16 @@ ul li {
 .word-input {
   margin: 5px;
   padding: 2px !important;
+}
+
+.word-input-field {
+  @media screen and (max-width: 450px) {
+    padding-top: 0;
+  }
+
+  form {
+    margin-bottom: 0;
+  }
 }
 
 .card-audio {
