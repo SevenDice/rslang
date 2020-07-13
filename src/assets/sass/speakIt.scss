@@ -242,6 +242,7 @@
   background: url('./images/exit-game.png') no-repeat center;
   background-size: cover;
   cursor: pointer;
+  z-index: 10000000;
 }
 
 .results-body {

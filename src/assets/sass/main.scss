@@ -2194,8 +2194,16 @@ ul li {
   padding: 15px;
   border-radius: 5px;
   width: 800px;
-  height: 450px;
   background-color: #c7c7c7f8;
+  @media screen and (max-width: 1020px) {
+    width: 500px;
+  }
+  @media screen and (max-width: 680px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 450px) {
+    width: 250px;
+  }
 }
 
 .arrow {
@@ -2208,6 +2216,9 @@ ul li {
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 450px) {
+    flex-wrap: wrap;
+  }
 }
 
 .card-eng-sentense {
@@ -2215,15 +2226,21 @@ ul li {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  @media screen and (max-width: 450px) {
+    flex-basis: 100%;
+  }
 }
 
 .card-img {
-  display: inline-block;
+  display: block;
   border-radius: 5px;
   width: 250px;
 
   @media screen and (max-width: 680px) {
     width: 130px;
+  }
+  @media screen and (max-width: 450px) {
+    flex-basis: 100%;
   }
 }
 .card-divider {
@@ -2258,7 +2275,6 @@ ul li {
   background: url('./images/card-audio.png') no-repeat center;
 }
 
-
 // Audio call game
 .audiocall {
   min-width: 320px;
@@ -2284,7 +2300,7 @@ ul li {
       width: 100%;
       font-size: 45px;
       height: $height;
-      opacity: .9;
+      opacity: 0.9;
       color: #fff;
       position: absolute;
       top: calc(50% - #{$width} / 2);
@@ -2344,7 +2360,7 @@ ul li {
     }
 
     &.disabled {
-      opacity: .5;
+      opacity: 0.5;
 
       &:hover li {
         background: transparent;
@@ -2389,5 +2405,24 @@ ul li {
     @include breakpoint('<=small') {
       top: 44px;
     }
+  }
+}
+
+iframe {
+  @media screen and (max-width: 680px) {
+    width: 280px;
+    height: 156px;
+  }
+}
+
+h1 {
+  @media screen and (max-width: 750px) {
+    margin-top: 30px !important;
+  }
+}
+
+.navbar-logo {
+  @media screen and (max-width: 750px) {
+    margin-top: 0 !important;
   }
 }
