@@ -3,7 +3,7 @@
 ### Study project for RS School 2020 Q1
 
 - #### [Task requirements](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/rslang/rslang.md)
-- #### [Heroku Deploy](https://rslang-team2-sevendice.herokuapp.com/).
+- #### [Heroku Deploy](https://rslang-team2-sevendice.herokuapp.com/)
 
 <hr>
 
