@@ -4,6 +4,7 @@
 
 - #### [Task requirements](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/rslang/rslang.md)
 - #### [Heroku Deploy](https://rslang-team2-sevendice.herokuapp.com/)
+- #### [Coggle Diagram](https://coggle.it/diagram/XuZehuRfjSEyjKFk/t/rs-lang)
 
 <hr>
 
