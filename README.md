@@ -10,6 +10,9 @@
 
 ## Screenshots:
 
+##### RACI Diagram
+<a href="https://imgur.com/c2KeNmj"><img src="https://i.imgur.com/c2KeNmj.png" title="source: imgur.com" /></a>
+
 ##### Landing page
 
 <a href="https://imgur.com/khAqC9I"><img src="https://i.imgur.com/khAqC9I.png" title="source: imgur.com" /></a>
